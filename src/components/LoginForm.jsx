@@ -1,19 +1,23 @@
-import {
-	Avatar,
-	Button,
-	Checkbox,
-	Container,
-	CssBaseline,
-	FormControlLabel,
-	Grid,
-	TextField,
-	Typography
-} from '@mui/material';
+import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { getUsers } from '../api/users';
 
 const LoginForm = () => {
+	const { register, handleSubmit } = useForm();
+
+	async function onSubmitClick({ email, password }) {
+		let apiUsers = await getUsers();
+
+		if (apiUsers.find(_user => _user.username === email)) {
+			console.log(email + ' exists');
+			return;
+		}
+
+		console.log(email + ' does not exist');
+	}
+
 	return (
 		<Box
 			sx={{
@@ -22,16 +26,19 @@ const LoginForm = () => {
 				flexDirection: 'column',
 				alignItems: 'center'
 			}}>
-			<Avatar sx={{ m: 1, bgcolor: 'secondary-main' }}>
-				<FitnessCenterIcon />
-			</Avatar>
 			<Typography component='h1' variant='h5'>
-				Sign in
+				Login Form
 			</Typography>
-			<Box component='form' noValidate sx={{ mt: 1 }}>
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 1 }}>
 				<TextField
+					{...register('email', {
+						required: true,
+						minLength: 4
+						// pattern: {
+						// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+						// }
+					})}
 					margin='normal'
-					required
 					fullWidth
 					id='email'
 					label='Email Address'
@@ -40,8 +47,11 @@ const LoginForm = () => {
 					autoFocus
 				/>
 				<TextField
+					{...register('password', {
+						required: true,
+						minLength: 4
+					})}
 					margin='normal'
-					required
 					fullWidth
 					name='password'
 					label='Password'
@@ -53,15 +63,13 @@ const LoginForm = () => {
 					control={<Checkbox value='remember' color='primary' />}
 					label='Remember me'
 				/>
+				<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+					Login
+				</Button>
 			</Box>
-			<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-				Sign in
-			</Button>
-			<Grid container>
-				<Grid item xs>
-					<NavLink to='/register'>{'Need an account? Click here to get started'}</NavLink>
-				</Grid>
-			</Grid>
+			<Link to='/register' className='text-blue-400 underline'>
+				{'Need an account? Click here to get started'}
+			</Link>
 		</Box>
 	);
 };
