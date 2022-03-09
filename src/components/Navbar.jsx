@@ -1,9 +1,19 @@
-import { AdminPanelSettingsOutlined, LogoutOutlined, PersonOutlined } from '@mui/icons-material';
+import {
+	AccountCircleOutlined,
+	AdminPanelSettingsOutlined,
+	DirectionsRunOutlined,
+	FitnessCenterOutlined,
+	HomeOutlined,
+	LibraryBooksOutlined,
+	LogoutOutlined,
+	Person,
+	PostAddOutlined,
+	RowingOutlined
+} from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -55,13 +65,6 @@ const Navbar = () => {
 		<AppBar position='static' color='primary'>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
-					<Typography
-						variant='h6'
-						noWrap
-						component='div'
-						sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
-						MeFit
-					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 						<IconButton
 							size='large'
@@ -91,20 +94,27 @@ const Navbar = () => {
 							}}>
 							{pages.map(page => (
 								<MenuItem key={page.title} onClick={handleCloseNavMenu}>
-									<Typography textAlign='center'>
-										<Link to={page.path}>{page.title}</Link>
-									</Typography>
+									<Link to={page.path}>
+										<Typography>
+											{page.title.includes('Dashboard') && (
+												<HomeOutlined sx={{ mr: 1 }} />
+											)}
+											{page.title.includes('Excercises') && (
+												<FitnessCenterOutlined sx={{ mr: 1 }} />
+											)}
+											{page.title.includes('Programs') && (
+												<LibraryBooksOutlined sx={{ mr: 1 }} />
+											)}
+											{page.title.includes('Workout') && (
+												<RowingOutlined sx={{ mr: 1 }} />
+											)}
+											{page.title}
+										</Typography>
+									</Link>
 								</MenuItem>
 							))}
 						</Menu>
 					</Box>
-					<Typography
-						variant='h6'
-						noWrap
-						component='div'
-						sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-						MeFit
-					</Typography>
 					<Box
 						sx={{
 							flexGrow: 1,
@@ -112,21 +122,37 @@ const Navbar = () => {
 							alignItems: { md: 'center' }
 						}}>
 						{pages.map(page => (
-							<Link to={page.path} key={page.title}>
-								<Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white' }}>
-									{page.title}
-								</Button>
-							</Link>
+							<MenuItem
+								key={page.title}
+								onClick={handleCloseNavMenu}
+								sx={{ my: 2, color: 'white' }}>
+								<Link to={page.path}>
+									<Typography>
+										{page.title.includes('Dashboard') && <HomeOutlined sx={{ mr: 1 }} />}
+										{page.title.includes('Excercises') && (
+											<FitnessCenterOutlined sx={{ mr: 1 }} />
+										)}
+										{page.title.includes('Programs') && (
+											<LibraryBooksOutlined sx={{ mr: 1 }} />
+										)}
+										{page.title.includes('Workout') && (
+											<DirectionsRunOutlined sx={{ mr: 1 }} />
+										)}
+										{page.title}
+									</Typography>
+								</Link>
+							</MenuItem>
 						))}
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Box sx={{ display: 'flex', alignItems: 'center' }}>
-							<MenuItem sx={{ display: { xs: 'none', md: 'block' } }}>
+							<Box>
+								<Person sx={{ mr: 1 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>
 									Konsta123
 								</Box>
-							</MenuItem>
+							</Box>
 							<Tooltip title='Open dropdown'>
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
 									<Avatar alt='Konstantinos Pascal' src='/static/images/avatar/1.jpg' />
@@ -148,14 +174,6 @@ const Navbar = () => {
 							}}
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}>
-							<MenuItem sx={{ display: { md: 'none' } }} key={'User'}>
-								<Typography>
-									Logged in as{' '}
-									<Box component={'span'} className='font-semibold'>
-										Konsta123
-									</Box>
-								</Typography>
-							</MenuItem>
 							{dropdownOptions.map(option => (
 								<MenuItem key={option.title} onClick={handleCloseUserMenu}>
 									<Link to={option.path}>
@@ -164,10 +182,10 @@ const Navbar = () => {
 												<AdminPanelSettingsOutlined sx={{ mr: 1 }} />
 											)}
 											{option.title.includes('Contributor') && (
-												<PersonOutlined sx={{ mr: 1 }} />
+												<PostAddOutlined sx={{ mr: 1 }} />
 											)}
 											{option.title.includes('Profile') && (
-												<PersonOutlined sx={{ mr: 1 }} />
+												<AccountCircleOutlined sx={{ mr: 1 }} />
 											)}
 											{option.title}
 										</Typography>

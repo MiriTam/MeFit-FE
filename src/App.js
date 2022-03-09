@@ -15,16 +15,16 @@ function App() {
 		<Routes>
 			{/* Not logged in  */}
 			<Route exact path='' element={<LoginPage />} />
-			<Route exact path='register' element={<RegistrationPage />} />
+			<Route path='register' element={<RegistrationPage />} />
 
 			{/* Logged in  */}
-			<Route exact path='dashboard' element={<DashboardPage />} />
-			<Route exact path='excercises' element={<ExcercisesPage />} />
-			<Route exact path='programs' element={<ProgramsPage />} />
-			<Route exact path='workouts' element={<WorkoutsPage />} />
-			<Route exact path='profile' element={<ProfilePage />} />
-			<Route exact path='contributor' element={<ContributorPage />} />
-			<Route exact path='administrator' element={<AdministratorPage />} />
+			<Route path='dashboard' element={<DashboardPage />} />
+			<Route path='excercises' element={<ExcercisesPage />} />
+			<Route path='programs' element={<ProgramsPage />} />
+			<Route path='workouts' element={<WorkoutsPage />} />
+			<Route path='profile' element={<ProfilePage />} />
+			<Route path='contributor' element={<ContributorPage />} />
+			<Route path='administrator' element={<AdministratorPage />} />
 
 			{/* Wildcard fallback page */}
 			<Route path='*' element={<LoginPage />} />
