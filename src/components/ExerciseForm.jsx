@@ -1,6 +1,6 @@
 const ExerciseForm = () => {
     return (
-        <h2>Your current programs</h2>
+        <h2>Your current exercises</h2>
     )
 }
 
