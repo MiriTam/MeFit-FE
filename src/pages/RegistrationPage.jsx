@@ -1,11 +1,11 @@
 import { Container } from '@mui/material';
 import React from 'react';
-import RegisterForm from '../components/RegisterForm';
+import RegistrationForm from '../components/registration-page-components/RegistrationForm';
 
 const RegistrationPage = () => {
 	return (
 		<Container component='main' maxWidth='xs'>
-			<RegisterForm />
+			<RegistrationForm />
 		</Container>
 	);
 };

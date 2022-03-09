@@ -12,9 +12,9 @@ import {
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { postUser } from '../api/users';
+import { postUser } from '../../api/users';
 
-const RegisterForm = () => {
+const RegistrationForm = () => {
 	const { register, handleSubmit } = useForm();
 
 	async function onSubmitClick({ firstName, lastName, email, password, role }) {
@@ -132,4 +132,4 @@ const RegisterForm = () => {
 	);
 };
 
-export default RegisterForm;
+export default RegistrationForm;

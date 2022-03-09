@@ -2,7 +2,7 @@ import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@mui/
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { getUsers } from '../api/users';
+import { getUsers } from '../../api/users';
 
 const LoginForm = () => {
 	const { register, handleSubmit } = useForm();

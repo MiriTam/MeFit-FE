@@ -1,15 +1,17 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
-import Navbar from '../components/Navbar';
-import ProgramForm from '../components/ProgramForm';
+import Navbar from '../components/shared-components/Navbar';
+import ProgramList from '../components/programs-page-components/ProgramList';
 
 const ProgramsPage = () => {
 	return (
 		<>
 			<Navbar />
 			<Container maxWidth='xl'>
-				<Typography variant='h3' sx={{mt:3}}>Program Page</Typography>
-				<ProgramForm />
+				<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+					Programs Page
+				</Typography>
+				<ProgramList />
 			</Container>
 		</>
 	);
