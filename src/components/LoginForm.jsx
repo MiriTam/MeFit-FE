@@ -60,9 +60,6 @@ const LoginForm = () => {
 			<Grid container>
 				<Grid item xs>
 					<NavLink to='/register'>{'Need an account? Click here to get started'}</NavLink>
-					{/* <Link href="#" variant="body2">
-                                {"Need an account? Click here."}
-                                </Link> */}
 				</Grid>
 			</Grid>
 		</Box>
