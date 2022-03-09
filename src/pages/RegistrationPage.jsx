@@ -1,10 +1,11 @@
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import React from 'react';
+import RegisterForm from '../components/RegisterForm';
 
 const RegistrationPage = () => {
 	return (
-		<Container maxWidth='xl'>
-			<Typography variant='h1'>Registration Page</Typography>
+		<Container component='main' maxWidth='xs'>
+			<RegisterForm />
 		</Container>
 	);
 };

@@ -1,10 +1,11 @@
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import React from 'react';
+import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
 	return (
-		<Container maxWidth='xl'>
-			<Typography variant='h1'>Login Page</Typography>
+		<Container component='main' maxWidth='xs'>
+			<LoginForm />
 		</Container>
 	);
 };
