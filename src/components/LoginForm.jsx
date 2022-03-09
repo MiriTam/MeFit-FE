@@ -2,8 +2,6 @@ import {
 	Avatar,
 	Button,
 	Checkbox,
-	Container,
-	CssBaseline,
 	FormControlLabel,
 	Grid,
 	TextField,
