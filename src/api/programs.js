@@ -2,7 +2,7 @@ export const programsArr = [
 	{
 		id: 1,
 		name: 'Program 1',
-		description: 'Program 2 description',
+		description: 'Program 1 description',
 		excercises: ['Excercise 1', 'Excercise 2']
 	},
 	{
