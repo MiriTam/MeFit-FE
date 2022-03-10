@@ -1,21 +1,24 @@
 import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
 import { getUsers } from '../../api/users';
+import useUser from '../../context/UserContext';
 
 const LoginForm = () => {
 	const { register, handleSubmit } = useForm();
+	const { login } = useUser();
 
 	async function onSubmitClick({ email, password }) {
-		let apiUsers = await getUsers();
+		const apiUsers = await getUsers();
+		const apiUser = apiUsers.find(_user => _user.username === email);
 
-		if (apiUsers.find(_user => _user.username === email)) {
-			console.log(email + ' exists');
-			return;
-		}
+		// User does not exist
+		if (!apiUser) return;
 
-		console.log(email + ' does not exist');
+		// Otherwise, log in user
+		login(apiUser);
 	}
 
 	return (

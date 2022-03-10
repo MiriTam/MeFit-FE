@@ -1,5 +1,6 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
+
 import Navbar from '../components/shared-components/Navbar';
 
 const DashboardPage = () => {

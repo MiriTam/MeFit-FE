@@ -24,8 +24,8 @@ const Program = ({ name, description, excercises }) => {
 			<AccordionDetails>
 				<Typography>{description}</Typography>
 				<List dense={false}>
-					{excercises.map(excercise => (
-						<ListItem>
+					{excercises.map((excercise, idx) => (
+						<ListItem key={idx}>
 							<ListItemText primary={excercise} />
 						</ListItem>
 					))}
