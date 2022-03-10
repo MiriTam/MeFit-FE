@@ -7,7 +7,11 @@ import { getUsers } from '../../api/users';
 import useUser from '../../context/UserContext';
 
 const LoginForm = () => {
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm();
 	const { login } = useUser();
 
 	async function onSubmitClick({ email, password }) {
@@ -24,7 +28,7 @@ const LoginForm = () => {
 	return (
 		<Box
 			sx={{
-				marginTop: 8,
+				marginTop: 14,
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center'
@@ -32,7 +36,7 @@ const LoginForm = () => {
 			<Typography component='h1' variant='h5'>
 				Login Form
 			</Typography>
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 1 }}>
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 4 }}>
 				<TextField
 					{...register('email', {
 						required: true,
@@ -41,7 +45,7 @@ const LoginForm = () => {
 						// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 						// }
 					})}
-					margin='normal'
+					error={errors.email}
 					fullWidth
 					id='email'
 					label='Email Address'
@@ -54,6 +58,7 @@ const LoginForm = () => {
 						required: true,
 						minLength: 4
 					})}
+					error={errors.password}
 					margin='normal'
 					fullWidth
 					name='password'
@@ -66,7 +71,7 @@ const LoginForm = () => {
 					control={<Checkbox value='remember' color='primary' />}
 					label='Remember me'
 				/>
-				<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 2 }}>
 					Login
 				</Button>
 			</Box>

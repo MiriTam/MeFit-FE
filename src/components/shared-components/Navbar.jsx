@@ -160,7 +160,7 @@ const Navbar = () => {
 							</Box>
 							<Tooltip title='Open dropdown'>
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-									<Avatar alt='Konstantinos Pascal' src='/static/images/avatar/1.jpg' />
+									<Avatar alt={username} src='/static/images/avatar/1.jpg' />
 								</IconButton>
 							</Tooltip>
 						</Box>
