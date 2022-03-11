@@ -1,25 +1,25 @@
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { excercises } from '../../api/excercices';
+import { excercises as _excercises } from '../../api/excercices';
 import Exercise from './Exercise';
 
 const ExerciseList = () => {
-	const [exercise, setExercise] = useState([]);
+	const [exercises, setExercises] = useState([]);
 
 	useEffect(() => {
-		setTimeout(() => setExercise(excercises), 1000);
+		setTimeout(() => setExercises(_excercises), 1000);
 	}, []);
 
 	return (
 		<Box className='mt-4'>
-			{exercise.map(exercises => (
+			{exercises.map(exercise => (
 				<Exercise
-					key={exercises.id}
-					name={exercises.name}
-					description={exercises.description}
-                    targetMuscleGroup={exercises.targetMuscleGroup}
-                    image={exercises.image}
-                    video={exercises.video}
+					key={exercise.id}
+					name={exercise.name}
+					description={exercise.description}
+					targetMuscleGroup={exercise.targetMuscleGroup}
+					image={exercise.image}
+					video={exercise.video}
 				/>
 			))}
 		</Box>
