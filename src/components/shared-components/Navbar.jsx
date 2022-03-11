@@ -98,8 +98,8 @@ const Navbar = () => {
 								display: { xs: 'block', md: 'none' }
 							}}>
 							{pages.map(page => (
-								<Link to={page.path}>
-									<MenuItem key={page.title} onClick={handleCloseNavMenu}>
+								<Link to={page.path} key={page.title}>
+									<MenuItem onClick={handleCloseNavMenu}>
 										<Typography>
 											{page.title.includes('Dashboard') && (
 												<HomeOutlined sx={{ mr: 1 }} />
@@ -127,11 +127,8 @@ const Navbar = () => {
 							alignItems: { md: 'center' }
 						}}>
 						{pages.map(page => (
-							<Link to={page.path}>
-								<MenuItem
-									key={page.title}
-									onClick={handleCloseNavMenu}
-									sx={{ my: 2, color: 'white' }}>
+							<Link to={page.path} key={page.title}>
+								<MenuItem onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white' }}>
 									<Typography>
 										{page.title.includes('Dashboard') && <HomeOutlined sx={{ mr: 1 }} />}
 										{page.title.includes('Excercises') && (
@@ -180,8 +177,8 @@ const Navbar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}>
 							{dropdownOptions.map(option => (
-								<Link to={option.path}>
-									<MenuItem key={option.title} onClick={handleCloseUserMenu}>
+								<Link to={option.path} key={option.title}>
+									<MenuItem onClick={handleCloseUserMenu}>
 										<Typography textAlign='center'>
 											{option.title.includes('Admin') && (
 												<AdminPanelSettingsOutlined sx={{ mr: 1 }} />
