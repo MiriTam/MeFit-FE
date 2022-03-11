@@ -1,5 +1,13 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, List, ListItem, ListItemText, Typography } from '@mui/material';
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	List,
+	ListItem,
+	ListItemText,
+	Typography
+} from '@mui/material';
 import React from 'react';
 
 const Program = ({ name, description, excercises }) => {
@@ -9,7 +17,7 @@ const Program = ({ name, description, excercises }) => {
 				expandIcon={<ExpandMoreIcon />}
 				aria-controls='panel1a-content'
 				id='panel1a-header'>
-				<Typography component='h2' variant='h6'>
+				<Typography component='h2' variant='h5'>
 					{name}
 				</Typography>
 			</AccordionSummary>
