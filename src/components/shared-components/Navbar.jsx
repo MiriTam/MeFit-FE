@@ -24,6 +24,8 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import useUser from '../../context/UserContext';
+
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
 	{ title: 'Excercises', path: '/excercises' },
@@ -37,6 +39,8 @@ const dropdownOptions = [
 ];
 
 const Navbar = () => {
+	const { username, logout, login } = useUser();
+
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -58,7 +62,8 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
-		console.log('Logged out!');
+		login({ id: 22, username: 'TamTam' });
+		logout();
 	};
 
 	return (
@@ -93,8 +98,8 @@ const Navbar = () => {
 								display: { xs: 'block', md: 'none' }
 							}}>
 							{pages.map(page => (
-								<MenuItem key={page.title} onClick={handleCloseNavMenu}>
-									<Link to={page.path}>
+								<Link to={page.path}>
+									<MenuItem key={page.title} onClick={handleCloseNavMenu}>
 										<Typography>
 											{page.title.includes('Dashboard') && (
 												<HomeOutlined sx={{ mr: 1 }} />
@@ -110,8 +115,8 @@ const Navbar = () => {
 											)}
 											{page.title}
 										</Typography>
-									</Link>
-								</MenuItem>
+									</MenuItem>
+								</Link>
 							))}
 						</Menu>
 					</Box>
@@ -122,11 +127,11 @@ const Navbar = () => {
 							alignItems: { md: 'center' }
 						}}>
 						{pages.map(page => (
-							<MenuItem
-								key={page.title}
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: 'white' }}>
-								<Link to={page.path}>
+							<Link to={page.path}>
+								<MenuItem
+									key={page.title}
+									onClick={handleCloseNavMenu}
+									sx={{ my: 2, color: 'white' }}>
 									<Typography>
 										{page.title.includes('Dashboard') && <HomeOutlined sx={{ mr: 1 }} />}
 										{page.title.includes('Excercises') && (
@@ -140,8 +145,8 @@ const Navbar = () => {
 										)}
 										{page.title}
 									</Typography>
-								</Link>
-							</MenuItem>
+								</MenuItem>
+							</Link>
 						))}
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
@@ -150,12 +155,12 @@ const Navbar = () => {
 								<Person sx={{ mr: 1 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>
-									Konsta123
+									{username}
 								</Box>
 							</Box>
 							<Tooltip title='Open dropdown'>
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-									<Avatar alt='Konstantinos Pascal' src='/static/images/avatar/1.jpg' />
+									<Avatar alt={username} src='/static/images/avatar/1.jpg' />
 								</IconButton>
 							</Tooltip>
 						</Box>
@@ -175,8 +180,8 @@ const Navbar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}>
 							{dropdownOptions.map(option => (
-								<MenuItem key={option.title} onClick={handleCloseUserMenu}>
-									<Link to={option.path}>
+								<Link to={option.path}>
+									<MenuItem key={option.title} onClick={handleCloseUserMenu}>
 										<Typography textAlign='center'>
 											{option.title.includes('Admin') && (
 												<AdminPanelSettingsOutlined sx={{ mr: 1 }} />
@@ -189,8 +194,8 @@ const Navbar = () => {
 											)}
 											{option.title}
 										</Typography>
-									</Link>
-								</MenuItem>
+									</MenuItem>
+								</Link>
 							))}
 							<MenuItem key={'Logout'} onClick={handleLogout}>
 								<Typography textAlign='center' color={'red'}>

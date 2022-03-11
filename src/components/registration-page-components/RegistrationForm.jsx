@@ -10,12 +10,17 @@ import {
 	Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
 import { postUser } from '../../api/users';
 
 const RegistrationForm = () => {
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm();
 
 	async function onSubmitClick({ firstName, lastName, email, password, role }) {
 		await postUser(firstName);
@@ -24,7 +29,7 @@ const RegistrationForm = () => {
 	return (
 		<Box
 			sx={{
-				marginTop: 8,
+				marginTop: 14,
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center'
@@ -32,7 +37,7 @@ const RegistrationForm = () => {
 			<Typography component='h1' variant='h5'>
 				Registration Form
 			</Typography>
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 3 }}>
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 4 }}>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6}>
 						<TextField
@@ -40,6 +45,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
+							error={errors.firstName}
 							autoComplete='given-name'
 							name='firstName'
 							fullWidth
@@ -54,6 +60,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
+							error={errors.lastName}
 							fullWidth
 							id='lastName'
 							label='Last Name'
@@ -70,6 +77,7 @@ const RegistrationForm = () => {
 								// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 								// }
 							})}
+							error={errors.email}
 							fullWidth
 							id='email'
 							label='Email Address'
@@ -83,6 +91,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
+							error={errors.password}
 							fullWidth
 							name='password'
 							label='Password'
@@ -121,7 +130,7 @@ const RegistrationForm = () => {
 						</FormControl>
 					</Grid>
 				</Grid>
-				<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 2 }}>
 					Register
 				</Button>
 			</Box>

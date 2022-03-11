@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
+
 import { programsArr } from '../../api/programs';
 import Program from '../programs-page-components/Program';
 
@@ -7,7 +8,12 @@ const ProgramList = () => {
 	const [programs, setPrograms] = useState([]);
 
 	useEffect(() => {
-		setTimeout(() => setPrograms(programsArr), 1000);
+		const timeoutFunc = setTimeout(() => setPrograms(programsArr), 1000);
+
+		// Cleanup in case component unmounts
+		return () => {
+			clearTimeout(timeoutFunc);
+		};
 	}, []);
 
 	return (
