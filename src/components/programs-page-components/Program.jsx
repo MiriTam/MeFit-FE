@@ -1,16 +1,8 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	List,
-	ListItem,
-	ListItemText,
-	Typography
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React from 'react';
 
-const Program = ({ name, description, excercises }) => {
+const Program = ({ name, type, completed }) => {
 	return (
 		<Accordion className='mt-2'>
 			<AccordionSummary
@@ -22,14 +14,8 @@ const Program = ({ name, description, excercises }) => {
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Typography>{description}</Typography>
-				<List dense={false}>
-					{excercises.map((excercise, idx) => (
-						<ListItem key={idx}>
-							<ListItemText primary={excercise} />
-						</ListItem>
-					))}
-				</List>
+				<Typography>{type}</Typography>
+				<Typography>Completed: {completed ? 'Yes' : 'No'}</Typography>
 			</AccordionDetails>
 		</Accordion>
 	);

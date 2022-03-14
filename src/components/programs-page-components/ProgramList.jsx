@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { programsArr } from '../../api/programs';
-import Program from '../programs-page-components/Program';
+import { programs as programsArr } from '../../api/programs';
+import Program from './Program';
 
 const ProgramList = () => {
 	const [programs, setPrograms] = useState([]);
@@ -22,8 +22,8 @@ const ProgramList = () => {
 				<Program
 					key={program.id}
 					name={program.name}
-					description={program.description}
-					excercises={program.excercises}
+					type={program.type}
+					completed={program.completed}
 				/>
 			))}
 		</Box>
