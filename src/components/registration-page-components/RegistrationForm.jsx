@@ -23,7 +23,9 @@ const RegistrationForm = () => {
 	} = useForm();
 
 	async function onSubmitClick({ firstName, lastName, email, password, role }) {
-		await postUser(firstName);
+		const userToBePosted = { firstName, lastName, email };
+
+		await postUser(userToBePosted, role);
 	}
 
 	return (
@@ -45,7 +47,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.firstName}
+							error={errors.hasOwnProperty('firstName')}
 							autoComplete='given-name'
 							name='firstName'
 							fullWidth
@@ -60,7 +62,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.lastName}
+							error={errors.hasOwnProperty('lastName')}
 							fullWidth
 							id='lastName'
 							label='Last Name'
@@ -77,7 +79,7 @@ const RegistrationForm = () => {
 								// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 								// }
 							})}
-							error={errors.email}
+							error={errors.hasOwnProperty('email')}
 							fullWidth
 							id='email'
 							label='Email Address'
@@ -91,7 +93,7 @@ const RegistrationForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.password}
+							error={errors.hasOwnProperty('password')}
 							fullWidth
 							name='password'
 							label='Password'
@@ -103,11 +105,7 @@ const RegistrationForm = () => {
 					<Grid item xs={12}>
 						<FormControl>
 							<FormLabel id='roles'>User role</FormLabel>
-							<RadioGroup
-								row
-								aria-labelledby='roles'
-								name='row-radio-buttons-group'
-								defaultValue={'regular'}>
+							<RadioGroup row aria-labelledby='roles' defaultValue={'regular'}>
 								<FormControlLabel
 									{...register('role')}
 									value='regular'

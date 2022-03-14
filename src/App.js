@@ -5,7 +5,7 @@ import useUser from './context/UserContext';
 import AdministratorPage from './pages/AdministratorPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
-import ExcercisesPage from './pages/ExcercisesPage';
+import ExercisesPage from './pages/ExcercisesPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
@@ -46,7 +46,7 @@ function App() {
 
 			{/* Logged in  */}
 			<Route path='dashboard' element={<DashboardPage />} />
-			<Route path='excercises' element={<ExcercisesPage />} />
+			<Route path='excercises' element={<ExercisesPage />} />
 			<Route path='programs' element={<ProgramsPage />} />
 			<Route path='workouts' element={<WorkoutsPage />} />
 			<Route path='profile' element={<ProfilePage />} />

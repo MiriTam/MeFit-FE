@@ -12,7 +12,7 @@ import React from 'react';
 
 const Program = ({ name, description, excercises }) => {
 	return (
-		<Accordion className='mt-2'>
+		<Accordion>
 			<AccordionSummary
 				expandIcon={<ExpandMoreIcon />}
 				aria-controls='panel1a-content'

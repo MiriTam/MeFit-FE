@@ -1,8 +1,25 @@
-export const programs = [
-	{ id: 1, name: 'Program 1', type: 'Type of Program', completed: true },
-	{ id: 2, name: 'Program 2', type: 'Type of Program', completed: false },
-	{ id: 3, name: 'Program 3', type: 'Type of Program', completed: true },
-	{ id: 4, name: 'Program 4', type: 'Type of Program', completed: false },
-	{ id: 5, name: 'Program 5', type: 'Type of Program', completed: false },
-	{ id: 6, name: 'Program 6', type: 'Type of Program', completed: true }
-];
+const BASE_URL = 'https://mefit22api.azurewebsites.net/api/workout-program';
+
+export async function getPrograms() {
+	const req = await fetch(BASE_URL);
+	if (!req.ok) throw new Error('Could not get programs!');
+
+	const programsArr = await req.json();
+
+	return programsArr;
+}
+
+// export async function postProgram(program) {
+// 	const req = await fetch(BASE_URL, {
+// 		method: 'POST',
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		},
+// 		body: JSON.stringify(program)
+// 	});
+// 	if (!req.ok) throw new Error('Could not post program!');
+
+// 	const newProgram = await req.json();
+
+// 	return newProgram;
+// }

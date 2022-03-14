@@ -2,9 +2,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React from 'react';
 
-const Program = ({ name, type, completed }) => {
+const Program = ({ name, category }) => {
 	return (
-		<Accordion className='mt-2'>
+		<Accordion>
 			<AccordionSummary
 				expandIcon={<ExpandMoreIcon />}
 				aria-controls='panel1a-content'
@@ -14,8 +14,9 @@ const Program = ({ name, type, completed }) => {
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Typography>{type}</Typography>
-				<Typography>Completed: {completed ? 'Yes' : 'No'}</Typography>
+				<Typography component='h3' variant='h6'>
+					{category}
+				</Typography>
 			</AccordionDetails>
 		</Accordion>
 	);
