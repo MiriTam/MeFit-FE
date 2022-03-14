@@ -3,13 +3,13 @@ import React from 'react';
 import ExerciseList from '../components/exercise-page-components/ExerciseList';
 import Navbar from '../components/shared-components/Navbar';
 
-const ExcercisesPage = () => {
+const ExercisesPage = () => {
 	return (
 		<>
 			<Navbar />
 			<Container maxWidth='xl'>
 				<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
-					Excercises Page
+					Exercises Page
 				</Typography>
 				<ExerciseList />
 			</Container>
@@ -17,4 +17,4 @@ const ExcercisesPage = () => {
 	);
 };
 
-export default ExcercisesPage;
+export default ExercisesPage;
