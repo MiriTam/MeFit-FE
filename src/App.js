@@ -14,7 +14,7 @@ import WorkoutsPage from './pages/WorkoutsPage';
 import { storageRead } from './utils/storage';
 
 function App() {
-	const { username, login } = useUser();
+	const { loggedInUser, login } = useUser();
 	const navigate = useNavigate();
 	const pathname = useLocation().pathname;
 
@@ -22,18 +22,21 @@ function App() {
 	useEffect(() => {
 		if (pathname !== '/' && pathname !== '/register') return;
 
-		if (username) navigate('/dashboard');
+		if (loggedInUser) navigate('/dashboard');
 
-		const sessionUsername = storageRead('user');
-		if (sessionUsername) login(sessionUsername);
-	}, [navigate, username, login, pathname]);
+		const sessionLoggedInUser = storageRead('loggedInUser');
+
+		if (sessionLoggedInUser) {
+			login(sessionLoggedInUser);
+		}
+	}, [navigate, loggedInUser, login, pathname]);
 
 	// Redirect to / from application if not logged in
 	useEffect(() => {
 		if (pathname === '/' || pathname === '/register') return;
 
-		if (!username) navigate('/');
-	}, [username, navigate, login, pathname]);
+		if (!loggedInUser) navigate('/');
+	}, [loggedInUser, navigate, login, pathname]);
 
 	return (
 		<Routes>

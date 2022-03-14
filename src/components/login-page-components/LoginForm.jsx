@@ -16,7 +16,7 @@ const LoginForm = () => {
 
 	async function onSubmitClick({ email, password }) {
 		const apiUsers = await getUsers();
-		const apiUser = apiUsers.find(_user => _user.username === email);
+		const apiUser = apiUsers.find(_user => _user.email === email);
 
 		// User does not exist
 		if (!apiUser) return;

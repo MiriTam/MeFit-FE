@@ -14,12 +14,12 @@ const ProfileForm = () => {
 	}
 
 	return (
-		<Box className='mt-4 md:w-4/5 lg:w-7/12 mx-auto'>
-			<Typography component='h2' variant='h5'>
-				Profile Form
-			</Typography>
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 4 }}>
-				<Grid container spacing={2}>
+		<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left'>
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
+				<Typography component='h2' variant='h5'>
+					Fitness Attributes
+				</Typography>
+				<Grid container spacing={2} sx={{ mt: 0.5 }}>
 					<Grid item xs={12} sm={6}>
 						<TextField
 							{...register('weight', {
@@ -74,6 +74,22 @@ const ProfileForm = () => {
 							id='disabilities'
 						/>
 					</Grid>
+				</Grid>
+
+				{/* TODO: Add Goals  */}
+				{/* TODO: Add Workout Programs  */}
+				{/* TODO: Add Workouts  */}
+
+				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+					Update Attributes
+				</Button>
+			</Box>
+
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 4 }}>
+				<Typography component='h2' variant='h5'>
+					Personal Information
+				</Typography>
+				<Grid container spacing={2} sx={{ mt: 0.5 }}>
 					<Grid item xs={12}>
 						<TextField
 							{...register('address', {
@@ -132,8 +148,8 @@ const ProfileForm = () => {
 				{/* TODO: Add Workout Programs  */}
 				{/* TODO: Add Workouts  */}
 
-				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 2 }}>
-					Update Profile
+				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+					Update Information
 				</Button>
 			</Box>
 		</Box>

@@ -1,5 +1,6 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
+
 import ProfileForm from '../components/profile-page-components/ProfileForm';
 import Navbar from '../components/shared-components/Navbar';
 
