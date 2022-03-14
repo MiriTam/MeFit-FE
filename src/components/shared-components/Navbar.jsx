@@ -7,8 +7,7 @@ import {
 	LibraryBooksOutlined,
 	LogoutOutlined,
 	Person,
-	PostAddOutlined,
-	RowingOutlined
+	PostAddOutlined
 } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
@@ -29,8 +28,8 @@ import useUser from '../../context/UserContext';
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
 	{ title: 'Excercises', path: '/excercises' },
-	{ title: 'Programs', path: '/programs' },
-	{ title: 'Workouts', path: '/workouts' }
+	{ title: 'Workouts', path: '/workouts' },
+	{ title: 'Workout Programs', path: '/programs' }
 ];
 const dropdownOptions = [
 	{ title: 'Contributor Page', path: '/contributor' },
@@ -39,7 +38,7 @@ const dropdownOptions = [
 ];
 
 const Navbar = () => {
-	const { username, logout, login } = useUser();
+	const { loggedInUser, logout } = useUser();
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -62,12 +61,11 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
-		login({ id: 22, username: 'TamTam' });
 		logout();
 	};
 
 	return (
-		<AppBar position='static' color='primary'>
+		<AppBar position='static' color='primary' sx={{ pt: 1, pb: 1 }}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -99,19 +97,17 @@ const Navbar = () => {
 							}}>
 							{pages.map(page => (
 								<Link to={page.path} key={page.title}>
-									<MenuItem onClick={handleCloseNavMenu}>
+									<MenuItem onClick={handleCloseNavMenu} size={''}>
 										<Typography>
-											{page.title.includes('Dashboard') && (
-												<HomeOutlined sx={{ mr: 1 }} />
-											)}
-											{page.title.includes('Excercises') && (
+											{page.title === 'Dashboard' && <HomeOutlined sx={{ mr: 1 }} />}
+											{page.title === 'Excercises' && (
 												<FitnessCenterOutlined sx={{ mr: 1 }} />
 											)}
-											{page.title.includes('Programs') && (
-												<LibraryBooksOutlined sx={{ mr: 1 }} />
+											{page.title === 'Workouts' && (
+												<DirectionsRunOutlined sx={{ mr: 1 }} />
 											)}
-											{page.title.includes('Workout') && (
-												<RowingOutlined sx={{ mr: 1 }} />
+											{page.title === 'Workout Programs' && (
+												<LibraryBooksOutlined sx={{ mr: 1 }} />
 											)}
 											{page.title}
 										</Typography>
@@ -130,15 +126,15 @@ const Navbar = () => {
 							<Link to={page.path} key={page.title}>
 								<MenuItem onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white' }}>
 									<Typography>
-										{page.title.includes('Dashboard') && <HomeOutlined sx={{ mr: 1 }} />}
-										{page.title.includes('Excercises') && (
+										{page.title === 'Dashboard' && <HomeOutlined sx={{ mr: 1 }} />}
+										{page.title === 'Excercises' && (
 											<FitnessCenterOutlined sx={{ mr: 1 }} />
 										)}
-										{page.title.includes('Programs') && (
-											<LibraryBooksOutlined sx={{ mr: 1 }} />
-										)}
-										{page.title.includes('Workout') && (
+										{page.title === 'Workouts' && (
 											<DirectionsRunOutlined sx={{ mr: 1 }} />
+										)}
+										{page.title === 'Workout Programs' && (
+											<LibraryBooksOutlined sx={{ mr: 1 }} />
 										)}
 										{page.title}
 									</Typography>
@@ -152,12 +148,12 @@ const Navbar = () => {
 								<Person sx={{ mr: 1 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>
-									{username}
+									{loggedInUser?.fullName}
 								</Box>
 							</Box>
 							<Tooltip title='Open dropdown'>
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-									<Avatar alt={username} src='/static/images/avatar/1.jpg' />
+									<Avatar alt={loggedInUser?.fullName} src='/static/images/avatar/1.jpg' />
 								</IconButton>
 							</Tooltip>
 						</Box>

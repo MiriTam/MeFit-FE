@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
+
 import { excercises as _excercises } from '../../api/excercices';
 import Exercise from './Exercise';
 
@@ -7,7 +8,11 @@ const ExerciseList = () => {
 	const [exercises, setExercises] = useState([]);
 
 	useEffect(() => {
-		setTimeout(() => setExercises(_excercises), 1000);
+		const timeoutFunc = setTimeout(() => setExercises(_excercises), 1000);
+
+		return () => {
+			clearTimeout(timeoutFunc);
+		};
 	}, []);
 
 	return (

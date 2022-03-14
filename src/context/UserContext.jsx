@@ -11,23 +11,25 @@ export default function useUser() {
 
 // Providing the context
 export function UserProvider({ children }) {
-	const [username, setUsername] = useState(null);
+	const [loggedInUser, setLoggedInUser] = useState(null);
 
-	function login(_user) {
+	function login(user) {
+		const _user = { ...user, fullName: `${user.firstName} ${user.lastName}` };
+
 		// Save user in session storage and state
-		storageSave('user', _user);
-		setUsername(_user.username);
+		storageSave('loggedInUser', _user);
+		setLoggedInUser(_user);
 	}
 
 	function logout() {
 		// Clear user in session storage and state
-		storageSave('user', {});
-		setUsername(null);
+		storageSave('loggedInUser', null);
+		setLoggedInUser(null);
 	}
 
 	const state = {
-		username,
-		setUsername,
+		loggedInUser,
+		setLoggedInUser,
 		login,
 		logout
 	};
