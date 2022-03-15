@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import RegistrationPage from './pages/RegistrationPage';
 import WorkoutsPage from './pages/WorkoutsPage';
+import { isOnRootOrRegisterPage } from './utils/isOnRootOrRegisterPage';
 import { storageRead } from './utils/storage';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
 	// Redirect to application from / or /register if logged in
 	useEffect(() => {
-		if (pathname !== '/' && pathname !== '/register') return;
+		if (!isOnRootOrRegisterPage(pathname)) return;
 
 		if (loggedInUser) navigate('/dashboard');
 
@@ -33,7 +34,7 @@ function App() {
 
 	// Redirect to / from application if not logged in
 	useEffect(() => {
-		if (pathname === '/' || pathname === '/register') return;
+		if (isOnRootOrRegisterPage(pathname)) return;
 
 		if (!loggedInUser) navigate('/');
 	}, [loggedInUser, navigate, login, pathname]);
