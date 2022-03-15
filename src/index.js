@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import AppContext from './context/AppContext';
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
+// import AppContext from './context/AppContext';
 
 import './styles/index.css';
 
 ReactDOM.render(
 	<BrowserRouter>
-		<AppContext>
+		{/* <AppContext> */}
+		<Auth0ProviderWithHistory>
 			<React.StrictMode>
 				<App />
 			</React.StrictMode>
-		</AppContext>
+		</Auth0ProviderWithHistory>
+		{/* </AppContext> */}
 	</BrowserRouter>,
 	document.getElementById('root')
 );
