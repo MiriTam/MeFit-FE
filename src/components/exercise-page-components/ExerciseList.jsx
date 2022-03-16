@@ -15,7 +15,7 @@ const ExerciseList = () => {
 	}, []);
 
 	return (
-		<Box className='mt-4'>
+		<Box className='mt-6 flex flex-wrap gap-4 justify-center'>
 			{exercises.map(exercise => (
 				<Exercise
 					key={exercise.id}

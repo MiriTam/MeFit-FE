@@ -1,23 +1,21 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 
 const Exercise = ({ name, description, video, image }) => {
 	return (
-		<Accordion>
-			<AccordionSummary
-				expandIcon={<ExpandMoreIcon />}
-				aria-controls='panel1a-content'
-				id='panel1a-header'>
-				<Typography component='h3' variant='h6'>
-					{name}
-				</Typography>
-			</AccordionSummary>
-			<AccordionDetails>
-				<Typography>{description}</Typography>
-				<Box>{image ? <img src={image} alt={name} /> : null}</Box>
-				<Box>{video ? <video src={video} /> : null}</Box>
-			</AccordionDetails>
-		</Accordion>
+		<Card className='max-w-xs px-6 py-4 text-left shadow-md' variant='outlined'>
+			<CardContent>
+				<Box>
+					<Typography component='h2' variant='h5'>
+						{name}
+					</Typography>
+				</Box>
+				<Box className='mt-2'>
+					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+						{description}
+					</Typography>
+				</Box>
+			</CardContent>
+		</Card>
 	);
 };
 

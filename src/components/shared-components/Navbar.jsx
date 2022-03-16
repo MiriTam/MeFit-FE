@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import {
 	AccountCircleOutlined,
 	AdminPanelSettingsOutlined,
@@ -38,7 +39,7 @@ const dropdownOptions = [
 ];
 
 const Navbar = () => {
-	const { loggedInUser, logout } = useUser();
+	const { user, logout } = useAuth0();
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -148,12 +149,12 @@ const Navbar = () => {
 								<Person sx={{ mr: 1 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>
-									{loggedInUser?.fullName}
+									{user?.nickname}
 								</Box>
 							</Box>
 							<Tooltip title='Open dropdown'>
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-									<Avatar alt={loggedInUser?.fullName} src='/static/images/avatar/1.jpg' />
+									<Avatar alt={user?.nickname} src={user?.picture} />
 								</IconButton>
 							</Tooltip>
 						</Box>

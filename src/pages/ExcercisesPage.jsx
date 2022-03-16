@@ -7,7 +7,7 @@ const ExercisesPage = () => {
 	return (
 		<>
 			<Navbar />
-			<Container maxWidth='xl'>
+			<Container maxWidth='xl text-center'>
 				<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 					Exercises Page
 				</Typography>
