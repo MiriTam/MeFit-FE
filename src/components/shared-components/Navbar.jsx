@@ -59,7 +59,8 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
-		logout();
+		logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
+		// logout({ returnTo: 'http://localhost:3000' });
 	};
 
 	return (
