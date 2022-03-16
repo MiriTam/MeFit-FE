@@ -1,6 +1,6 @@
+import { Auth0Provider } from '@auth0/auth0-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Auth0Provider } from '@auth0/auth0-react';
 
 const Auth0ProviderWithHistory = ({ children }) => {
 	const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -17,7 +17,11 @@ const Auth0ProviderWithHistory = ({ children }) => {
 			domain={domain}
 			clientId={clientId}
 			redirectUri={window.location.origin + '/dashboard'}
-			onRedirectCallback={onRedirectCallback}>
+			onRedirectCallback={onRedirectCallback}
+			audience='https://dev-o072w2hj.eu.auth0.com/api/v2/'
+			// audience='https://mefit22api.azurewebsites.net/api/'
+			// scope='openid profile email'
+		>
 			{children}
 		</Auth0Provider>
 	);

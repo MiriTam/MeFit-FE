@@ -1,18 +1,15 @@
-// import { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+// import { Route, Routes } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-// import useUser from './context/UserContext';
 import AdministratorPage from './pages/AdministratorPage';
+import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
 import ExercisesPage from './pages/ExcercisesPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
-// import RegistrationPage from './pages/RegistrationPage';
 import WorkoutsPage from './pages/WorkoutsPage';
-// import { isOnRootOrRegisterPage } from './utils/isOnRootOrRegisterPage';
-// import { storageRead } from './utils/storage';
 
 function App() {
 	// const { loggedInUser, login } = useUser();
@@ -42,7 +39,8 @@ function App() {
 	return (
 		<Routes>
 			{/* Not logged in  */}
-			<Route exact path='' element={<LoginPage />} />
+			<Route exact path='' element={<AuthenticationPage />} />
+			{/* <Route exact path='' element={<LoginPage />} /> */}
 			{/* <Route path='register' element={<RegistrationPage />} /> */}
 
 			{/* Logged in  */}
