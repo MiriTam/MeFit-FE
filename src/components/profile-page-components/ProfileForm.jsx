@@ -8,14 +8,23 @@ const ProfileForm = () => {
 		handleSubmit,
 		formState: { errors }
 	} = useForm();
+	const {
+		register: registerInfo,
+		handleSubmit: handleSubmitInfo,
+		formState: { errors: errorsInfo }
+	} = useForm();
 
-	async function onSubmitClick(data) {
+	async function onAttributesFormSubmitClick(data) {
+		console.log(data);
+	}
+
+	async function onInformationFormSubmitClick(data) {
 		console.log(data);
 	}
 
 	return (
 		<Box className='mt-8 md:w-2/3 lg:w-1/2 mx-auto text-left'>
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
+			<Box component='form' onSubmit={handleSubmit(onAttributesFormSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
 					Fitness Attributes
 				</Typography>
@@ -27,7 +36,7 @@ const ProfileForm = () => {
 								minLength: 4
 							})}
 							// defaultValue={120}
-							error={errors.weight}
+							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
 							id='weight'
@@ -41,7 +50,7 @@ const ProfileForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.height}
+							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
 							label='Height (cm)'
@@ -54,7 +63,7 @@ const ProfileForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.medicalConditions}
+							error={errors.hasOwnProperty('medicalConditions')}
 							fullWidth
 							id='medicalConditions'
 							label='Medical Conditions'
@@ -67,7 +76,7 @@ const ProfileForm = () => {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.disabilities}
+							error={errors.hasOwnProperty('disabilities')}
 							fullWidth
 							name='disabilities'
 							label='Disabilities'
@@ -87,18 +96,22 @@ const ProfileForm = () => {
 				</Box>
 			</Box>
 
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 6 }}>
+			<Box
+				component='form'
+				onSubmit={handleSubmitInfo(onInformationFormSubmitClick)}
+				noValidate
+				sx={{ mt: 6 }}>
 				<Typography component='h2' variant='h5'>
 					Personal Information
 				</Typography>
 				<Grid container spacing={2} sx={{ mt: 0.5 }}>
 					<Grid item xs={12}>
 						<TextField
-							{...register('address', {
+							{...registerInfo('address', {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.address}
+							error={errorsInfo.hasOwnProperty('address')}
 							fullWidth
 							name='address'
 							label='Street Address'
@@ -107,11 +120,11 @@ const ProfileForm = () => {
 					</Grid>
 					<Grid item xs={4}>
 						<TextField
-							{...register('postalCode', {
+							{...registerInfo('postalCode', {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.postalCode}
+							error={errorsInfo.hasOwnProperty('postalCode')}
 							fullWidth
 							name='postalCode'
 							label='Postal Code'
@@ -120,11 +133,11 @@ const ProfileForm = () => {
 					</Grid>
 					<Grid item xs={4}>
 						<TextField
-							{...register('postalPlace', {
+							{...registerInfo('postalPlace', {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.postalPlace}
+							error={errorsInfo.hasOwnProperty('postalPlace')}
 							fullWidth
 							name='postalPlace'
 							label='Postal Place'
@@ -133,11 +146,11 @@ const ProfileForm = () => {
 					</Grid>
 					<Grid item xs={4}>
 						<TextField
-							{...register('country', {
+							{...registerInfo('country', {
 								required: true,
 								minLength: 4
 							})}
-							error={errors.country}
+							error={errorsInfo.hasOwnProperty('country')}
 							fullWidth
 							name='country'
 							label='Country'
