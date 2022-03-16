@@ -3,15 +3,17 @@ import { Box, Container, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 
 const DashboardPage = () => {
-	const { user, getAccessTokenSilently } = useAuth0();
+	const { user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
 	useEffect(() => {
 		(async () => {
-			const token = await getAccessTokenSilently();
+			const jwt_token = await getAccessTokenSilently();
+			const id_token = await getIdTokenClaims();
 
-			console.log(token);
+			console.log(jwt_token);
+			console.log(id_token);
 		})();
-	}, [getAccessTokenSilently]);
+	}, [getAccessTokenSilently, getIdTokenClaims]);
 
 	return (
 		<Container maxWidth='xl'>
