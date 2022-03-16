@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
-import Contributor from '../components/contributor-page-components/Contributor';
+
+import ExerciseFormsList from '../components/contributor-page-components/ExerciseFormsList';
 import Navbar from '../components/shared-components/Navbar';
 
 const ContributorPage = () => {
@@ -11,7 +12,7 @@ const ContributorPage = () => {
 				<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 					Contributor Page
 				</Typography>
-				<Contributor />
+				<ExerciseFormsList />
 			</Container>
 		</>
 	);

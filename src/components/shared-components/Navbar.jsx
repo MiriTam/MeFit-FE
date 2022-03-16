@@ -24,8 +24,6 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import useUser from '../../context/UserContext';
-
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
 	{ title: 'Excercises', path: '/excercises' },
