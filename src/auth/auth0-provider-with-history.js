@@ -3,9 +3,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Auth0ProviderWithHistory = ({ children }) => {
-	const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-	const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-
 	const navigate = useNavigate();
 
 	const onRedirectCallback = appState => {
@@ -14,12 +11,12 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
 	return (
 		<Auth0Provider
-			domain={domain}
-			clientId={clientId}
+			domain={'dev-o072w2hj.eu.auth0.com'}
+			clientId={'ViXbPTcrznJsmZxaEze6IdPXCZrGB4rp'}
 			redirectUri={window.location.origin + '/dashboard'}
 			onRedirectCallback={onRedirectCallback}
-			// audience='https://dev-o072w2hj.eu.auth0.com/api/v2/'
 			audience='https://mefit22api.azurewebsites.net/api/'
+			// audience='https://dev-o072w2hj.eu.auth0.com/api/v2/'
 			// scope='openid profile email'
 		>
 			{children}
