@@ -19,7 +19,6 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -61,13 +60,14 @@ const Navbar = () => {
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
 		logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
+		// logout({ returnTo: 'http://localhost:3000' });
 	};
 
 	return (
-		<AppBar position='static' color='primary' sx={{ pt: 1, pb: 1 }}>
+		<AppBar position='static' color='primary' sx={{ pt: 1.5, pb: 1.5 }}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
-					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+					<Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>
 						<IconButton
 							size='large'
 							aria-label='account of current user'
@@ -92,7 +92,7 @@ const Navbar = () => {
 							open={Boolean(anchorElNav)}
 							onClose={handleCloseNavMenu}
 							sx={{
-								display: { xs: 'block', md: 'none' }
+								display: { xs: 'block', lg: 'none' }
 							}}>
 							{pages.map(page => (
 								<Link to={page.path} key={page.title}>
@@ -118,22 +118,24 @@ const Navbar = () => {
 					<Box
 						sx={{
 							flexGrow: 1,
-							display: { xs: 'none', md: 'flex' },
-							alignItems: { md: 'center' }
+							display: { xs: 'none', lg: 'flex' },
+							alignItems: { lg: 'center' }
 						}}>
 						{pages.map(page => (
 							<Link to={page.path} key={page.title}>
-								<MenuItem onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white' }}>
+								<MenuItem
+									onClick={handleCloseNavMenu}
+									sx={{ px: 3, py: 1.5, color: 'white' }}>
 									<Typography>
-										{page.title === 'Dashboard' && <HomeOutlined sx={{ mr: 1 }} />}
+										{page.title === 'Dashboard' && <HomeOutlined sx={{ mr: 1.25 }} />}
 										{page.title === 'Excercises' && (
-											<FitnessCenterOutlined sx={{ mr: 1 }} />
+											<FitnessCenterOutlined sx={{ mr: 1.25 }} />
 										)}
 										{page.title === 'Workouts' && (
-											<DirectionsRunOutlined sx={{ mr: 1 }} />
+											<DirectionsRunOutlined sx={{ mr: 1.25 }} />
 										)}
 										{page.title === 'Workout Programs' && (
-											<LibraryBooksOutlined sx={{ mr: 1 }} />
+											<LibraryBooksOutlined sx={{ mr: 1.25 }} />
 										)}
 										{page.title}
 									</Typography>
@@ -141,20 +143,18 @@ const Navbar = () => {
 							</Link>
 						))}
 					</Box>
-					<Box sx={{ flexGrow: 0 }}>
+					<Box sx={{ justifySelf: 'flex-end' }}>
 						<Box sx={{ display: 'flex', alignItems: 'center' }}>
 							<Box>
-								<Person sx={{ mr: 1 }} />
+								<Person sx={{ mr: 1.25 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>
 									{user?.nickname}
 								</Box>
 							</Box>
-							<Tooltip title='Open dropdown'>
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-									<Avatar alt={user?.nickname} src={user?.picture} />
-								</IconButton>
-							</Tooltip>
+							<IconButton onClick={handleOpenUserMenu} sx={{ ml: 1.5 }}>
+								<Avatar alt={user?.nickname} />
+							</IconButton>
 						</Box>
 						<Menu
 							sx={{ mt: '45px' }}
@@ -176,13 +176,13 @@ const Navbar = () => {
 									<MenuItem onClick={handleCloseUserMenu}>
 										<Typography textAlign='center'>
 											{option.title.includes('Admin') && (
-												<AdminPanelSettingsOutlined sx={{ mr: 1 }} />
+												<AdminPanelSettingsOutlined sx={{ mr: 1.25 }} />
 											)}
 											{option.title.includes('Contributor') && (
-												<PostAddOutlined sx={{ mr: 1 }} />
+												<PostAddOutlined sx={{ mr: 1.25 }} />
 											)}
 											{option.title.includes('Profile') && (
-												<AccountCircleOutlined sx={{ mr: 1 }} />
+												<AccountCircleOutlined sx={{ mr: 1.25 }} />
 											)}
 											{option.title}
 										</Typography>
@@ -191,7 +191,7 @@ const Navbar = () => {
 							))}
 							<MenuItem key={'Logout'} onClick={handleLogout}>
 								<Typography textAlign='center' color={'red'}>
-									<LogoutOutlined sx={{ mr: 1 }} />
+									<LogoutOutlined sx={{ mr: 1.25 }} />
 									Logout
 								</Typography>
 							</MenuItem>

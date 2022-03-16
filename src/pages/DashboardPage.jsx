@@ -2,31 +2,28 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Container, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import Navbar from '../components/shared-components/Navbar';
-
 const DashboardPage = () => {
-	const { user, getAccessTokenSilently } = useAuth0();
+	const { user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
 	useEffect(() => {
 		(async () => {
-			const token = await getAccessTokenSilently();
+			const jwt_token = await getAccessTokenSilently();
+			const id_token = await getIdTokenClaims();
 
-			console.log(token);
+			console.log(jwt_token);
+			console.log(id_token);
 		})();
-	}, [getAccessTokenSilently]);
+	}, [getAccessTokenSilently, getIdTokenClaims]);
 
 	return (
-		<>
-			<Navbar />
-			<Container maxWidth='xl'>
-				<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
-					Dashboard Page
-				</Typography>
-				<Box className='mt-4'>
-					<Typography>{JSON.stringify(user)}</Typography>
-				</Box>
-			</Container>
-		</>
+		<Container maxWidth='xl'>
+			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+				Dashboard Page
+			</Typography>
+			<Box className='mt-4'>
+				<Typography>{JSON.stringify(user)}</Typography>
+			</Box>
+		</Container>
 	);
 };
 
