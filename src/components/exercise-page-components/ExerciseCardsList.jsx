@@ -2,9 +2,9 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
 import { getExercises } from '../../api/exercices';
-import Exercise from './Exercise';
+import ExerciseCard from './ExerciseCard';
 
-const ExerciseList = () => {
+const ExerciseCardsList = () => {
 	const [exercises, setExercises] = useState([]);
 
 	useEffect(() => {
@@ -15,9 +15,9 @@ const ExerciseList = () => {
 	}, []);
 
 	return (
-		<Box className='mt-6 flex flex-wrap gap-4 justify-center'>
+		<Box className='mt-6 flex flex-wrap gap-4 '>
 			{exercises.map(exercise => (
-				<Exercise
+				<ExerciseCard
 					key={exercise.id}
 					name={exercise.name}
 					description={exercise.description}
@@ -29,4 +29,4 @@ const ExerciseList = () => {
 	);
 };
 
-export default ExerciseList;
+export default ExerciseCardsList;
