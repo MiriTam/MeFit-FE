@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
@@ -6,13 +7,16 @@ import ExerciseCard from './ExerciseCard';
 
 const ExerciseCardsList = () => {
 	const [exercises, setExercises] = useState([]);
+	const { getAccessTokenSilently } = useAuth0();
 
 	useEffect(() => {
 		(async () => {
-			const excercises = await getExercises();
+			const token = await getAccessTokenSilently();
+			const excercises = await getExercises(token);
+
 			setExercises(excercises);
 		})();
-	}, []);
+	}, [getAccessTokenSilently]);
 
 	return (
 		<Box className='mt-6 flex flex-wrap gap-4 '>

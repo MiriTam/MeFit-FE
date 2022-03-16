@@ -1,12 +1,13 @@
+import axios from 'axios';
+
 const BASE_URL = 'https://mefit22api.azurewebsites.net/api/exercise';
 
-export async function getExercises() {
-	const req = await fetch(BASE_URL);
-	if (!req.ok) throw new Error('Could not get exercises!');
+export async function getExercises(token) {
+	const req = await axios.get(BASE_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
 
-	const excercisesArr = await req.json();
-
-	return excercisesArr;
+	return req.data;
 }
 
 // export async function postExercise(excercise) {
