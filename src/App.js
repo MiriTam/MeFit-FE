@@ -7,7 +7,6 @@ import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
 import ExercisesPage from './pages/ExercisesPage';
-import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
@@ -48,7 +47,7 @@ function App() {
 
 					{/* Logged in  */}
 					<Route path='dashboard' element={<DashboardPage />} />
-					<Route path='excercises' element={<ExercisesPage />} />
+					<Route path='exercises' element={<ExercisesPage />} />
 					<Route path='programs' element={<ProgramsPage />} />
 					<Route path='workouts' element={<WorkoutsPage />} />
 					<Route path='profile' element={<ProfilePage />} />
@@ -56,7 +55,7 @@ function App() {
 					<Route path='administrator' element={<AdministratorPage />} />
 
 					{/* Wildcard fallback page */}
-					<Route path='*' element={<LoginPage />} />
+					<Route path='*' element={<AuthenticationPage />} />
 				</Routes>
 			</ApplicationFrame>
 		</>

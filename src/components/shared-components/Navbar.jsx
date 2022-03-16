@@ -25,9 +25,9 @@ import { Link } from 'react-router-dom';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
-	{ title: 'Excercises', path: '/excercises' },
+	{ title: 'Excercises', path: '/exercises' },
 	{ title: 'Workouts', path: '/workouts' },
-	{ title: 'Workout Programs', path: '/programs' }
+	{ title: 'Programs', path: '/programs' }
 ];
 const dropdownOptions = [
 	{ title: 'Contributor Page', path: '/contributor' },
@@ -105,7 +105,7 @@ const Navbar = () => {
 											{page.title === 'Workouts' && (
 												<DirectionsRunOutlined sx={{ mr: 1 }} />
 											)}
-											{page.title === 'Workout Programs' && (
+											{page.title === 'Programs' && (
 												<LibraryBooksOutlined sx={{ mr: 1 }} />
 											)}
 											{page.title}
@@ -134,7 +134,7 @@ const Navbar = () => {
 										{page.title === 'Workouts' && (
 											<DirectionsRunOutlined sx={{ mr: 1.25 }} />
 										)}
-										{page.title === 'Workout Programs' && (
+										{page.title === 'Programs' && (
 											<LibraryBooksOutlined sx={{ mr: 1.25 }} />
 										)}
 										{page.title}
