@@ -14,7 +14,7 @@ const ProfileForm = () => {
 	}
 
 	return (
-		<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left'>
+		<Box className='mt-8 md:w-2/3 lg:w-1/2 mx-auto text-left'>
 			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
 					Fitness Attributes
@@ -80,12 +80,14 @@ const ProfileForm = () => {
 				{/* TODO: Add Workout Programs  */}
 				{/* TODO: Add Workouts  */}
 
-				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
-					Update Attributes
-				</Button>
+				<Box className='w-1/2 mx-auto'>
+					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+						Update Attributes
+					</Button>
+				</Box>
 			</Box>
 
-			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 4 }}>
+			<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate sx={{ mt: 6 }}>
 				<Typography component='h2' variant='h5'>
 					Personal Information
 				</Typography>
@@ -148,9 +150,11 @@ const ProfileForm = () => {
 				{/* TODO: Add Workout Programs  */}
 				{/* TODO: Add Workouts  */}
 
-				<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
-					Update Information
-				</Button>
+				<Box className='w-1/2 mx-auto'>
+					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+						Update Attributes
+					</Button>
+				</Box>
 			</Box>
 		</Box>
 	);
