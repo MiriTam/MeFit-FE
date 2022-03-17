@@ -1,8 +1,11 @@
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
-const Exercise = ({ name, description, video, image }) => {
+const ExerciseCard = ({ name, description, video, image }) => {
 	return (
-		<Card className='max-w-xs px-6 py-4 text-left shadow-md' variant='outlined'>
+		<Card
+			className='max-w-xs px-6 py-4 text-left shadow-lg'
+			sx={{ backgroundColor: '#EFF6FF' }}
+			variant='outlined'>
 			<CardContent>
 				<Box>
 					<Typography component='h2' variant='h5'>
@@ -19,4 +22,4 @@ const Exercise = ({ name, description, video, image }) => {
 	);
 };
 
-export default Exercise;
+export default ExerciseCard;

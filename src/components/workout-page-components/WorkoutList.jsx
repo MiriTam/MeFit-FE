@@ -1,30 +1,27 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { getWorkouts } from '../../api/workouts';
 
-import { workouts as workoutsArr } from '../../api/workouts';
 import Workout from './Workout';
 
 const WorkoutList = () => {
 	const [workouts, setWorkouts] = useState([]);
+	const { getAccessTokenSilently } = useAuth0();
 
 	useEffect(() => {
-		const timeoutFunc = setTimeout(() => setWorkouts(workoutsArr), 1000);
+		(async () => {
+			const token = await getAccessTokenSilently();
+			const workouts = await getWorkouts(token);
 
-		// Cleanup in case component unmounts
-		return () => {
-			clearTimeout(timeoutFunc);
-		};
-	}, []);
+			setWorkouts(workouts);
+		})();
+	}, [getAccessTokenSilently]);
 
 	return (
 		<Box className='mt-4'>
-			{workouts.map(program => (
-				<Workout
-					key={program.id}
-					name={program.name}
-					description={program.description}
-					excercises={program.excercises}
-				/>
+			{workouts.map(workout => (
+				<Workout key={workout.id} name={workout.name} type={workout.type} sets={workout.sets} />
 			))}
 		</Box>
 	);
