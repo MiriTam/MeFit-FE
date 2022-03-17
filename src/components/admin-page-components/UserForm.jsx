@@ -24,11 +24,8 @@ const UserForm = ({ email, expanded, panel, handleChange }) => {
 		formState: { errors }
 	} = useForm();
 
-	async function onSubmitClick(data, event) {
-		const parent = event.target.offsetParent;
-		const userToBePatched = parent.firstChild.innerText;
-
-		console.log(`Modifying ${userToBePatched}...`);
+	async function onSubmitClick(data) {
+		console.log(`Modifying ${email}...`);
 		console.log(`New values:`);
 		console.log(data);
 

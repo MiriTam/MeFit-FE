@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
-import { getExercises } from '../../api/exercices';
+import { getAllExercises, getExerciseById } from '../../api/exercices';
 import ExerciseCard from './ExerciseCard';
 
 const ExerciseCardsList = () => {
@@ -12,9 +12,12 @@ const ExerciseCardsList = () => {
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
-			const excercises = await getExercises(token);
+
+			const excercises = await getAllExercises(token);
+			// const excercise = await getExerciseById(2, token);
 
 			setExercises(excercises);
+			// setExercises([excercise]);
 		})();
 	}, [getAccessTokenSilently]);
 
