@@ -164,7 +164,7 @@ const ProfileForm = () => {
 				{/* TODO: Add Workouts  */}
 
 				<Box className='w-1/2 mx-auto'>
-					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 4 }}>
 						Update Attributes
 					</Button>
 				</Box>

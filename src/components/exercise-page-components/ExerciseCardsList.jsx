@@ -14,10 +14,10 @@ const ExerciseCardsList = () => {
 			const token = await getAccessTokenSilently();
 
 			const excercises = await getAllExercises(token);
-			// const excercise = await getExerciseById(2, token);
+			//const excercise = await getExerciseById(2, token);
 
 			setExercises(excercises);
-			// setExercises([excercise]);
+			//setExercises([excercise]);
 		})();
 	}, [getAccessTokenSilently]);
 
