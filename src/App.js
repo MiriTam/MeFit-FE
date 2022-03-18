@@ -1,5 +1,7 @@
-// import { Route, Routes } from 'react';
-import { Route, Routes } from 'react-router-dom';
+// import { useAuth0 } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
 import AdministratorPage from './pages/AdministratorPage';
@@ -10,31 +12,19 @@ import ExercisesPage from './pages/ExercisesPage';
 import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
+import { isOnRootPage } from './utils/isOnRootPage';
 
 function App() {
-	// const { loggedInUser, login } = useUser();
-	// const navigate = useNavigate();
-	// const pathname = useLocation().pathname;
+	const { isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
+	const pathname = useLocation().pathname;
 
-	// // Redirect to application from / or /register if logged in
-	// useEffect(() => {
-	// 	if (!isOnRootOrRegisterPage(pathname)) return;
-
-	// 	if (loggedInUser) navigate('/dashboard');
-
-	// 	const sessionLoggedInUser = storageRead('loggedInUser');
-
-	// 	if (sessionLoggedInUser) {
-	// 		login(sessionLoggedInUser);
-	// 	}
-	// }, [navigate, loggedInUser, login, pathname]);
-
-	// // Redirect to / from application if not logged in
-	// useEffect(() => {
-	// 	if (isOnRootOrRegisterPage(pathname)) return;
-
-	// 	if (!loggedInUser) navigate('/');
-	// }, [loggedInUser, navigate, login, pathname]);
+	// Redirect from / to /dashboard, if logged in
+	// Redirect from /dashboard to / if not logged in
+	useEffect(() => {
+		if (isOnRootPage(pathname) && isAuthenticated) navigate('/dashboard');
+		if (!isOnRootPage(pathname) && !isAuthenticated) navigate('/');
+	}, [navigate, pathname, isAuthenticated]);
 
 	return (
 		<>
@@ -42,8 +32,6 @@ function App() {
 				<Routes>
 					{/* Not logged in  */}
 					<Route exact path='' element={<AuthenticationPage />} />
-					{/* <Route exact path='' element={<LoginPage />} /> */}
-					{/* <Route path='register' element={<RegistrationPage />} /> */}
 
 					{/* Logged in  */}
 					<Route path='dashboard' element={<DashboardPage />} />
@@ -51,6 +39,8 @@ function App() {
 					<Route path='programs' element={<ProgramsPage />} />
 					<Route path='workouts' element={<WorkoutsPage />} />
 					<Route path='profile' element={<ProfilePage />} />
+
+					{/* Logged in, restricted routes */}
 					<Route path='contributor' element={<ContributorPage />} />
 					<Route path='administrator' element={<AdministratorPage />} />
 

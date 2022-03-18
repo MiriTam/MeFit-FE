@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { isOnRootOrRegisterPage } from '../../utils/isOnRootOrRegisterPage';
+import { isOnRootPage } from '../../utils/isOnRootPage';
 import Navbar from './Navbar';
 
 const ApplicationFrame = ({ children }) => {
@@ -8,7 +7,7 @@ const ApplicationFrame = ({ children }) => {
 
 	return (
 		<>
-			{!isOnRootOrRegisterPage(pathname) && <Navbar />}
+			{!isOnRootPage(pathname) && <Navbar />}
 			{children}
 		</>
 	);
