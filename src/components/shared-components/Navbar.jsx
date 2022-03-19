@@ -22,6 +22,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import getRoleBasedOptions from '../../utils/getRoleBasedOptions';
+
 import { isAdministrator, isContributor } from '../../utils/isRole';
 
 const pages = [
@@ -61,15 +63,8 @@ const Navbar = () => {
 
 	const dropdownOptions = [{ title: 'Profile Page', path: '/profile' }];
 
-	if (isAuthenticated && isContributor(user)) {
-		dropdownOptions.push({
-			title: 'Contributor Page',
-			path: '/contributor'
-		});
-	}
-
-	if (isAuthenticated && isAdministrator(user)) {
-		dropdownOptions.push({ title: 'Administrator Page', path: '/administrator' });
+	if (isAuthenticated) {
+		dropdownOptions.push(...getRoleBasedOptions(user));
 	}
 
 	return (
