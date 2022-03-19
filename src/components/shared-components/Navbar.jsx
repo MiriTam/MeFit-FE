@@ -11,6 +11,7 @@ import {
 	PostAddOutlined
 } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -20,11 +21,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ColorModeContext } from '../../App';
 import getRoleBasedOptions from '../../utils/getRoleBasedOptions';
-
-import { isAdministrator, isContributor } from '../../utils/isRole';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
@@ -34,6 +36,9 @@ const pages = [
 ];
 
 const Navbar = () => {
+	const theme = useTheme();
+	const colorMode = useContext(ColorModeContext);
+
 	const { user, logout, isAuthenticated } = useAuth0();
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
@@ -158,6 +163,9 @@ const Navbar = () => {
 							</Box>
 							<IconButton onClick={handleOpenUserMenu} sx={{ ml: 1.5 }}>
 								<Avatar alt={user?.nickname} />
+							</IconButton>
+							<IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color='inherit'>
+								{theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
 							</IconButton>
 						</Box>
 						<Menu

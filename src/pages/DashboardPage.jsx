@@ -17,23 +17,12 @@ const DashboardPage = () => {
 
 	return (
 		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+			<Typography component='h1' color='text.primary' variant='h4' sx={{ mt: 5 }}>
 				Dashboard Page
 			</Typography>
 			<Box className='mt-4'>
 				<Typography>{JSON.stringify(user)}</Typography>
 			</Box>
-
-			{/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-				<DatePicker
-					label='Basic example'
-					value={value}
-					onChange={newValue => {
-						setValue(newValue);
-					}}
-					renderInput={params => <TextField {...params} />}
-				/>
-			</LocalizationProvider> */}
 		</Container>
 	);
 };
