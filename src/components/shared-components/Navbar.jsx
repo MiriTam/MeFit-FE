@@ -22,6 +22,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { isAdministrator, isContributor } from '../../utils/isRole';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
@@ -29,14 +30,9 @@ const pages = [
 	{ title: 'Workouts', path: '/workouts' },
 	{ title: 'Programs', path: '/programs' }
 ];
-const dropdownOptions = [
-	{ title: 'Contributor Page', path: '/contributor' },
-	{ title: 'Administrator Page', path: '/administrator' },
-	{ title: 'Profile Page', path: '/profile' }
-];
 
 const Navbar = () => {
-	const { user, logout } = useAuth0();
+	const { user, logout, isAuthenticated } = useAuth0();
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -62,6 +58,19 @@ const Navbar = () => {
 		// logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
 		logout({ returnTo: 'http://localhost:3000' });
 	};
+
+	const dropdownOptions = [{ title: 'Profile Page', path: '/profile' }];
+
+	if (isAuthenticated && isContributor(user)) {
+		dropdownOptions.push({
+			title: 'Contributor Page',
+			path: '/contributor'
+		});
+	}
+
+	if (isAuthenticated && isAdministrator(user)) {
+		dropdownOptions.push({ title: 'Administrator Page', path: '/administrator' });
+	}
 
 	return (
 		<AppBar position='static' color='primary' sx={{ pt: 1.5, pb: 1.5 }}>
