@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@mui/material';
+import { CssBaseline, useMediaQuery } from '@mui/material';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
@@ -35,7 +35,10 @@ export function ThemeProvider({ children }) {
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>
-			<MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+			<MuiThemeProvider theme={theme}>
+				<CssBaseline />
+				{children}
+			</MuiThemeProvider>
 		</ColorModeContext.Provider>
 	);
 }

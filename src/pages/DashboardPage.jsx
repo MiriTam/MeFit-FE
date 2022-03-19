@@ -17,7 +17,7 @@ const DashboardPage = () => {
 
 	return (
 		<Container maxWidth='xl'>
-			<Typography component='h1' color='text.primary' variant='h4' sx={{ mt: 5 }}>
+			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 				Dashboard Page
 			</Typography>
 			<Box className='mt-4'>

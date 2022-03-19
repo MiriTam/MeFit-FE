@@ -13,7 +13,6 @@ import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
 import { isOnRootPage } from './utils/isOnRootPage';
-import { CssBaseline } from '@mui/material';
 
 function App() {
 	const { isAuthenticated } = useAuth0();
@@ -28,29 +27,26 @@ function App() {
 	}, [navigate, pathname, isAuthenticated]);
 
 	return (
-		<>
-			<CssBaseline />
-			<ApplicationFrame>
-				<Routes>
-					{/* Not logged in  */}
-					<Route exact path='' element={<AuthenticationPage />} />
+		<ApplicationFrame>
+			<Routes>
+				{/* Not logged in  */}
+				<Route exact path='' element={<AuthenticationPage />} />
 
-					{/* Logged in  */}
-					<Route path='dashboard' element={<DashboardPage />} />
-					<Route path='exercises' element={<ExercisesPage />} />
-					<Route path='programs' element={<ProgramsPage />} />
-					<Route path='workouts' element={<WorkoutsPage />} />
-					<Route path='profile' element={<ProfilePage />} />
+				{/* Logged in  */}
+				<Route path='dashboard' element={<DashboardPage />} />
+				<Route path='exercises' element={<ExercisesPage />} />
+				<Route path='programs' element={<ProgramsPage />} />
+				<Route path='workouts' element={<WorkoutsPage />} />
+				<Route path='profile' element={<ProfilePage />} />
 
-					{/* Logged in, restricted routes */}
-					<Route path='contributor' element={<ContributorPage />} />
-					<Route path='administrator' element={<AdministratorPage />} />
+				{/* Logged in, restricted routes */}
+				<Route path='contributor' element={<ContributorPage />} />
+				<Route path='administrator' element={<AdministratorPage />} />
 
-					{/* Wildcard fallback page */}
-					<Route path='*' element={<AuthenticationPage />} />
-				</Routes>
-			</ApplicationFrame>
-		</>
+				{/* Wildcard fallback page */}
+				<Route path='*' element={<AuthenticationPage />} />
+			</Routes>
+		</ApplicationFrame>
 	);
 }
 
