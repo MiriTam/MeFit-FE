@@ -2,7 +2,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material';
 
 const ExerciseCard = ({ name, description, video, image }) => {
 	return (
-		<Card className='max-w-xs px-6 py-4 text-left shadow-md' variant='outlined'>
+		<Card className='max-w-xs px-6 py-4 text-left shadow-lg' variant='outlined'>
 			<CardContent>
 				<Box>
 					<Typography component='h2' variant='h5'>

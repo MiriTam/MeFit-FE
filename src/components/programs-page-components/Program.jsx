@@ -14,9 +14,7 @@ const Program = ({ name, category }) => {
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Typography component='h3' variant='h6'>
-					{category}
-				</Typography>
+				<Typography>Category: {category}</Typography>
 			</AccordionDetails>
 		</Accordion>
 	);

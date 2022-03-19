@@ -17,18 +17,15 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({ email }) => {
+const UserForm = ({ email, expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm();
 
-	async function onSubmitClick(data, event) {
-		const parent = event.target.offsetParent;
-		const userToBePatched = parent.firstChild.innerText;
-
-		console.log(`Modifying ${userToBePatched}...`);
+	async function onSubmitClick(data) {
+		console.log(`Modifying ${email}...`);
 		console.log(`New values:`);
 		console.log(data);
 
@@ -39,14 +36,12 @@ const UserForm = ({ email }) => {
 	}
 
 	return (
-		<Accordion>
+		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography component='h2' variant='h5'>
-					{email}
-				</Typography>
+				<Typography sx={{ fontSize: 20 }}>{email}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left'>
+				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6}>
@@ -132,9 +127,14 @@ const UserForm = ({ email }) => {
 								</FormControl>
 							</Grid>
 						</Grid>
-						<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 2 }}>
-							Update user
-						</Button>
+						<Box className='flex mt-4 gap-4'>
+							<Button type='submit' fullWidth variant='contained'>
+								Update user
+							</Button>
+							<Button type='submit' fullWidth variant='contained' color='error'>
+								Delete user
+							</Button>
+						</Box>
 					</Box>
 				</Box>
 			</AccordionDetails>
