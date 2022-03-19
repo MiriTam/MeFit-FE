@@ -1,5 +1,7 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AddExerciseForm from '../components/contributor-page-components/AddExerciseForm';
 import AddProgramForm from '../components/contributor-page-components/AddProgramForm';
@@ -7,8 +9,16 @@ import AddWorkoutForm from '../components/contributor-page-components/AddWorkout
 import ExerciseFormsList from '../components/contributor-page-components/ExerciseFormsList';
 import ProgramFormsList from '../components/contributor-page-components/ProgramFormsList';
 import WorkoutFormsList from '../components/contributor-page-components/WorkoutFormsList';
+import { isContributor } from '../utils/isRole';
 
 const ContributorPage = () => {
+	const { user } = useAuth0();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!isContributor(user)) navigate('/');
+	}, [navigate, user]);
+
 	return (
 		<Container maxWidth='xl'>
 			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>

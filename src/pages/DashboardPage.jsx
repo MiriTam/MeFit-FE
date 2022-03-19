@@ -23,17 +23,6 @@ const DashboardPage = () => {
 			<Box className='mt-4'>
 				<Typography>{JSON.stringify(user)}</Typography>
 			</Box>
-
-			{/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-				<DatePicker
-					label='Basic example'
-					value={value}
-					onChange={newValue => {
-						setValue(newValue);
-					}}
-					renderInput={params => <TextField {...params} />}
-				/>
-			</LocalizationProvider> */}
 		</Container>
 	);
 };

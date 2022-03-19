@@ -10,6 +10,7 @@ import {
 	Person,
 	PostAddOutlined
 } from '@mui/icons-material';
+import useColorModeContext from '../../context/ThemeContext';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -22,6 +23,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import getRoleBasedOptions from '../../utils/getRoleBasedOptions';
+
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useTheme } from '@emotion/react';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
@@ -29,14 +35,12 @@ const pages = [
 	{ title: 'Workouts', path: '/workouts' },
 	{ title: 'Programs', path: '/programs' }
 ];
-const dropdownOptions = [
-	{ title: 'Contributor Page', path: '/contributor' },
-	{ title: 'Administrator Page', path: '/administrator' },
-	{ title: 'Profile Page', path: '/profile' }
-];
 
 const Navbar = () => {
-	const { user, logout } = useAuth0();
+	const colorMode = useColorModeContext();
+	const theme = useTheme();
+
+	const { user, logout, isAuthenticated } = useAuth0();
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -59,9 +63,15 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
-		// logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
-		logout({ returnTo: 'http://localhost:3000' });
+		logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
+		// logout({ returnTo: 'http://localhost:3000' });
 	};
+
+	const dropdownOptions = [{ title: 'Profile Page', path: '/profile' }];
+
+	if (isAuthenticated) {
+		dropdownOptions.push(...getRoleBasedOptions(user));
+	}
 
 	return (
 		<AppBar position='static' color='primary' sx={{ pt: 1.5, pb: 1.5 }}>
@@ -154,6 +164,9 @@ const Navbar = () => {
 							</Box>
 							<IconButton onClick={handleOpenUserMenu} sx={{ ml: 1.5 }}>
 								<Avatar alt={user?.nickname} />
+							</IconButton>
+							<IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color='inherit'>
+								{theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
 							</IconButton>
 						</Box>
 						<Menu
