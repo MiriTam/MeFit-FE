@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { UserProvider } from './UserContext';
+import { ThemeProvider } from '../context/ThemeContext';
 
 function AppContext({ children }) {
-	return <UserProvider>{children}</UserProvider>;
+	return <ThemeProvider>{children}</ThemeProvider>;
 }
 
 export default AppContext;

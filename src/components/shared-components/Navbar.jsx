@@ -10,8 +10,8 @@ import {
 	Person,
 	PostAddOutlined
 } from '@mui/icons-material';
+import useColorModeContext from '../../context/ThemeContext';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -21,12 +21,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ColorModeContext } from '../../App';
 import getRoleBasedOptions from '../../utils/getRoleBasedOptions';
+
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useTheme } from '@emotion/react';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
@@ -36,8 +37,8 @@ const pages = [
 ];
 
 const Navbar = () => {
+	const colorMode = useColorModeContext();
 	const theme = useTheme();
-	const colorMode = useContext(ColorModeContext);
 
 	const { user, logout, isAuthenticated } = useAuth0();
 
