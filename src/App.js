@@ -1,7 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
 import AdministratorPage from './pages/AdministratorPage';

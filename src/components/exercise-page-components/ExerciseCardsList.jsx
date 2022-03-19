@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
-import { getAllExercises, getExerciseById } from '../../api/exercices';
+import { getAllExercises } from '../../api/exercices';
 import ExerciseCard from './ExerciseCard';
 
 const ExerciseCardsList = () => {
