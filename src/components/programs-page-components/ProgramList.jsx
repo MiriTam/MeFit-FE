@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { getPrograms } from '../../api/programs';
+import { getAllPrograms } from '../../api/programs';
 import Program from './Program';
 
 const ProgramList = () => {
@@ -9,7 +9,7 @@ const ProgramList = () => {
 
 	useEffect(() => {
 		(async () => {
-			const programs = await getPrograms();
+			const programs = await getAllPrograms();
 			setPrograms(programs);
 		})();
 	}, []);

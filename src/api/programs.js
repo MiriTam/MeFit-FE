@@ -1,6 +1,6 @@
 const BASE_URL = 'https://mefit22api.azurewebsites.net/api/workout-program';
 
-export async function getPrograms() {
+export async function getAllPrograms() {
 	const req = await fetch(BASE_URL);
 	if (!req.ok) throw new Error('Could not get programs!');
 

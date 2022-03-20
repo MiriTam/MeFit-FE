@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { getAllExercises } from '../../api/exercices';
 import ExerciseCard from './ExerciseCard';
 
-const ExerciseCardsList = () => {
+const ExerciseCardList = () => {
 	const [exercises, setExercises] = useState([]);
 	const { getAccessTokenSilently } = useAuth0();
 
@@ -36,4 +36,4 @@ const ExerciseCardsList = () => {
 	);
 };
 
-export default ExerciseCardsList;
+export default ExerciseCardList;

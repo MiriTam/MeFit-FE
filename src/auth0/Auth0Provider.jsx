@@ -1,8 +1,8 @@
-import { Auth0Provider } from '@auth0/auth0-react';
+import { Auth0Provider as OriginalAuthProvider } from '@auth0/auth0-react';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Auth0ProviderWithHistory = ({ children }) => {
+function Auth0Provider({ children }) {
 	const navigate = useNavigate();
 	const pathname = useLocation().pathname;
 
@@ -11,15 +11,15 @@ const Auth0ProviderWithHistory = ({ children }) => {
 	};
 
 	return (
-		<Auth0Provider
+		<OriginalAuthProvider
 			domain={'dev-o072w2hj.eu.auth0.com'}
 			clientId={'ViXbPTcrznJsmZxaEze6IdPXCZrGB4rp'}
 			redirectUri={window.location.origin + '/dashboard'}
 			onRedirectCallback={onRedirectCallback}
 			audience='https://mefit22api.azurewebsites.net/api/'>
 			{children}
-		</Auth0Provider>
+		</OriginalAuthProvider>
 	);
-};
+}
 
-export default Auth0ProviderWithHistory;
+export default Auth0Provider;

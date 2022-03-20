@@ -12,7 +12,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
+const AddWorkout = () => {
 	const {
 		register,
 		handleSubmit,
@@ -20,7 +20,7 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 	} = useForm();
 
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${name}...`);
+		console.log(`Adding exercise...`);
 		console.log(`New values:`);
 		console.log(data);
 
@@ -31,9 +31,9 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 	}
 
 	return (
-		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
+		<Accordion className='my-2'>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				<Typography sx={{ fontSize: 20 }}>Add a new workout</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
@@ -49,7 +49,6 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 									autoComplete='given-name'
 									name='exerciseName'
 									fullWidth
-									placeholder={name}
 									label='Name'
 									autoFocus
 								/>
@@ -65,7 +64,6 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 									})}
 									error={errors.hasOwnProperty('exerciseDescription')}
 									fullWidth
-									placeholder={description}
 									label='Description'
 									name='exerciseDescription'
 								/>
@@ -73,7 +71,7 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 						</Grid>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>
 							<Button type='submit' fullWidth variant='contained'>
-								Update exercise
+								Add Workout
 							</Button>
 						</Box>
 					</Box>
@@ -83,4 +81,4 @@ const ExerciseForm = ({ name, description, expanded, panel, handleChange }) => {
 	);
 };
 
-export default ExerciseForm;
+export default AddWorkout;

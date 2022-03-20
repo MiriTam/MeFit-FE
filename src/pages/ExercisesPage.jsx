@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-import ExerciseCardsList from '../components/exercise-page-components/ExerciseCardsList';
+import ExerciseCardList from '../components/exercise-page-components/ExerciseCardList';
 
 const ExercisesPage = () => {
 	return (
@@ -9,7 +9,7 @@ const ExercisesPage = () => {
 			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 				Exercises Page
 			</Typography>
-			<ExerciseCardsList />
+			<ExerciseCardList />
 		</Container>
 	);
 };
