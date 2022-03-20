@@ -17,7 +17,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({ email, expanded, panel, handleChange }) => {
+const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
@@ -142,4 +142,4 @@ const UserForm = ({ email, expanded, panel, handleChange }) => {
 	);
 };
 
-export default UserForm;
+export default EditUserForm;

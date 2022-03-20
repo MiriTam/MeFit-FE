@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { getWorkouts } from '../../api/workouts';
 
+import { getAllWorkouts } from '../../api/workouts';
 import Workout from './Workout';
 
 const WorkoutList = () => {
@@ -12,7 +12,7 @@ const WorkoutList = () => {
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
-			const workouts = await getWorkouts(token);
+			const workouts = await getAllWorkouts(token);
 
 			setWorkouts(workouts);
 		})();
