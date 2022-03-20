@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-import ProfileForm from '../components/profile-page-components/ProfileForm';
+import EditProfile from '../components/profile-page-components/EditProfile';
 
 const ProfilePage = () => {
 	return (
@@ -9,7 +9,7 @@ const ProfilePage = () => {
 			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 				Profile Page
 			</Typography>
-			<ProfileForm />
+			<EditProfile />
 		</Container>
 	);
 };

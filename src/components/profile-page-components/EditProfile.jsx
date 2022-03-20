@@ -2,7 +2,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 
-const ProfileForm = () => {
+const EditProfile = () => {
 	const {
 		register,
 		handleSubmit,
@@ -173,4 +173,4 @@ const ProfileForm = () => {
 	);
 };
 
-export default ProfileForm;
+export default EditProfile;

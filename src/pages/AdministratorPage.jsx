@@ -3,7 +3,7 @@ import { Container, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import UserFormsList from '../components/admin-page-components/UserFormsList';
+import EditUserList from '../components/admin-page-components/EditUserList';
 import { isAdministrator } from '../utils/isRole';
 
 const AdministratorPage = () => {
@@ -19,7 +19,7 @@ const AdministratorPage = () => {
 			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
 				Administrator Page
 			</Typography>
-			<UserFormsList />
+			<EditUserList />
 		</Container>
 	);
 };

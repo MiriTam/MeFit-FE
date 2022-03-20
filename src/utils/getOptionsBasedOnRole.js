@@ -1,16 +1,16 @@
 import { isAdministrator, isContributor } from './isRole';
 
-export default function getRoleBasedOptions(user) {
+export default function getOptionsBasedOnRole(user, isAuthenticated) {
 	const options = [];
 
-	if (isContributor(user)) {
+	if (isAuthenticated && isContributor(user)) {
 		options.push({
 			title: 'Contributor Page',
 			path: '/contributor'
 		});
 	}
 
-	if (isAdministrator(user)) {
+	if (isAuthenticated && isAdministrator(user)) {
 		options.push({ title: 'Administrator Page', path: '/administrator' });
 	}
 

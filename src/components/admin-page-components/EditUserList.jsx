@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { getUsers } from '../../api/users';
-import UserForm from './UserForm';
+import EditUserForm from './EditUser';
 
-const UserFormsList = () => {
+const EditUserList = () => {
 	const [users, setUsers] = useState([]);
 	const [expanded, setExpanded] = useState(false);
 
@@ -22,7 +22,7 @@ const UserFormsList = () => {
 	return (
 		<Box className='mt-4'>
 			{users.map((user, idx) => (
-				<UserForm
+				<EditUserForm
 					key={user.id}
 					email={user.email}
 					panel={`panel-${idx + 1}`}
@@ -34,4 +34,4 @@ const UserFormsList = () => {
 	);
 };
 
-export default UserFormsList;
+export default EditUserList;
