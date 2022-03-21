@@ -15,10 +15,14 @@ const AdministratorPage = () => {
 	}, [navigate, user]);
 
 	return (
-		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
 				Administrator Page
 			</Typography>
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				As an administrator, you have the right edit and delete registered users on MeFit.
+			</Typography>
+
 			<EditUserList />
 		</Container>
 	);

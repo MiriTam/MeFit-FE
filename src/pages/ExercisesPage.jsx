@@ -5,9 +5,12 @@ import ExerciseCardList from '../components/exercise-page-components/ExerciseCar
 
 const ExercisesPage = () => {
 	return (
-		<Container maxWidth='xl' className='text-left'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
-				Exercises Page
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
+				Exercises Overview
+			</Typography>
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				This is a list of all exercises, categorized by the target muscle group they affect.
 			</Typography>
 			<ExerciseCardList />
 		</Container>

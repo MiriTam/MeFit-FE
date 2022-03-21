@@ -1,12 +1,14 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 const GoalsPage = () => {
 	return (
-		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
-				Goals Page
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
+				My Goals
 			</Typography>
-			<Box className='mt-4'>Content of goals page</Box>
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				This is an overview of all your goals, available to be modified at any time.
+			</Typography>
 		</Container>
 	);
 };
