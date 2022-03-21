@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import useColorModeContext from '../../context/ThemeContext';
 import getIconBasedOnTitle from '../../utils/getIconBasedOnTitle';
 import getOptionsBasedOnRole from '../../utils/getOptionsBasedOnRole';
@@ -21,6 +22,7 @@ import ThemeToggle from './ThemeToggle';
 
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
+	{ title: 'Goals', path: '/goals' },
 	{ title: 'Excercises', path: '/exercises' },
 	{ title: 'Workouts', path: '/workouts' },
 	{ title: 'Programs', path: '/programs' }
@@ -53,8 +55,8 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleCloseUserMenu(null);
-		logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
-		// logout({ returnTo: 'http://localhost:3000' });
+		// logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
+		logout({ returnTo: 'http://localhost:3000' });
 	};
 
 	const dropdownOptions = [
@@ -95,7 +97,7 @@ const Navbar = () => {
 							}}>
 							{pages.map(page => (
 								<Link to={page.path} key={page.title}>
-									<MenuItem onClick={handleCloseNavMenu} size={''}>
+									<MenuItem sx={{ px: 3, py: 1 }} onClick={handleCloseNavMenu}>
 										<Typography>
 											{getIconBasedOnTitle(page.title)}
 											{page.title}
@@ -113,9 +115,7 @@ const Navbar = () => {
 						}}>
 						{pages.map(page => (
 							<Link to={page.path} key={page.title}>
-								<MenuItem
-									onClick={handleCloseNavMenu}
-									sx={{ px: 3, py: 1.5, color: 'white' }}>
+								<MenuItem onClick={handleCloseNavMenu} sx={{ px: 3, py: 1.5 }}>
 									<Typography>
 										{getIconBasedOnTitle(page.title)}
 										{page.title}
@@ -157,7 +157,7 @@ const Navbar = () => {
 							onClose={handleCloseUserMenu}>
 							{dropdownOptions.map(option => (
 								<Link to={option.path} key={option.title}>
-									<MenuItem onClick={handleCloseUserMenu}>
+									<MenuItem sx={{ px: 3, py: 1 }} onClick={handleCloseUserMenu}>
 										<Typography textAlign='center'>
 											{getIconBasedOnTitle(option.title)}
 											{option.title}
@@ -165,7 +165,7 @@ const Navbar = () => {
 									</MenuItem>
 								</Link>
 							))}
-							<MenuItem key={'Logout'} onClick={handleLogout}>
+							<MenuItem sx={{ px: 3, py: 1 }} key={'Logout'} onClick={handleLogout}>
 								<Typography textAlign='center' color={'red'}>
 									<LogoutOutlined sx={{ mr: 1.25 }} />
 									Logout

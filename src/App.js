@@ -8,6 +8,7 @@ import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
 import ExercisesPage from './pages/ExercisesPage';
+import GoalsPage from './pages/GoalsPage';
 import ProfilePage from './pages/ProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
@@ -33,6 +34,7 @@ function App() {
 
 				{/* Logged in  */}
 				<Route path='dashboard' element={<DashboardPage />} />
+				<Route path='goals' element={<GoalsPage />} />
 				<Route path='exercises' element={<ExercisesPage />} />
 				<Route path='programs' element={<ProgramsPage />} />
 				<Route path='workouts' element={<WorkoutsPage />} />
