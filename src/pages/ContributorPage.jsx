@@ -20,9 +20,12 @@ const ContributorPage = () => {
 	}, [navigate, user, isAuthenticated]);
 
 	return (
-		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
 				Contributor Page
+			</Typography>
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				As a contributor, you have the right to add and edit exercises, workouts and programs.
 			</Typography>
 
 			<Box className='mt-6'>

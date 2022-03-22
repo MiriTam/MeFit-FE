@@ -28,3 +28,21 @@ export async function postUser(user, role) {
 
 	return newUser;
 }
+
+export async function patchUser(user, role) {
+	const req = await fetch(BASE_URL, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			...user
+			// ...getRoleBooleans(role)
+		})
+	});
+	if (!req.ok) throw new Error('Could not post user!');
+
+	const newUser = await req.json();
+
+	return newUser;
+}

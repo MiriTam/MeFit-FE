@@ -23,7 +23,7 @@ const EditProfile = () => {
 	}
 
 	return (
-		<Box className='mt-8 md:w-2/3 lg:w-1/2 mx-auto text-left'>
+		<Box className='mt-4 md:w-2/3 lg:w-1/2 text-left'>
 			<Box component='form' onSubmit={handleSubmit(onAttributesFormSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
 					Fitness Attributes
@@ -100,7 +100,7 @@ const EditProfile = () => {
 				component='form'
 				onSubmit={handleSubmitInfo(onInformationFormSubmitClick)}
 				noValidate
-				sx={{ mt: 6 }}>
+				className='mt-8'>
 				<Typography component='h2' variant='h5'>
 					Personal Information
 				</Typography>
@@ -165,7 +165,7 @@ const EditProfile = () => {
 
 				<Box className='w-1/2 mx-auto'>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
-						Update Attributes
+						Update Information
 					</Button>
 				</Box>
 			</Box>

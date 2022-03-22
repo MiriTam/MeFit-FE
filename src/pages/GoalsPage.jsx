@@ -1,20 +1,16 @@
 import { Container, Typography } from '@mui/material';
-import React from 'react';
 
-import WorkoutList from '../components/workout-page-components/WorkoutList';
-
-const WorkoutsPage = () => {
+const GoalsPage = () => {
 	return (
 		<Container maxWidth='xl' className='my-12'>
 			<Typography component='h1' variant='h4'>
-				Workouts Overview
+				My Goals
 			</Typography>
 			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
-				This is a list of all workouts, categorized by their type.
+				This is an overview of all your goals, available to be modified at any time.
 			</Typography>
-			<WorkoutList />
 		</Container>
 	);
 };
 
-export default WorkoutsPage;
+export default GoalsPage;
