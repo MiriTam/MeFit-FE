@@ -2,7 +2,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 
-const ProfileForm = () => {
+const EditProfile = () => {
 	const {
 		register,
 		handleSubmit,
@@ -23,7 +23,7 @@ const ProfileForm = () => {
 	}
 
 	return (
-		<Box className='mt-8 md:w-2/3 lg:w-1/2 mx-auto text-left'>
+		<Box className='mt-4 md:w-2/3 lg:w-1/2 text-left'>
 			<Box component='form' onSubmit={handleSubmit(onAttributesFormSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
 					Fitness Attributes
@@ -100,7 +100,7 @@ const ProfileForm = () => {
 				component='form'
 				onSubmit={handleSubmitInfo(onInformationFormSubmitClick)}
 				noValidate
-				sx={{ mt: 6 }}>
+				className='mt-8'>
 				<Typography component='h2' variant='h5'>
 					Personal Information
 				</Typography>
@@ -164,8 +164,8 @@ const ProfileForm = () => {
 				{/* TODO: Add Workouts  */}
 
 				<Box className='w-1/2 mx-auto'>
-					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2, mb: 4 }}>
-						Update Attributes
+					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
+						Update Information
 					</Button>
 				</Box>
 			</Box>
@@ -173,4 +173,4 @@ const ProfileForm = () => {
 	);
 };
 
-export default ProfileForm;
+export default EditProfile;

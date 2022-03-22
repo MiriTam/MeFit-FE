@@ -17,7 +17,9 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserForm = ({ email, expanded, panel, handleChange }) => {
+import getManagementApiAccessToken from '../../api/tokens';
+
+const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
@@ -28,6 +30,8 @@ const UserForm = ({ email, expanded, panel, handleChange }) => {
 		console.log(`Modifying ${email}...`);
 		console.log(`New values:`);
 		console.log(data);
+
+		await getManagementApiAccessToken();
 
 		// const { firstName, lastName, email, password, role } = data;
 
@@ -142,4 +146,4 @@ const UserForm = ({ email, expanded, panel, handleChange }) => {
 	);
 };
 
-export default UserForm;
+export default EditUserForm;

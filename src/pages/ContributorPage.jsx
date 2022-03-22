@@ -1,55 +1,68 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import AddExerciseForm from '../components/contributor-page-components/AddExerciseForm';
-import AddProgramForm from '../components/contributor-page-components/AddProgramForm';
-import AddWorkoutForm from '../components/contributor-page-components/AddWorkoutForm';
-import ExerciseFormsList from '../components/contributor-page-components/ExerciseFormsList';
-import ProgramFormsList from '../components/contributor-page-components/ProgramFormsList';
-import WorkoutFormsList from '../components/contributor-page-components/WorkoutFormsList';
+import AddExerciseForm from '../components/contributor-page-components/AddExercise';
+import AddProgramForm from '../components/contributor-page-components/AddProgram';
+import AddWorkout from '../components/contributor-page-components/AddWorkout';
+import EditExerciseList from '../components/contributor-page-components/EditExerciseList';
+import EditProgramList from '../components/contributor-page-components/EditProgramList';
+import EditWorkoutList from '../components/contributor-page-components/EditWorkoutList';
+import { isContributor } from '../utils/isRole';
 
 const ContributorPage = () => {
+	const { user, isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isAuthenticated && !isContributor(user)) navigate('/');
+	}, [navigate, user, isAuthenticated]);
+
 	return (
-		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
 				Contributor Page
 			</Typography>
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				As a contributor, you have the right to add and edit exercises, workouts and programs.
+			</Typography>
 
-			<Box className='mt-2'>
+			<Box className='mt-6'>
 				{/* ADD/EDIT EXERCISES */}
 				<Box>
 					<Typography component='h2' variant='h5'>
-						Edit Exercises
-					</Typography>
-					<ExerciseFormsList />
-					<Typography component='h2' variant='h5'>
-						Add Exercises
+						Add Exercise
 					</Typography>
 					<AddExerciseForm />
+					<Typography component='h2' variant='h5'>
+						Edit Exercises
+					</Typography>
+					<EditExerciseList />
 				</Box>
 
 				{/* ADD/EDIT WORKOUTS */}
-				<Box className='mt-4'>
+				<Box className='mt-6'>
+					<Typography component='h2' variant='h5'>
+						Add Workout
+					</Typography>
+					<AddWorkout />
 					<Typography component='h2' variant='h5'>
 						Edit Workouts
 					</Typography>
-					<WorkoutFormsList />
-					<Typography component='h2' variant='h5'>
-						Add Workouts
-					</Typography>
-					<AddWorkoutForm />
+					<EditWorkoutList />
 				</Box>
 
 				{/* ADD/EDIT PROGRAMS */}
-				<Box className='mt-4'>
+				<Box className='mt-6'>
+					<Typography component='h2' variant='h5'>
+						Add Program
+					</Typography>
+					<AddProgramForm />
 					<Typography component='h2' variant='h5'>
 						Edit Programs
 					</Typography>
-					<ProgramFormsList />
-					<Typography component='h2' variant='h5'>
-						Add Programs
-					</Typography>
-					<AddProgramForm />
+					<EditProgramList />
 				</Box>
 			</Box>
 		</Container>

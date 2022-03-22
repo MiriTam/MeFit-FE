@@ -2,11 +2,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { getAllExercises } from '../../api/exercices';
-import ExerciseForm from './ExerciseForm';
+import { getAllPrograms } from '../../api/programs';
+import EditProgram from './EditProgram';
 
-const ExerciseFormsList = () => {
-	const [exercises, setExercises] = useState([]);
+const EditWorkoutList = () => {
+	const [programs, setPrograms] = useState([]);
 	const [expanded, setExpanded] = useState(false);
 
 	const { getAccessTokenSilently } = useAuth0();
@@ -18,19 +18,19 @@ const ExerciseFormsList = () => {
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
-			const apiExercises = await getAllExercises(token);
+			const apiPrograms = await getAllPrograms(token);
 
-			setExercises(apiExercises);
+			setPrograms(apiPrograms);
 		})();
 	}, [getAccessTokenSilently]);
 
 	return (
 		<Box className='my-2'>
-			{exercises.map((exercise, idx) => (
-				<ExerciseForm
-					key={exercise.id}
-					name={exercise.name}
-					description={exercise.description}
+			{programs.map((program, idx) => (
+				<EditProgram
+					key={program.id}
+					name={program.name}
+					category={program.category}
 					panel={`panel-${idx + 1}`}
 					expanded={expanded}
 					handleChange={handleChange}
@@ -40,4 +40,4 @@ const ExerciseFormsList = () => {
 	);
 };
 
-export default ExerciseFormsList;
+export default EditWorkoutList;
