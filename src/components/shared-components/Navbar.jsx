@@ -126,7 +126,7 @@ const Navbar = () => {
 					</Box>
 					<Box sx={{ justifySelf: 'flex-end' }}>
 						<Box sx={{ display: 'flex', alignItems: 'center' }}>
-							<Box>
+							<Box className='text-right'>
 								<Person sx={{ mr: 1.25 }} />
 								Logged in as{' '}
 								<Box component={'span'} className='font-semibold'>

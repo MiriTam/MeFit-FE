@@ -7,12 +7,12 @@ import EditUserList from '../components/admin-page-components/EditUserList';
 import { isAdministrator } from '../utils/isRole';
 
 const AdministratorPage = () => {
-	const { user } = useAuth0();
+	const { user, isAuthenticated } = useAuth0();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!isAdministrator(user)) navigate('/');
-	}, [navigate, user]);
+		if (isAuthenticated && !isAdministrator(user)) navigate('/');
+	}, [navigate, user, isAuthenticated]);
 
 	return (
 		<Container maxWidth='xl' className='my-12'>
