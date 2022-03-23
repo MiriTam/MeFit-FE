@@ -16,8 +16,16 @@ import {
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import getDefaultRoleValue from '../../utils/getDefaultRoleString';
 
-const EditUserForm = ({ email, expanded, panel, handleChange }) => {
+// import getManagementApiAccessToken from '../../api/tokens';
+
+const EditUserForm = ({
+	user: { firstName, lastName, email, password, isContributor, isAdmin },
+	expanded,
+	panel,
+	handleChange
+}) => {
 	const {
 		register,
 		handleSubmit,
@@ -29,10 +37,10 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 		console.log(`New values:`);
 		console.log(data);
 
-		// const { firstName, lastName, email, password, role } = data;
+		// await getManagementApiAccessToken();
 
-		// const userToBePatched = { firstName, lastName, email };
-		// await patchUser(userToBePatched, role);
+		// const { firstName, lastName, _email } = data;
+		// const userToBePatched = { firstName, lastName, _email };
 	}
 
 	return (
@@ -47,9 +55,9 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 							<Grid item xs={12} sm={6}>
 								<TextField
 									{...register('firstName', {
-										required: true,
 										minLength: 4
 									})}
+									value={firstName}
 									error={errors.hasOwnProperty('firstName')}
 									autoComplete='given-name'
 									name='firstName'
@@ -61,9 +69,9 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 							<Grid item xs={12} sm={6}>
 								<TextField
 									{...register('lastName', {
-										required: true,
 										minLength: 4
 									})}
+									value={lastName}
 									error={errors.hasOwnProperty('lastName')}
 									fullWidth
 									label='Last Name'
@@ -74,12 +82,12 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 							<Grid item xs={12}>
 								<TextField
 									{...register('email', {
-										required: true,
 										minLength: 4
 										// pattern: {
 										// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 										// }
 									})}
+									value={email}
 									error={errors.hasOwnProperty('email')}
 									fullWidth
 									label='Email Address'
@@ -90,9 +98,9 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 							<Grid item xs={12}>
 								<TextField
 									{...register('password', {
-										required: true,
 										minLength: 4
 									})}
+									// value={'placeholder_password'}
 									error={errors.hasOwnProperty('password')}
 									fullWidth
 									name='password'
@@ -104,7 +112,10 @@ const EditUserForm = ({ email, expanded, panel, handleChange }) => {
 							<Grid item xs={12}>
 								<FormControl>
 									<FormLabel id='roles'>User role</FormLabel>
-									<RadioGroup row aria-labelledby='roles' defaultValue={'regular'}>
+									<RadioGroup
+										row
+										aria-labelledby='roles'
+										defaultValue={getDefaultRoleValue(isContributor, isAdmin)}>
 										<FormControlLabel
 											{...register('role')}
 											value='regular'

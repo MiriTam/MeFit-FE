@@ -1,15 +1,18 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-import ProgramList from '../components/programs-page-components/ProgramList';
+import ProgramCardList from '../components/programs-page-components/ProgramCardList';
 
 const ProgramsPage = () => {
 	return (
-		<Container maxWidth='xl'>
-			<Typography component='h1' variant='h4' sx={{ mt: 5 }}>
-				Programs Page
+		<Container maxWidth='xl' className='my-12'>
+			<Typography component='h1' variant='h4'>
+				Programs Overview
 			</Typography>
-			<ProgramList />
+			<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
+				This is a list of all programs, categorized by their category.
+			</Typography>
+			<ProgramCardList />
 		</Container>
 	);
 };

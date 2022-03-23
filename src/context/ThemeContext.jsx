@@ -1,5 +1,5 @@
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
 // Creating context
@@ -12,7 +12,7 @@ export default function useColorModeContext() {
 // Providing the context
 export function ThemeProvider({ children }) {
 	const prefersDarkMode = window.matchMedia('(prefers-color-scheme:dark)').matches;
-	const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light');
+	const [mode, setMode] = useState(!prefersDarkMode ? 'dark' : 'light');
 
 	const colorMode = useMemo(
 		() => ({
