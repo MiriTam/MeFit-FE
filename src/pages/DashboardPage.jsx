@@ -25,7 +25,7 @@ const DashboardPage = () => {
 	return (
 		<Container maxWidth='xl' className='my-12'>
 			<Typography component='h1' variant='h2' color='text.secondary' sx={{ mt: 6 }}>
-				Welcome back, <br />{' '}
+				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}
 				</Box>
