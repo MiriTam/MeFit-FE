@@ -1,8 +1,18 @@
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import { Box, CardContent, Paper, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
-const ExerciseCard = ({ name, description, video, image }) => {
+const ExerciseCard = ({ id, name, description, video, image }) => {
+	const location = useLocation();
+
+	function isHighlighted(id) {
+		return location.search.includes(id);
+	}
+
 	return (
-		<Card className='max-w-sm px-6 py-4 text-left shadow-md' variant='outlined'>
+		<Paper
+			elevation={4}
+			className='w-96 px-6 py-4 text-left '
+			sx={{ backgroundColor: isHighlighted(id) ? 'lightskyblue' : 'none' }}>
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
@@ -15,7 +25,7 @@ const ExerciseCard = ({ name, description, video, image }) => {
 					</Typography>
 				</Box>
 			</CardContent>
-		</Card>
+		</Paper>
 	);
 };
 

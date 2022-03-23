@@ -60,7 +60,7 @@ const Navbar = () => {
 	};
 
 	const dropdownOptions = [
-		{ title: 'Profile Page', path: '/profile' },
+		{ title: 'Profile Page', path: '/edit-profile' },
 		...getOptionsBasedOnRole(user, isAuthenticated)
 	];
 

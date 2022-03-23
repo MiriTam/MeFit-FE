@@ -1,5 +1,6 @@
 import React from 'react';
-import { isOnRootPage } from '../../utils/isOnRootPage';
+
+import { isOnNewProfilePage, isOnRootPage } from '../../utils/isOnPage';
 import Navbar from './Navbar';
 
 const ApplicationFrame = ({ children }) => {
@@ -7,7 +8,7 @@ const ApplicationFrame = ({ children }) => {
 
 	return (
 		<>
-			{!isOnRootPage(pathname) && <Navbar />}
+			{!isOnRootPage(pathname) && !isOnNewProfilePage(pathname) && <Navbar />}
 			{children}
 		</>
 	);

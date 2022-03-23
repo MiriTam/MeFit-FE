@@ -1,9 +1,9 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-import EditProfile from '../components/profile-page-components/EditProfile';
+import EditProfile from '../components/edit-profile-page-components/EditProfile';
 
-const ProfilePage = () => {
+const EditProfilePage = () => {
 	return (
 		<Container maxWidth='xl' className='my-12'>
 			<Typography component='h1' variant='h4'>
@@ -17,4 +17,4 @@ const ProfilePage = () => {
 	);
 };
 
-export default ProfilePage;
+export default EditProfilePage;

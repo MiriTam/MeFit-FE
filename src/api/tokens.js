@@ -6,9 +6,9 @@ const options = {
 	headers: { 'content-type': 'application/x-www-form-urlencoded' },
 	data: {
 		grant_type: 'client_credentials',
-		client_id: 'ViXbPTcrznJsmZxaEze6IdPXCZrGB4rp',
-		client_secret: 'xC4t9h5cd9DwO_LCa1FGnGgHqIAuTQlCB-_facnkiy2avehdYa3ENdHGWmtRv6h6',
-		audience: 'https:/dev-o072w2hj.eu.auth0.com/api/v2/'
+		client_id: '4XDd6Abg3AwWP0Zd4coiF2N547u4etgr',
+		client_secret: '5urccG3ubdhB3Q7UkMU4A8F5r5cUaeE_3L7re-wVT0Eq1PriylPu5H7mExUQRRAB',
+		audience: 'https:/dev-o072w2hj.eu.auth0.com/api/v2'
 	}
 };
 

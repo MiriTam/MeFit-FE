@@ -24,7 +24,7 @@ const EditUserList = () => {
 			{users.map((user, idx) => (
 				<EditUserForm
 					key={user.id}
-					email={user.email}
+					user={user}
 					panel={`panel-${idx + 1}`}
 					expanded={expanded}
 					handleChange={handleChange}
