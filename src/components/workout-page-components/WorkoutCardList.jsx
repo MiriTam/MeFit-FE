@@ -23,8 +23,8 @@ const WorkoutCardList = () => {
 	return (
 		<Box className='mt-4'>
 			{/* Get unique workout types, iterate over them */}
-			{getUniqueWorkoutTypes(workouts).map(workoutType => (
-				<Box className='mt-6'>
+			{getUniqueWorkoutTypes(workouts).map((workoutType, idx) => (
+				<Box className='mt-6' key={idx}>
 					<Typography component='h2' variant='h6' color='text.secondary'>
 						Workout type:{' '}
 						<Box component={'span'} className='font-semibold' color='text.primary'>
@@ -37,6 +37,7 @@ const WorkoutCardList = () => {
 							workout =>
 								workout.type === workoutType && (
 									<WorkoutCard
+										key={workout.id}
 										contributorId={workout.contributorId}
 										name={workout.name}
 										type={workout.type}

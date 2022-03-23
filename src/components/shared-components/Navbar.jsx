@@ -23,7 +23,7 @@ import ThemeToggle from './ThemeToggle';
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
 	{ title: 'Goals', path: '/goals' },
-	{ title: 'Excercises', path: '/exercises' },
+	{ title: 'Exercises', path: '/exercises' },
 	{ title: 'Workouts', path: '/workouts' },
 	{ title: 'Programs', path: '/programs' }
 ];

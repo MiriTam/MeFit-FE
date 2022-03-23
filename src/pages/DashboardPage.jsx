@@ -18,7 +18,7 @@ const DashboardPage = () => {
 			console.log(jwt_token);
 			console.log(id_token);
 
-			// setTimeout(() => navigate('/new-profile'), 3000);
+			// setTimeout(() => navigate('/new-profile'), 5000);
 		})();
 	}, [getAccessTokenSilently, getIdTokenClaims, navigate]);
 

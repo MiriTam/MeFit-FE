@@ -20,8 +20,8 @@ const ProgramCardList = () => {
 	return (
 		<Box className='mt-4'>
 			{/* Get unique program types, iterate over them */}
-			{getUniqueProgramCategories(programs).map(programType => (
-				<Box className='mt-6'>
+			{getUniqueProgramCategories(programs).map((programType, idx) => (
+				<Box className='mt-6' key={idx}>
 					<Typography component='h2' variant='h6' color='text.secondary'>
 						Program type:{' '}
 						<Box component={'span'} className='font-semibold' color='text.primary'>
@@ -34,6 +34,7 @@ const ProgramCardList = () => {
 							program =>
 								program.category === programType && (
 									<ProgramCard
+										key={program.id}
 										name={program.name}
 										category={program.category}
 										workouts={program.workouts}
