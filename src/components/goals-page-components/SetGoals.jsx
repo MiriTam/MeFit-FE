@@ -1,19 +1,22 @@
 import { Button, Container, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import Calendar from '../calendar-page-components/Calendar';
 import ExerciseCardList from '../exercise-page-components/ExerciseCardList';
 import ProgramList from '../programs-page-components/ProgramList';
 import WorkoutList from '../workout-page-components/WorkoutList';
 
-const steps = ['Select program', 'Add workouts', 'Add exercises'];
+const steps = ['Select program', 'Pick starting date', 'Add workouts', 'Add exercises'];
 
 function getStepContent(step) {
 	switch (step) {
 		case 0:
 			return <ProgramList />;
 		case 1:
-			return <WorkoutList />;
+			return <Calendar />;
 		case 2:
+			return <WorkoutList />;
+		case 3:
 			return <ExerciseCardList />;
 		default:
 			throw new Error('Unknown steps');
@@ -34,7 +37,7 @@ export default function SetGoals() {
 	return (
 		<Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
 			<Paper variant='outlined' sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-				<Typography component='h1' variant='h4' align='center'>
+				<Typography component='h1' variant='h4' align='center' sx={{mb: 3}}>
 					Select your goals for the week
 				</Typography>
 				<Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -57,7 +60,7 @@ export default function SetGoals() {
 							</Typography>
 						</React.Fragment>
 					) : (
-						<React.Fragment>
+						<React.Fragment >
 							{getStepContent(activeStep)}
 							<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
 								{activeStep !== 0 && (
