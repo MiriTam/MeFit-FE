@@ -7,12 +7,13 @@ import AdministratorPage from './pages/AdministratorPage';
 import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
+import EditProfilePage from './pages/EditProfilePage';
 import ExercisesPage from './pages/ExercisesPage';
 import GoalsPage from './pages/GoalsPage';
-import ProfilePage from './pages/ProfilePage';
+import NewProfilePage from './pages/NewProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
-import { isOnRootPage } from './utils/isOnRootPage';
+import { isOnRootPage } from './utils/isOnPage';
 
 function App() {
 	const { isAuthenticated } = useAuth0();
@@ -30,22 +31,24 @@ function App() {
 		<ApplicationFrame>
 			<Routes>
 				{/* Not logged in  */}
-				<Route exact path='' element={<AuthenticationPage />} />
+				<Route index element={<AuthenticationPage />} />
 
 				{/* Logged in  */}
-				<Route path='dashboard' element={<DashboardPage />} />
-				<Route path='goals' element={<GoalsPage />} />
-				<Route path='exercises' element={<ExercisesPage />} />
-				<Route path='programs' element={<ProgramsPage />} />
-				<Route path='workouts' element={<WorkoutsPage />} />
-				<Route path='profile' element={<ProfilePage />} />
+				<Route exact path='new-profile' element={<NewProfilePage />} />
+
+				<Route exact path='dashboard' element={<DashboardPage />} />
+				<Route exact path='goals' element={<GoalsPage />} />
+				<Route exact path='exercises' element={<ExercisesPage />} />
+				<Route exact path='programs' element={<ProgramsPage />} />
+				<Route exact path='workouts' element={<WorkoutsPage />} />
+				<Route exact path='edit-profile' element={<EditProfilePage />} />
 
 				{/* Logged in, restricted routes */}
-				<Route path='contributor' element={<ContributorPage />} />
-				<Route path='administrator' element={<AdministratorPage />} />
+				<Route exact path='contributor' element={<ContributorPage />} />
+				<Route exact path='administrator' element={<AdministratorPage />} />
 
 				{/* Wildcard fallback page */}
-				<Route path='*' element={<AuthenticationPage />} />
+				<Route exact path='*' element={<AuthenticationPage />} />
 			</Routes>
 		</ApplicationFrame>
 	);

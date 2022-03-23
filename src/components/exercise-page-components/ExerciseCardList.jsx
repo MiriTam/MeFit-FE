@@ -25,8 +25,8 @@ const ExerciseCardList = () => {
 	return (
 		<Box className='mt-4'>
 			{/* Get unique target muscle groups, iterate over them */}
-			{getUniqueMuscleGroups(exercises).map(muscleGroup => (
-				<Box className='mt-6'>
+			{getUniqueMuscleGroups(exercises).map((muscleGroup, idx) => (
+				<Box key={idx} className='mt-6'>
 					<Typography component='h2' variant='h6' color='text.secondary'>
 						Target muscle:{' '}
 						<Box component={'span'} className='font-semibold' color='text.primary'>
@@ -39,6 +39,8 @@ const ExerciseCardList = () => {
 							exercise =>
 								exercise.targetMuscleGroup === muscleGroup && (
 									<ExerciseCard
+										key={exercise.id}
+										id={exercise.id}
 										name={exercise.name}
 										description={exercise.description}
 										video={exercise.video}
