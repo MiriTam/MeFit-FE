@@ -13,7 +13,7 @@ const NewProfilePage = () => {
 	};
 
 	return (
-		<Container maxWidth='xl' className='my-12'>
+		<Container maxWidth='xl' className='pt-8 pb-20 overflow-hidden'>
 			<Box className='text-right'>
 				<Button color='error' variant='contained' onClick={handleLogout}>
 					Logout
@@ -24,7 +24,7 @@ const NewProfilePage = () => {
 					New Profile Page
 				</Typography>
 				<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
-					Here you may create a new profile, requred to use the rest of the application.
+					Here you may create a new profile, required to use the rest of the application.
 				</Typography>
 			</Box>
 			<NewProfile />

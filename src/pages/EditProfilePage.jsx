@@ -5,7 +5,7 @@ import EditProfile from '../components/edit-profile-page-components/EditProfile'
 
 const EditProfilePage = () => {
 	return (
-		<Container maxWidth='xl' className='my-12'>
+		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
 			<Box className='md:w-2/3 lg:w-1/2 mx-auto'>
 				<Typography component='h1' variant='h4'>
 					Profile Page

@@ -1,3 +1,4 @@
+import { DirectionsRunOutlined } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
 	Accordion,
@@ -31,9 +32,12 @@ const AddWorkout = () => {
 	}
 
 	return (
-		<Accordion className='my-2'>
+		<Accordion className=''>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>Add a new workout</Typography>
+				<Box className='flex items-center'>
+					<DirectionsRunOutlined sx={{ mr: 1.5 }} />
+					<Typography sx={{ fontSize: 20 }}>Add a new workout</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>

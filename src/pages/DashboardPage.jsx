@@ -22,9 +22,18 @@ const DashboardPage = () => {
 		})();
 	}, [getAccessTokenSilently, getIdTokenClaims, navigate]);
 
+	useEffect(() => {
+		(async () => {
+			// 1. GET /api/login to check if user exists
+			// 2. if false -> set hasProfile to false, redirect to new profile page
+			// 3. if true -> redirect to dashboard
+			// 4. is on new profile page, POST /api/user and POST /api/profile
+		})();
+	}, []);
+
 	return (
-		<Container maxWidth='xl' className='my-12'>
-			<Typography component='h1' variant='h2' color='text.secondary' sx={{ mt: 6 }}>
+		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
+			<Typography component='h1' variant='h2' color='text.secondary'>
 				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}
