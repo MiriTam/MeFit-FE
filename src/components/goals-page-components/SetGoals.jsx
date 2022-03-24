@@ -36,12 +36,12 @@ export default function SetGoals() {
 	};
 
 	return (
-		<Container component='main' maxWidth='md' sx={{ mb: 4 }}>
-			<Paper variant='outlined' sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+		<Container component='main' maxWidth='md'>
+			<Paper variant='outlined' sx={{ p: { xs: 2, md: 3 } }}>
 				<Typography component='h1' variant='h4' align='center' sx={{ mb: 3 }}>
-					Select your goals for the week
+					Select your weekly goal
 				</Typography>
-				<Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+				<Stepper alternativeLabel activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
 					{steps.map(label => (
 						<Step key={label}>
 							<StepLabel>{label}</StepLabel>
