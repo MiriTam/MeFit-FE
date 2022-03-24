@@ -1,4 +1,4 @@
-import { Box, CardContent, Paper, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
 const ExerciseCard = ({ id, name, description, video, image }) => {
@@ -9,10 +9,18 @@ const ExerciseCard = ({ id, name, description, video, image }) => {
 	}
 
 	return (
-		<Paper
+		<Card
 			elevation={4}
-			className='w-96 px-6 py-4 text-left '
+			className='w-96  px-6 py-4 text-left '
 			sx={{ backgroundColor: isHighlighted(id) ? 'lightskyblue' : 'none' }}>
+			{image && (
+				<CardMedia
+					component='img'
+					image={image}
+					alt={name}
+					sx={{ height: '250px', objectFit: 'contain' }}
+				/>
+			)}
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
@@ -20,12 +28,13 @@ const ExerciseCard = ({ id, name, description, video, image }) => {
 					</Typography>
 				</Box>
 				<Box className='mt-2'>
-					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+					<Typography sx={{ fontSize: 16 }} variant='body2' color='text.secondary'>
 						{description}
 					</Typography>
 				</Box>
 			</CardContent>
-		</Paper>
+			<CardContent></CardContent>
+		</Card>
 	);
 };
 

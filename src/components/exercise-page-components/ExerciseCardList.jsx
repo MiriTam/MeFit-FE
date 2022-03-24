@@ -34,17 +34,18 @@ const ExerciseCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display exercises for that target muscle group */}
-					<Box className='mt-4 flex flex-wrap gap-4 '>
+					<Box className='mt-4 flex flex-wrap gap-4 items-center '>
 						{exercises.map(
 							exercise =>
-								exercise.targetMuscleGroup === muscleGroup && (
+								exercise.category === muscleGroup && (
 									<ExerciseCard
 										key={exercise.id}
 										id={exercise.id}
 										name={exercise.name}
 										description={exercise.description}
-										video={exercise.video}
+										category={exercise.category}
 										image={exercise.image}
+										video={exercise.video}
 									/>
 								)
 						)}

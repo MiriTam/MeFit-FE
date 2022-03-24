@@ -20,7 +20,7 @@ const EditUserList = () => {
 	}, []);
 
 	return (
-		<Box className='mt-4'>
+		<Box className='mt-2'>
 			{users.map((user, idx) => (
 				<EditUserForm
 					key={user.id}

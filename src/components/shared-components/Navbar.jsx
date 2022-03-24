@@ -65,7 +65,11 @@ const Navbar = () => {
 	];
 
 	return (
-		<AppBar position='static' color='primary' sx={{ pt: 1.5, pb: 1.5 }}>
+		<AppBar
+			className='overflow-hidden'
+			position='static'
+			color='primary'
+			sx={{ pt: 1.5, pb: 1.5 }}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>

@@ -1,6 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
+<<<<<<< HEAD
 import { Button, Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+=======
+import { Box, Button, Container, Typography } from '@mui/material';
+>>>>>>> 3057addefe9f2c2833727a046adbc9c09aa068b9
 import React from 'react';
 
 import NewProfile from '../components/new-profile-page-components/NewProfile';
@@ -14,18 +18,18 @@ const NewProfilePage = () => {
 	};
 
 	return (
-		<Container maxWidth='xl' className='my-12'>
+		<Container maxWidth='xl' className='pt-8 pb-20 overflow-hidden'>
 			<Box className='text-right'>
-				<Button color='error' onClick={handleLogout} variant='contained'>
+				<Button color='error' variant='contained' onClick={handleLogout}>
 					Logout
 				</Button>
 			</Box>
-			<Box className='mt-8 md:w-2/3 lg:w-1/2 mx-auto'>
+			<Box className='md:w-2/3 lg:w-1/2 mx-auto mt-8'>
 				<Typography component='h1' variant='h4'>
 					New Profile Page
 				</Typography>
 				<Typography component='p' fontSize={18} sx={{ mt: 1.5 }}>
-					Here you may create a new profile, requred to use the rest of the application.
+					Here you may create a new profile, required to use the rest of the application.
 				</Typography>
 			</Box>
 			<NewProfile />
