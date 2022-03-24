@@ -16,6 +16,7 @@ import {
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
 import getDefaultRoleValue from '../../utils/getDefaultRoleString';
 
 // import getManagementApiAccessToken from '../../api/tokens';
@@ -46,7 +47,12 @@ const EditUserForm = ({
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>{email}</Typography>
+				<Typography sx={{ fontSize: 20 }}>
+					{`${firstName} ${lastName}`}
+					<Typography variant='span' color={'text.secondary'} sx={{ fontSize: 18, ml: 1 }}>
+						{email}
+					</Typography>
+				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
@@ -97,16 +103,15 @@ const EditUserForm = ({
 							</Grid>
 							<Grid item xs={12}>
 								<TextField
-									{...register('password', {
+									{...register('nickname', {
 										minLength: 4
 									})}
-									// value={'placeholder_password'}
-									error={errors.hasOwnProperty('password')}
+									error={errors.hasOwnProperty('nickname')}
 									fullWidth
-									name='password'
-									label='Password'
-									type='password'
-									autoComplete='new-password'
+									name='nickname'
+									label='Nickname'
+									type='nickname'
+									autoComplete='new-nickname'
 								/>
 							</Grid>
 							<Grid item xs={12}>

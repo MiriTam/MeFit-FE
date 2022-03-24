@@ -4,6 +4,7 @@ import Auth0Provider from '../auth0/Auth0Provider';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ExercisesProvider } from './ExercisesContext';
 import { ProgramsProvider } from './ProgramsContext';
+import { UserProvider } from './UserContext';
 import { WorkoutsProvider } from './WorkoutsContext';
 
 function AppContext({ children }) {
@@ -12,7 +13,9 @@ function AppContext({ children }) {
 			<ThemeProvider>
 				<ExercisesProvider>
 					<WorkoutsProvider>
-						<ProgramsProvider>{children}</ProgramsProvider>
+						<ProgramsProvider>
+							<UserProvider>{children}</UserProvider>
+						</ProgramsProvider>
 					</WorkoutsProvider>
 				</ExercisesProvider>
 			</ThemeProvider>
