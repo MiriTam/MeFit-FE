@@ -15,6 +15,9 @@ const ExerciseCardList = () => {
 
 	useEffect(() => {
 		(async () => {
+			console.log(exercises);
+			if (exercises.length !== 0) return;
+
 			const token = await getAccessTokenSilently();
 			const apiExercises = await getAllExercises(token);
 

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { getUsers } from '../../api/users';
+import { getAllUsers } from '../../api/users';
 import EditUserForm from './EditUser';
 
 const EditUserList = () => {
@@ -14,7 +14,7 @@ const EditUserList = () => {
 
 	useEffect(() => {
 		(async () => {
-			const apiUsers = await getUsers();
+			const apiUsers = await getAllUsers();
 			setUsers(apiUsers);
 		})();
 	}, []);

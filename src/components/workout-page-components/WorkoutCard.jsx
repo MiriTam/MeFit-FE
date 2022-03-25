@@ -1,10 +1,14 @@
 import { Box, CardContent, Paper, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useExercises } from '../../context/ExercisesContext';
+import getExerciseNameById from '../../utils/getExerciseNameById';
 
-const WorkoutCard = ({ name, type, sets, contributorId }) => {
+const WorkoutCard = ({ name, type, difficulty, sets, contributorId }) => {
+	const { exercises } = useExercises();
+
 	return (
-		<Paper elevation={4} className='w-64 px-6 py-4 text-left'>
+		<Paper elevation={4} className='w-80 px-6 py-4 text-left'>
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
@@ -13,14 +17,34 @@ const WorkoutCard = ({ name, type, sets, contributorId }) => {
 				</Box>
 				<Box className='mt-2'>
 					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-						Contributor ID: {contributorId}
+						Difficulty: {difficulty}
 					</Typography>
+
 					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
 						Type: {type}
 					</Typography>
-					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-						Sets: <Link to={`/exercises?id=${sets[0]}`}>{sets[0]}</Link>
-					</Typography>
+
+					<Box className='mt-4'>
+						<Typography component='h4' variant='h6' sx={{ fontSize: 20 }}>
+							Sets
+						</Typography>
+						{sets.map(({ exerciseId, exerciseRepetitions }, idx) => (
+							<Box className='mt-2'>
+								<Typography sx={{ fontSize: 18 }}>Exercise {idx + 1}</Typography>
+								<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+									Exercise:{' '}
+									<Link
+										className='text-blue-400 font-bold '
+										to={`/exercises?exerciseId=${exerciseId}`}>
+										{getExerciseNameById(exercises, exerciseId)}
+									</Link>
+								</Typography>
+								<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+									Repetitions: {exerciseRepetitions}
+								</Typography>
+							</Box>
+						))}
+					</Box>
 				</Box>
 			</CardContent>
 		</Paper>

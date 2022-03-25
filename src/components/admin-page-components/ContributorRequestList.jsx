@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { getContributorRequests } from '../../api/contributor-requests';
+import { getAllContributorRequests } from '../../api/contributor-requests';
 import ContributorRequest from './ContributorRequest';
 
 const ContributorRequestList = () => {
@@ -9,7 +9,7 @@ const ContributorRequestList = () => {
 
 	useEffect(() => {
 		(async () => {
-			const apiContributorRequests = await getContributorRequests();
+			const apiContributorRequests = await getAllContributorRequests();
 			setContributorRequests(apiContributorRequests);
 		})();
 	}, []);

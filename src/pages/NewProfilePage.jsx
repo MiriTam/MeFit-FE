@@ -1,10 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-<<<<<<< HEAD
-import { Button, Container, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-=======
 import { Box, Button, Container, Typography } from '@mui/material';
->>>>>>> 3057addefe9f2c2833727a046adbc9c09aa068b9
 import React from 'react';
 
 import NewProfile from '../components/new-profile-page-components/NewProfile';
