@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -7,6 +8,7 @@ import EditUserForm from './EditUser';
 const EditUserList = () => {
 	const [users, setUsers] = useState([]);
 	const [expanded, setExpanded] = useState(false);
+	const { getAccessTokenSilently } = useAuth0();
 
 	const handleChange = panel => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -14,13 +16,15 @@ const EditUserList = () => {
 
 	useEffect(() => {
 		(async () => {
-			const apiUsers = await getAllUsers();
+			const token = await getAccessTokenSilently();
+			const apiUsers = await getAllUsers(token);
+
 			setUsers(apiUsers);
 		})();
-	}, []);
+	}, [getAccessTokenSilently, setUsers]);
 
 	return (
-		<Box className='mt-2'>
+		<Box className='mt-2 '>
 			{users.map((user, idx) => (
 				<EditUserForm
 					key={user.id}

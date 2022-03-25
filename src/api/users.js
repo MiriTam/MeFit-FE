@@ -1,12 +1,13 @@
-const BASE_URL = 'https://mefit22api.azurewebsites.net/api/user';
+import axios from 'axios';
 
-export async function getAllUsers() {
-	const req = await fetch(BASE_URL);
-	if (!req.ok) throw new Error('Could not get users!');
+const BASE_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
 
-	const usersArr = await req.json();
+export async function getAllUsers(token) {
+	const req = await axios.get(BASE_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
 
-	return usersArr;
+	return req.data;
 }
 
 export async function postUser(user, role) {

@@ -13,14 +13,15 @@ const WorkoutCardList = () => {
 
 	useEffect(() => {
 		(async () => {
+			if (workouts.length !== 0) return;
+
+			console.log('Getting workouts from API...');
 			const token = await getAccessTokenSilently();
 			const apiWorkouts = await getAllWorkouts(token);
 
-			console.log(apiWorkouts);
-
 			setWorkouts(apiWorkouts);
 		})();
-	}, [getAccessTokenSilently, setWorkouts]);
+	}, [workouts, getAccessTokenSilently, setWorkouts]);
 
 	return (
 		<Box className='mt-4'>
@@ -34,7 +35,7 @@ const WorkoutCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display workouts for that workout category */}
-					<Box className='mt-4 flex flex-wrap gap-4 '>
+					<Box className='mt-4 flex flex-wrap items-start gap-6 '>
 						{workouts.map(
 							workout =>
 								workout.category === workoutType && (

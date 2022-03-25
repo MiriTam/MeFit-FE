@@ -1,5 +1,3 @@
-// import { getRoleBooleans } from '../utils/getRoleBooleans';
-
 const BASE_URL = 'https://mefit22api.azurewebsites.net/api/user';
 
 export async function getAllContributorRequests() {
