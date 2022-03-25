@@ -13,6 +13,7 @@ const ProgramCardList = () => {
 		(async () => {
 			const programs = await getAllPrograms();
 
+			console.log(programs);
 			setPrograms(programs);
 		})();
 	}, [setPrograms]);
@@ -29,13 +30,14 @@ const ProgramCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display programs for that program type */}
-					<Box className='mt-4 flex flex-wrap gap-4 '>
+					<Box className='mt-4 flex flex-wrap items-start gap-4 '>
 						{programs.map(
 							program =>
 								program.category === programType && (
 									<ProgramCard
 										key={program.id}
 										name={program.name}
+										difficulty={program.difficulty}
 										category={program.category}
 										workouts={program.workouts}
 									/>

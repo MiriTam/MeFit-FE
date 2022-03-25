@@ -15,7 +15,7 @@ const ExerciseCard = ({ id, name, description, video, image }) => {
 	return (
 		<Card
 			elevation={4}
-			className='w-96  px-6 py-4 text-left '
+			className='w-96 min-w-min px-6 py-4 text-left '
 			sx={{
 				border: isHighlighted(id) ? '2px solid' : 'none',
 				borderColor: isHighlighted(id) && color
@@ -28,7 +28,12 @@ const ExerciseCard = ({ id, name, description, video, image }) => {
 				component='img'
 				image={image}
 				alt={name}
-				sx={{ height: '225px', objectFit: 'contain', background: 'white', p: 1 }}
+				sx={{
+					height: '225px',
+					objectFit: 'contain',
+					background: 'white',
+					p: 1
+				}}
 			/>
 
 			<Divider />

@@ -11,9 +11,12 @@ const WorkoutCard = ({ name, type, difficulty, sets, contributorId }) => {
 	return (
 		<Paper elevation={4} className='w-72 px-6 py-4 text-center'>
 			<CardContent>
-				<Typography component='h3' variant='h5'>
-					{name}
-				</Typography>
+				<Box>
+					<Typography component='h3' variant='h5'>
+						{name}
+					</Typography>
+				</Box>
+
 				<Box className='mt-2'>
 					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
 						Difficulty:{' '}
@@ -28,10 +31,12 @@ const WorkoutCard = ({ name, type, difficulty, sets, contributorId }) => {
 							{type}
 						</Typography>
 					</Typography>
+				</Box>
 
-					<List className='divide-y '>
+				<Box className='mt-2'>
+					<List className='divide-y   max-h-56  overflow-y-scroll scrollbar '>
 						{sets.map(({ exerciseId, exerciseRepetitions }, idx) => (
-							<ListItem className='' key={idx}>
+							<ListItem key={idx}>
 								<Box className='text-center mx-auto'>
 									<Typography sx={{ fontSize: 18 }}>Exercise {idx + 1}</Typography>
 									<Typography sx={{ fontSize: 16 }} color='text.secondary'>
