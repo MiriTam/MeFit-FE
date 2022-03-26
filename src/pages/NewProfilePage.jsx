@@ -8,8 +8,8 @@ const NewProfilePage = () => {
 	const { logout } = useAuth0();
 
 	const handleLogout = () => {
-		// logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
-		logout({ returnTo: 'http://localhost:3000' });
+		logout({ returnTo: 'https://mefit-fe.herokuapp.com' });
+		// logout({ returnTo: 'http://localhost:3000' });
 	};
 
 	return (
