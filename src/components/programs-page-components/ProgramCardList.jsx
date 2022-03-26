@@ -1,24 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import { useEffect } from 'react';
 
-import { getAllPrograms } from '../../api/programs';
 import { usePrograms } from '../../context/ProgramsContext';
 import getUniqueProgramCategories from '../../utils/getUniqueProgramCategories';
 import ProgramCard from './ProgramCard';
 
 const ProgramCardList = () => {
-	const { programs, setPrograms } = usePrograms();
-
-	useEffect(() => {
-		(async () => {
-			if (programs.length !== 0) return;
-
-			console.log('Getting programs from API...');
-			const apiPrograms = await getAllPrograms();
-
-			setPrograms(apiPrograms);
-		})();
-	}, [setPrograms, programs]);
+	const { programs } = usePrograms();
 
 	return (
 		<Box className='mt-4'>

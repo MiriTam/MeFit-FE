@@ -1,3 +1,4 @@
+import { getAllContributorRequests } from '../api/contributor-requests';
 import React, { createContext, useContext, useState } from 'react';
 
 // Creating context
@@ -10,10 +11,21 @@ export function useContributorRequests() {
 // Providing the context
 export function ContributorRequestsProvider({ children }) {
 	const [contributorRequests, setContributorRequests] = useState([]);
+	const [firstRequestMade, setFirstRequestMade] = useState(false);
+
+	async function getAndSetContributorRequests(token) {
+		if (firstRequestMade) return;
+
+		const apiContributorRequests = await getAllContributorRequests(token);
+
+		setContributorRequests(apiContributorRequests);
+		setFirstRequestMade(true);
+	}
 
 	const state = {
 		contributorRequests,
-		setContributorRequests
+		setContributorRequests,
+		getAndSetContributorRequests
 	};
 
 	return (

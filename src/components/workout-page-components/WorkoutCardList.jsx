@@ -1,27 +1,11 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Typography } from '@mui/material';
-import { useEffect } from 'react';
 
-import { getAllWorkouts } from '../../api/workouts';
 import { useWorkouts } from '../../context/WorkoutsContext';
 import getUniqueWorkoutTypes from '../../utils/getUniqueWorkoutTypes';
 import WorkoutCard from './WorkoutCard';
 
 const WorkoutCardList = () => {
-	const { workouts, setWorkouts } = useWorkouts();
-	const { getAccessTokenSilently } = useAuth0();
-
-	useEffect(() => {
-		(async () => {
-			if (workouts.length !== 0) return;
-
-			console.log('Getting workouts from API...');
-			const token = await getAccessTokenSilently();
-			const apiWorkouts = await getAllWorkouts(token);
-
-			setWorkouts(apiWorkouts);
-		})();
-	}, [workouts, getAccessTokenSilently, setWorkouts]);
+	const { workouts } = useWorkouts();
 
 	return (
 		<Box className='mt-4'>

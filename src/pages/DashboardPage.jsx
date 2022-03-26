@@ -2,25 +2,41 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Container, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useContributorRequests } from '../context/ContributorRequestsContext';
+import { useExercises } from '../context/ExercisesContext';
+import { usePrograms } from '../context/ProgramsContext';
+import { useUsers } from '../context/UsersContext';
+import { useWorkouts } from '../context/WorkoutsContext';
 
 const color = blue[500];
 
 const DashboardPage = () => {
-	const { user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
-	const navigate = useNavigate();
+	const { user, getAccessTokenSilently } = useAuth0();
+	const { getAndSetExercises } = useExercises();
+	const { getAndSetWorkouts } = useWorkouts();
+	const { getAndSetPrograms } = usePrograms();
+	const { getAndSetUsers } = useUsers();
+	const { getAndSetContributorRequests } = useContributorRequests();
 
 	useEffect(() => {
 		(async () => {
-			const jwt_token = await getAccessTokenSilently();
-			const id_token = await getIdTokenClaims();
+			const token = await getAccessTokenSilently();
 
-			console.log(jwt_token);
-			console.log(id_token);
-
-			// setTimeout(() => navigate('/new-profile'), 5000);
+			getAndSetExercises(token);
+			getAndSetWorkouts(token);
+			getAndSetPrograms(token);
+			getAndSetUsers(token);
+			getAndSetContributorRequests(token);
 		})();
-	}, [getAccessTokenSilently, getIdTokenClaims, navigate]);
+	}, [
+		getAccessTokenSilently,
+		getAndSetWorkouts,
+		getAndSetExercises,
+		getAndSetPrograms,
+		getAndSetContributorRequests,
+		getAndSetUsers
+	]);
 
 	useEffect(() => {
 		(async () => {

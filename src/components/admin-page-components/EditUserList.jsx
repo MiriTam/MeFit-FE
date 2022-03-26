@@ -1,27 +1,16 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { getAllUsers } from '../../api/users';
+import { useUsers } from '../../context/UsersContext';
 import EditUserForm from './EditUser';
 
 const EditUserList = () => {
-	const [users, setUsers] = useState([]);
+	const { users } = useUsers();
 	const [expanded, setExpanded] = useState(false);
-	const { getAccessTokenSilently } = useAuth0();
 
 	const handleChange = panel => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
-
-	useEffect(() => {
-		(async () => {
-			const token = await getAccessTokenSilently();
-			const apiUsers = await getAllUsers(token);
-
-			setUsers(apiUsers);
-		})();
-	}, [getAccessTokenSilently, setUsers]);
 
 	return (
 		<Box className='mt-2 '>
