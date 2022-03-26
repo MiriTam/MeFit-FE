@@ -1,29 +1,82 @@
-import { Box, CardContent, Paper, Typography } from '@mui/material';
+import { Box, Card, CardContent, List, ListItem, Paper, Typography } from '@mui/material';
+import { lightBlue } from '@mui/material/colors';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const WorkoutCard = ({ name, type, sets, contributorId }) => {
+import { useExercises } from '../../context/ExercisesContext';
+import getExerciseNameById from '../../utils/getExerciseNameById';
+
+const color = lightBlue[500];
+
+const WorkoutCard = ({ id, name, type, difficulty, sets, contributorId }) => {
+	const { exercises } = useExercises();
+	const location = useLocation();
+
+	function isHighlighted(id) {
+		return location.search.includes(id);
+	}
+
 	return (
-		<Paper elevation={4} className='w-64 px-6 py-4 text-left'>
+		<Card
+			elevation={4}
+			sx={{
+				border: isHighlighted(id) ? '2px solid' : 'none',
+				borderColor: isHighlighted(id) && color
+			}}
+			className='w-72 px-6 py-4 text-center'>
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
 						{name}
 					</Typography>
 				</Box>
+
 				<Box className='mt-2'>
 					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-						Contributor ID: {contributorId}
+						Difficulty:{' '}
+						<Typography variant='span' className='font-semibold' color='text.primary'>
+							{difficulty}
+						</Typography>
 					</Typography>
+
 					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-						Type: {type}
-					</Typography>
-					<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-						Sets: <Link to={`/exercises?id=${sets[0]}`}>{sets[0]}</Link>
+						Type:{' '}
+						<Typography variant='span' className='font-semibold' color='text.primary'>
+							{type}
+						</Typography>
 					</Typography>
 				</Box>
+
+				<Box className='mt-2'>
+					<List className='divide-y   max-h-56  overflow-y-scroll scrollbar '>
+						{sets.map(({ exerciseId, exerciseRepetitions }, idx) => (
+							<ListItem key={idx}>
+								<Box className='text-center mx-auto'>
+									<Typography sx={{ fontSize: 18 }}>Exercise {idx + 1}</Typography>
+									<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+										Exercise:{' '}
+										<Link
+											className='text-blue-400 font-semibold '
+											to={`/exercises?exerciseId=${exerciseId}`}>
+											{getExerciseNameById(exercises, exerciseId)}
+										</Link>
+									</Typography>
+									<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+										Repetitions:{' '}
+										<Typography
+											variant='span'
+											className='font-semibold'
+											color='text.primary'>
+											{exerciseRepetitions}
+										</Typography>
+									</Typography>
+								</Box>
+							</ListItem>
+						))}
+					</List>
+				</Box>
 			</CardContent>
-		</Paper>
+		</Card>
 	);
 };
 

@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Typography } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect } from 'react';
 
@@ -10,11 +10,13 @@ import ExerciseCard from './ExerciseCard';
 
 const ExerciseCardList = () => {
 	const { exercises, setExercises } = useExercises();
-
 	const { getAccessTokenSilently } = useAuth0();
 
 	useEffect(() => {
 		(async () => {
+			if (exercises.length !== 0) return;
+
+			console.log('Getting exercises from API...');
 			const token = await getAccessTokenSilently();
 			const apiExercises = await getAllExercises(token);
 
@@ -34,21 +36,22 @@ const ExerciseCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display exercises for that target muscle group */}
-					<Box className='mt-4 flex flex-wrap gap-4 '>
+					<List className='mt-4 flex flex-wrap gap-4 items-start'>
 						{exercises.map(
 							exercise =>
-								exercise.targetMuscleGroup === muscleGroup && (
+								exercise.category === muscleGroup && (
 									<ExerciseCard
 										key={exercise.id}
 										id={exercise.id}
 										name={exercise.name}
 										description={exercise.description}
-										video={exercise.video}
+										category={exercise.category}
 										image={exercise.image}
+										video={exercise.video}
 									/>
 								)
 						)}
-					</Box>
+					</List>
 				</Box>
 			))}
 		</Box>

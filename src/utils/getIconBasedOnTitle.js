@@ -13,7 +13,7 @@ export default function getIconBasedOnTitle(title) {
 	// Navbar
 	if (title === 'Dashboard') return <HomeOutlined sx={{ mr: 1.25 }} />;
 	if (title === 'Goals') return <GradeOutlined sx={{ mr: 1.25 }} />;
-	if (title === 'Excercises') return <FitnessCenterOutlined sx={{ mr: 1.25 }} />;
+	if (title === 'Exercises') return <FitnessCenterOutlined sx={{ mr: 1.25 }} />;
 	if (title === 'Workouts') return <DirectionsRunOutlined sx={{ mr: 1.25 }} />;
 	if (title === 'Programs') return <LibraryBooksOutlined sx={{ mr: 1.25 }} />;
 

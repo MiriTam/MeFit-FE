@@ -23,7 +23,7 @@ import ThemeToggle from './ThemeToggle';
 const pages = [
 	{ title: 'Dashboard', path: '/dashboard' },
 	{ title: 'Goals', path: '/goals' },
-	{ title: 'Excercises', path: '/exercises' },
+	{ title: 'Exercises', path: '/exercises' },
 	{ title: 'Workouts', path: '/workouts' },
 	{ title: 'Programs', path: '/programs' }
 ];
@@ -65,7 +65,11 @@ const Navbar = () => {
 	];
 
 	return (
-		<AppBar position='static' color='primary' sx={{ pt: 1.5, pb: 1.5 }}>
+		<AppBar
+			className='overflow-hidden'
+			position='static'
+			color='primary'
+			sx={{ pt: 1.5, pb: 1.5 }}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', lg: 'none' } }}>

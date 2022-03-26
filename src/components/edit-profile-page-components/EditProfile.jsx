@@ -23,7 +23,7 @@ const EditProfile = () => {
 	}
 
 	return (
-		<Box className='mt-4 md:w-2/3 lg:w-1/2 text-left'>
+		<Box className='mt-4 md:w-2/3 lg:w-1/2 text-left mx-auto'>
 			<Box component='form' onSubmit={handleSubmit(onAttributesFormSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
 					Fitness Attributes

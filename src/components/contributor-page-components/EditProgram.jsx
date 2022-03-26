@@ -1,10 +1,24 @@
+import { LibraryBooksOutlined } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+	Grid,
+	Radio,
+	RadioGroup,
+	TextField,
+	Typography
+} from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const EditProgram = ({ name, category, expanded, panel, handleChange }) => {
+const EditProgram = ({ id, name, category, difficulty, expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
@@ -12,7 +26,7 @@ const EditProgram = ({ name, category, expanded, panel, handleChange }) => {
 	} = useForm();
 
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${name}...`);
+		console.log(`Modifying ${name} with id ${id}...`);
 		console.log(`New values:`);
 		console.log(data);
 
@@ -25,10 +39,13 @@ const EditProgram = ({ name, category, expanded, panel, handleChange }) => {
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				<Box className='flex items-center'>
+					<LibraryBooksOutlined sx={{ mr: 1.25 }} />
+					<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
+				<Box className='md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
@@ -41,7 +58,7 @@ const EditProgram = ({ name, category, expanded, panel, handleChange }) => {
 									autoComplete='given-name'
 									name='programName'
 									fullWidth
-									placeholder={name}
+									value={name}
 									label='Name'
 									autoFocus
 								/>
@@ -57,15 +74,40 @@ const EditProgram = ({ name, category, expanded, panel, handleChange }) => {
 									})}
 									error={errors.hasOwnProperty('programCategory')}
 									fullWidth
-									placeholder={category}
+									value={category}
 									label='Category'
 									name='programCategory'
 								/>
 							</Grid>
+							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='difficulty'>Workout difficulty</FormLabel>
+									<RadioGroup row aria-labelledby='roles' defaultValue={difficulty}>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Beginner'
+											control={<Radio />}
+											label='Beginner'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Intermediate'
+											control={<Radio />}
+											label='Intermediate'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Expert'
+											control={<Radio />}
+											label='Expert'
+										/>
+									</RadioGroup>
+								</FormControl>
+							</Grid>
 						</Grid>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>
 							<Button type='submit' fullWidth variant='contained'>
-								Update workout
+								Update program
 							</Button>
 						</Box>
 					</Box>

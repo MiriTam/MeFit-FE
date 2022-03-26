@@ -1,5 +1,14 @@
+import { FitnessCenterOutlined } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+	Grid,
+	TextField,
+	Typography
+} from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -25,10 +34,13 @@ const EditExercise = ({ name, description, expanded, panel, handleChange }) => {
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				<Box className='flex items-center'>
+					<FitnessCenterOutlined sx={{ mr: 1.5 }} />
+					<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
+				<Box className=' md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
@@ -41,7 +53,7 @@ const EditExercise = ({ name, description, expanded, panel, handleChange }) => {
 									autoComplete='given-name'
 									name='exerciseName'
 									fullWidth
-									placeholder={name}
+									value={name}
 									label='Name'
 									autoFocus
 								/>
@@ -57,7 +69,7 @@ const EditExercise = ({ name, description, expanded, panel, handleChange }) => {
 									})}
 									error={errors.hasOwnProperty('exerciseDescription')}
 									fullWidth
-									placeholder={description}
+									value={description}
 									label='Description'
 									name='exerciseDescription'
 								/>
