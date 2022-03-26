@@ -1,21 +1,22 @@
 import { Button, Container, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+
 import Calendar from '../calendar-page-components/Calendar';
 import ExerciseCardList from '../exercise-page-components/ExerciseCardList';
-import ProgramList from '../programs-page-components/ProgramList';
-import WorkoutList from '../workout-page-components/WorkoutList';
+import ProgramCardList from '../programs-page-components/ProgramCardList';
+import WorkoutCardList from '../workout-page-components/WorkoutCardList';
 
 const steps = ['Select program', 'Pick starting date', 'Add workouts', 'Add exercises'];
 
 function getStepContent(step) {
 	switch (step) {
 		case 0:
-			return <ProgramList />;
+			return <ProgramCardList />;
 		case 1:
 			return <Calendar />;
 		case 2:
-			return <WorkoutList />;
+			return <WorkoutCardList />;
 		case 3:
 			return <ExerciseCardList />;
 		default:
@@ -35,12 +36,12 @@ export default function SetGoals() {
 	};
 
 	return (
-		<Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
-			<Paper variant='outlined' sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-				<Typography component='h1' variant='h4' align='center' sx={{mb: 3}}>
-					Select your goals for the week
+		<Container component='main' maxWidth='md'>
+			<Paper variant='outlined' sx={{ p: { xs: 2, md: 3 } }}>
+				<Typography component='h1' variant='h4' align='center' sx={{ mb: 3 }}>
+					Select your weekly goal
 				</Typography>
-				<Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+				<Stepper alternativeLabel activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
 					{steps.map(label => (
 						<Step key={label}>
 							<StepLabel>{label}</StepLabel>
@@ -60,7 +61,7 @@ export default function SetGoals() {
 							</Typography>
 						</React.Fragment>
 					) : (
-						<React.Fragment >
+						<React.Fragment>
 							{getStepContent(activeStep)}
 							<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
 								{activeStep !== 0 && (

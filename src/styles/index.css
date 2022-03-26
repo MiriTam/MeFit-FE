@@ -5,3 +5,22 @@
 html {
 	font-family: 'Roboto', sans-serif;
 }
+
+.scrollbar::-webkit-scrollbar {
+	width: 10px;
+	height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+	border-radius: 100vh;
+	background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+	background: hsl(205, 90%, 85%);
+	border-radius: 100vh;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+	background: hsl(205, 90%, 70%);
+}

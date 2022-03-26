@@ -26,7 +26,7 @@ const NewProfile = () => {
 		<Box className='mt-4 md:w-2/3 lg:w-1/2 mx-auto text-left'>
 			<Box component='form' onSubmit={handleSubmit(onAttributesFormSubmitClick)} noValidate>
 				<Typography component='h2' variant='h5'>
-					New Fitness Attributes
+					Fitness Attributes
 				</Typography>
 				<Grid container spacing={2} sx={{ mt: 0.5 }}>
 					<Grid item xs={12} sm={6}>
@@ -84,10 +84,6 @@ const NewProfile = () => {
 						/>
 					</Grid>
 				</Grid>
-
-				{/* TODO: Add Goals  */}
-				{/* TODO: Add Workout Programs  */}
-				{/* TODO: Add Workouts  */}
 
 				<Box className='w-1/2 mx-auto'>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>

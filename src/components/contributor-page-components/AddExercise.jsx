@@ -1,10 +1,19 @@
+import { FitnessCenterOutlined } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+	Grid,
+	TextField,
+	Typography
+} from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddExercise = () => {
+const AddExercise = ({ expanded, handleChange, panel }) => {
 	const {
 		register,
 		handleSubmit,
@@ -23,9 +32,12 @@ const AddExercise = () => {
 	}
 
 	return (
-		<Accordion className='my-2'>
+		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>Add a new exercise</Typography>
+				<Box className='flex items-center'>
+					<FitnessCenterOutlined sx={{ mr: 1.5 }} />
+					<Typography sx={{ fontSize: 20 }}>Add a new exercise</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>

@@ -1,9 +1,10 @@
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+
 import SetGoals from '../components/goals-page-components/SetGoals';
 
 const GoalsPage = () => {
 	return (
-		<Container maxWidth='xl' className='my-12'>
+		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
 			{/* <Typography component='h1' variant='h4'>
 				My Goals
 			</Typography>
