@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
-import { useHasProfile, useUser } from './context/HasProfileContext';
+import { useHasProfile } from './context/HasProfileContext';
 import AdministratorPage from './pages/AdministratorPage';
 import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';

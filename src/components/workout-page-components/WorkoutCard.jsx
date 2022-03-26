@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, List, ListItem, Paper, Typography } from '@mui/material';
+import { Box, Card, CardContent, List, ListItem, Typography } from '@mui/material';
 import { lightBlue } from '@mui/material/colors';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';

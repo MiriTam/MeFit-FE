@@ -1,25 +1,9 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
-import { useEffect, useState } from 'react';
-
-import { getAllExercises } from '../../api/exercices';
 import { useExercises } from '../../context/ExercisesContext';
 import EditExercise from './EditExercise';
 
 const EditExerciseList = ({ expanded, handleChange }) => {
-	const { exercises, setExercises } = useExercises();
-	const { getAccessTokenSilently } = useAuth0();
-
-	useEffect(() => {
-		(async () => {
-			if (exercises.length !== 0) return;
-
-			const token = await getAccessTokenSilently();
-			const apiExercises = await getAllExercises(token);
-
-			setExercises(apiExercises);
-		})();
-	}, [getAccessTokenSilently, setExercises, exercises]);
+	const { exercises } = useExercises();
 
 	return (
 		<Box className='my-2'>
