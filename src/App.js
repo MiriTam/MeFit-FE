@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
-import { useUser } from './context/UserContext';
+import { useHasProfile, useUser } from './context/HasProfileContext';
 import AdministratorPage from './pages/AdministratorPage';
 import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
@@ -18,7 +18,7 @@ import { isOnRootPage } from './utils/isOnPage';
 
 function App() {
 	const { isAuthenticated } = useAuth0();
-	const { userHasProfile } = useUser();
+	const { hasProfile } = useHasProfile();
 
 	const navigate = useNavigate();
 	const pathname = useLocation().pathname;
@@ -27,10 +27,10 @@ function App() {
 	// Redirect from / to /dashboard, if logged in
 	// Redirect from /dashboard to /, if not logged in
 	useEffect(() => {
-		if (!userHasProfile && isAuthenticated) navigate('/new-profile');
+		if (!hasProfile && isAuthenticated) navigate('/new-profile');
 		if (isOnRootPage(pathname) && isAuthenticated) navigate('/dashboard');
 		if (!isOnRootPage(pathname) && !isAuthenticated) navigate('/');
-	}, [navigate, pathname, isAuthenticated, userHasProfile]);
+	}, [navigate, pathname, isAuthenticated, hasProfile]);
 
 	return (
 		<ApplicationFrame>

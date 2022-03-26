@@ -48,18 +48,16 @@ const EditUserForm = ({
 	return (
 		<Accordion variant='elevation' expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>
-					<Box className='flex items-center'>
-						<Person sx={{ mr: 1.25 }} />
-						{`${firstName} ${lastName}`}
-						<Typography
-							variant='span'
-							color={'text.secondary'}
-							sx={{ fontSize: 18, ml: 1, display: { xs: 'none', lg: 'inline' } }}>
-							{email}
-						</Typography>
-					</Box>
-				</Typography>
+				<Box className='flex items-center' sx={{ fontSize: 20 }}>
+					<Person sx={{ mr: 1.25 }} />
+					{`${firstName} ${lastName}`}
+					<Typography
+						variant='span'
+						color={'text.secondary'}
+						sx={{ fontSize: 18, ml: 1, display: { xs: 'none', lg: 'inline' } }}>
+						{email}
+					</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>

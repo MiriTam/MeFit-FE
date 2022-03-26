@@ -1,10 +1,16 @@
+import { DirectionsRunOutlined } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	Button,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
 	Grid,
+	Radio,
+	RadioGroup,
 	TextField,
 	Typography
 } from '@mui/material';
@@ -12,7 +18,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const EditWorkout = ({ name, type, expanded, panel, handleChange }) => {
+const EditWorkout = ({ id, name, category, difficulty, expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
@@ -20,23 +26,21 @@ const EditWorkout = ({ name, type, expanded, panel, handleChange }) => {
 	} = useForm();
 
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${name}...`);
+		console.log(`Modifying ${name} with id ${id}...`);
 		console.log(`New values:`);
 		console.log(data);
-
-		// const { name, description } = data;
-
-		// const exerciseToBePatched = { name, description };
-		// await patchExercise(userToBePatched, role);
 	}
 
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				<Box className='flex items-center'>
+					<DirectionsRunOutlined sx={{ mr: 1.5 }} />
+					<Typography sx={{ fontSize: 20 }}>{name}</Typography>
+				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
+				<Box className=' md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
@@ -49,7 +53,7 @@ const EditWorkout = ({ name, type, expanded, panel, handleChange }) => {
 									autoComplete='given-name'
 									name='workoutName'
 									fullWidth
-									placeholder={name}
+									value={name}
 									label='Name'
 									autoFocus
 								/>
@@ -65,10 +69,35 @@ const EditWorkout = ({ name, type, expanded, panel, handleChange }) => {
 									})}
 									error={errors.hasOwnProperty('workoutType')}
 									fullWidth
-									placeholder={type}
+									value={category}
 									label='Type'
 									name='workoutType'
 								/>
+							</Grid>
+							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='difficulty'>Workout difficulty</FormLabel>
+									<RadioGroup row aria-labelledby='roles' defaultValue={difficulty}>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Beginner'
+											control={<Radio />}
+											label='Beginner'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Intermediate'
+											control={<Radio />}
+											label='Intermediate'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Expert'
+											control={<Radio />}
+											label='Expert'
+										/>
+									</RadioGroup>
+								</FormControl>
 							</Grid>
 						</Grid>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>

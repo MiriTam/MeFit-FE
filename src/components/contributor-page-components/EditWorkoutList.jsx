@@ -3,35 +3,34 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { getAllWorkouts } from '../../api/workouts';
+import { useWorkouts } from '../../context/WorkoutsContext';
 import EditWorkout from './EditWorkout';
 
-const EditWorkoutList = () => {
-	const [workouts, setWorkouts] = useState([]);
-	const [expanded, setExpanded] = useState(false);
-
+const EditWorkoutList = ({ expanded, handleChange }) => {
+	const { workouts, setWorkouts } = useWorkouts();
 	const { getAccessTokenSilently } = useAuth0();
-
-	const handleChange = panel => (event, isExpanded) => {
-		setExpanded(isExpanded ? panel : false);
-	};
 
 	useEffect(() => {
 		(async () => {
+			if (workouts.length !== 0) return;
+
 			const token = await getAccessTokenSilently();
 			const apiWorkouts = await getAllWorkouts(token);
 
 			setWorkouts(apiWorkouts);
 		})();
-	}, [getAccessTokenSilently]);
+	}, [getAccessTokenSilently, setWorkouts, workouts]);
 
 	return (
 		<Box className='my-2'>
 			{workouts.map((workout, idx) => (
 				<EditWorkout
 					key={workout.id}
+					id={workout.id}
 					name={workout.name}
-					type={workout.type}
-					panel={`panel-${idx + 1}`}
+					category={workout.category}
+					difficulty={workout.difficulty}
+					panel={workout.name}
 					expanded={expanded}
 					handleChange={handleChange}
 				/>

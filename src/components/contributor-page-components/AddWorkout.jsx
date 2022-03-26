@@ -13,7 +13,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddWorkout = () => {
+const AddWorkout = ({ expanded, panel, handleChange }) => {
 	const {
 		register,
 		handleSubmit,
@@ -32,7 +32,7 @@ const AddWorkout = () => {
 	}
 
 	return (
-		<Accordion className=''>
+		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<Box className='flex items-center'>
 					<DirectionsRunOutlined sx={{ mr: 1.5 }} />

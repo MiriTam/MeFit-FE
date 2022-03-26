@@ -85,10 +85,6 @@ const NewProfile = () => {
 					</Grid>
 				</Grid>
 
-				{/* TODO: Add Goals  */}
-				{/* TODO: Add Workout Programs  */}
-				{/* TODO: Add Workouts  */}
-
 				<Box className='w-1/2 mx-auto'>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
 						Update Attributes

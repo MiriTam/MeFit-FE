@@ -3,26 +3,23 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { getAllExercises } from '../../api/exercices';
+import { useExercises } from '../../context/ExercisesContext';
 import EditExercise from './EditExercise';
 
-const EditExerciseList = () => {
-	const [exercises, setExercises] = useState([]);
-	const [expanded, setExpanded] = useState(false);
-
+const EditExerciseList = ({ expanded, handleChange }) => {
+	const { exercises, setExercises } = useExercises();
 	const { getAccessTokenSilently } = useAuth0();
-
-	const handleChange = panel => (event, isExpanded) => {
-		setExpanded(isExpanded ? panel : false);
-	};
 
 	useEffect(() => {
 		(async () => {
+			if (exercises.length !== 0) return;
+
 			const token = await getAccessTokenSilently();
 			const apiExercises = await getAllExercises(token);
 
 			setExercises(apiExercises);
 		})();
-	}, [getAccessTokenSilently]);
+	}, [getAccessTokenSilently, setExercises, exercises]);
 
 	return (
 		<Box className='my-2'>
@@ -31,7 +28,7 @@ const EditExerciseList = () => {
 					key={exercise.id}
 					name={exercise.name}
 					description={exercise.description}
-					panel={`panel-${idx + 1}`}
+					panel={exercise.name}
 					expanded={expanded}
 					handleChange={handleChange}
 				/>

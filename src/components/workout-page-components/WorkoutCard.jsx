@@ -1,15 +1,29 @@
-import { Box, CardContent, List, ListItem, Paper, Typography } from '@mui/material';
+import { Box, Card, CardContent, List, ListItem, Paper, Typography } from '@mui/material';
+import { lightBlue } from '@mui/material/colors';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useExercises } from '../../context/ExercisesContext';
 import getExerciseNameById from '../../utils/getExerciseNameById';
 
-const WorkoutCard = ({ name, type, difficulty, sets, contributorId }) => {
+const color = lightBlue[500];
+
+const WorkoutCard = ({ id, name, type, difficulty, sets, contributorId }) => {
 	const { exercises } = useExercises();
+	const location = useLocation();
+
+	function isHighlighted(id) {
+		return location.search.includes(id);
+	}
 
 	return (
-		<Paper elevation={4} className='w-72 px-6 py-4 text-center'>
+		<Card
+			elevation={4}
+			sx={{
+				border: isHighlighted(id) ? '2px solid' : 'none',
+				borderColor: isHighlighted(id) && color
+			}}
+			className='w-72 px-6 py-4 text-center'>
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
@@ -62,7 +76,7 @@ const WorkoutCard = ({ name, type, difficulty, sets, contributorId }) => {
 					</List>
 				</Box>
 			</CardContent>
-		</Paper>
+		</Card>
 	);
 };
 

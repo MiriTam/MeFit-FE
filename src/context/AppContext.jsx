@@ -2,10 +2,12 @@ import React from 'react';
 
 import Auth0Provider from '../auth0/Auth0Provider';
 import { ThemeProvider } from '../context/ThemeContext';
+import { ContributorRequestsProvider } from './ContributorRequestsContext';
 import { ExercisesProvider } from './ExercisesContext';
 import { ProgramsProvider } from './ProgramsContext';
-import { UserProvider } from './UserContext';
 import { WorkoutsProvider } from './WorkoutsContext';
+import { HasProfileProvider } from './HasProfileContext';
+import { UsersProvider } from './UsersContext';
 
 function AppContext({ children }) {
 	return (
@@ -14,7 +16,11 @@ function AppContext({ children }) {
 				<ExercisesProvider>
 					<WorkoutsProvider>
 						<ProgramsProvider>
-							<UserProvider>{children}</UserProvider>
+							<UsersProvider>
+								<HasProfileProvider>
+									<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+								</HasProfileProvider>
+							</UsersProvider>
 						</ProgramsProvider>
 					</WorkoutsProvider>
 				</ExercisesProvider>

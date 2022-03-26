@@ -16,7 +16,7 @@ const AuthenticationForm = () => {
 			</Typography>
 			<Box>
 				<Typography color='text.secondary' sx={{ mt: 1, fontSize: 20 }}>
-					Press the Login button to start Auth0 authentication to MeFit.
+					Press the Authenticate button to start Auth0 authentication to MeFit.
 				</Typography>
 			</Box>
 			<Button onClick={() => loginWithRedirect()} fullWidth variant='contained' sx={{ mt: 4 }}>

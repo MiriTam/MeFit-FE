@@ -41,6 +41,7 @@ const WorkoutCardList = () => {
 								workout.category === workoutType && (
 									<WorkoutCard
 										key={workout.id}
+										id={workout.id}
 										contributorId={workout.contributorId}
 										name={workout.name}
 										type={workout.category}

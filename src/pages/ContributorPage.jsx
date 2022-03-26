@@ -1,18 +1,24 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Container, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AddExercise from '../components/contributor-page-components/AddExercise';
 import AddProgram from '../components/contributor-page-components/AddProgram';
 import AddWorkout from '../components/contributor-page-components/AddWorkout';
+import EditExerciseList from '../components/contributor-page-components/EditExerciseList';
 import EditProgramList from '../components/contributor-page-components/EditProgramList';
 import EditWorkoutList from '../components/contributor-page-components/EditWorkoutList';
 import { isContributor } from '../utils/isRole';
 
 const ContributorPage = () => {
 	const { user, isAuthenticated } = useAuth0();
+	const [expanded, setExpanded] = useState(false);
 	const navigate = useNavigate();
+
+	const handleChange = panel => (event, isExpanded) => {
+		setExpanded(isExpanded ? panel : false);
+	};
 
 	useEffect(() => {
 		if (isAuthenticated && !isContributor(user)) navigate('/');
@@ -35,31 +41,45 @@ const ContributorPage = () => {
 						Add New
 					</Typography>
 
-					<AddExercise />
-					<AddWorkout />
-					<AddProgram />
+					<AddExercise
+						panel='addExercisePanel'
+						expanded={expanded}
+						handleChange={handleChange}
+					/>
+					<AddWorkout
+						panel='addWorkoutPanel'
+						expanded={expanded}
+						handleChange={handleChange}
+					/>
+					<AddProgram
+						panel='addProgramPanel'
+						expanded={expanded}
+						handleChange={handleChange}
+					/>
 				</Box>
 
-				{/* EDIT EXERCISE/WORKOUT/PROGRAM */}
+				{/* EDIT EXERCISES */}
 				<Box className='mt-6'>
 					<Typography component='h2' variant='h5'>
-						Add Workout
+						Edit Exercises
 					</Typography>
+					<EditExerciseList expanded={expanded} handleChange={handleChange} />
+				</Box>
+
+				{/* EDIT WORKOUTS */}
+				<Box className='mt-6'>
 					<Typography component='h2' variant='h5'>
 						Edit Workouts
 					</Typography>
-					<EditWorkoutList />
+					<EditWorkoutList expanded={expanded} handleChange={handleChange} />
 				</Box>
 
-				{/* ADD/EDIT PROGRAMS */}
+				{/* EDIT PROGRAMS */}
 				<Box className='mt-6'>
-					<Typography component='h2' variant='h5'>
-						Add Program
-					</Typography>
 					<Typography component='h2' variant='h5'>
 						Edit Programs
 					</Typography>
-					<EditProgramList />
+					<EditProgramList expanded={expanded} handleChange={handleChange} />
 				</Box>
 			</Box>
 		</Container>

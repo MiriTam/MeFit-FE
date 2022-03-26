@@ -11,12 +11,14 @@ const ProgramCardList = () => {
 
 	useEffect(() => {
 		(async () => {
-			const programs = await getAllPrograms();
+			if (programs.length !== 0) return;
 
-			console.log(programs);
-			setPrograms(programs);
+			console.log('Getting programs from API...');
+			const apiPrograms = await getAllPrograms();
+
+			setPrograms(apiPrograms);
 		})();
-	}, [setPrograms]);
+	}, [setPrograms, programs]);
 
 	return (
 		<Box className='mt-4'>
