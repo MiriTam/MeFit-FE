@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
-import { useHasProfile } from './context/HasProfileContext';
+import { useProfile } from './context/ProfileContext';
 import AdministratorPage from './pages/AdministratorPage';
 import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
@@ -17,20 +17,58 @@ import WorkoutsPage from './pages/WorkoutsPage';
 import { isOnRootPage } from './utils/isOnPage';
 
 function App() {
-	const { isAuthenticated } = useAuth0();
-	const { hasProfile } = useHasProfile();
+	const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+	const {
+		hasProfile,
+		hasCheckedStatus,
+		setHasCheckedStatus,
+		setHasProfile,
+		checkHasProfile,
+		hasProfileIsPending
+	} = useProfile();
 
 	const navigate = useNavigate();
 	const pathname = useLocation().pathname;
 
-	// Redirect to from anywhere to /new-profile, if user does not have a profile and is logged in
-	// Redirect from / to /dashboard, if logged in
-	// Redirect from /dashboard to /, if not logged in
 	useEffect(() => {
-		if (!hasProfile && isAuthenticated) navigate('/new-profile');
-		if (isOnRootPage(pathname) && isAuthenticated) navigate('/dashboard');
+		if (!hasCheckedStatus) {
+			(async () => {
+				const token = await getAccessTokenSilently();
+				const apiHasProfile = await checkHasProfile(token);
+
+				if (apiHasProfile) {
+					setHasProfile(true);
+					setHasCheckedStatus(true);
+
+					if (pathname === '/new-profile') navigate('/dashboard');
+					return;
+				}
+
+				setHasProfile(false);
+				setHasCheckedStatus(true);
+
+				navigate('/new-profile');
+			})();
+		}
+	}, [
+		checkHasProfile,
+		getAccessTokenSilently,
+		setHasProfile,
+		navigate,
+		pathname,
+		setHasCheckedStatus,
+		hasCheckedStatus
+	]);
+
+	useEffect(() => {
+		if (isOnRootPage(pathname) && isAuthenticated && !hasProfileIsPending() && hasProfile)
+			navigate('/dashboard');
+		if (isOnRootPage(pathname) && isAuthenticated && !hasProfileIsPending() && !hasProfile)
+			navigate('/new-profile');
+		if (!isOnRootPage(pathname) && isAuthenticated && !hasProfileIsPending() && !hasProfile)
+			navigate('/new-profile');
 		if (!isOnRootPage(pathname) && !isAuthenticated) navigate('/');
-	}, [navigate, pathname, isAuthenticated, hasProfile]);
+	}, [navigate, hasProfile, pathname, isAuthenticated, hasProfileIsPending]);
 
 	return (
 		<ApplicationFrame>

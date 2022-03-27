@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-
 import { getAllUsers } from '../api/users';
+import React, { createContext, useContext, useState } from 'react';
 
 // Creating context
 const UsersContext = createContext();

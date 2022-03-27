@@ -4,10 +4,10 @@ import Auth0Provider from '../auth0/Auth0Provider';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ContributorRequestsProvider } from './ContributorRequestsContext';
 import { ExercisesProvider } from './ExercisesContext';
+import { ProfileProvider } from './ProfileContext';
 import { ProgramsProvider } from './ProgramsContext';
-import { WorkoutsProvider } from './WorkoutsContext';
-import { HasProfileProvider } from './HasProfileContext';
 import { UsersProvider } from './UsersContext';
+import { WorkoutsProvider } from './WorkoutsContext';
 
 function AppContext({ children }) {
 	return (
@@ -17,9 +17,9 @@ function AppContext({ children }) {
 					<WorkoutsProvider>
 						<ProgramsProvider>
 							<UsersProvider>
-								<HasProfileProvider>
+								<ProfileProvider>
 									<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
-								</HasProfileProvider>
+								</ProfileProvider>
 							</UsersProvider>
 						</ProgramsProvider>
 					</WorkoutsProvider>

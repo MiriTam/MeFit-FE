@@ -40,7 +40,7 @@ const AddProgram = ({ expanded, panel, handleChange }) => {
 				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
+				<Box className=' md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>

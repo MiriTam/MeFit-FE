@@ -1,9 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { ClipLoader } from 'react-spinners';
 
 const AuthenticationForm = () => {
-	const { loginWithRedirect } = useAuth0();
+	const { loginWithRedirect, isLoading } = useAuth0();
 
 	return (
 		<Box
@@ -22,6 +23,7 @@ const AuthenticationForm = () => {
 			<Button onClick={() => loginWithRedirect()} fullWidth variant='contained' sx={{ mt: 4 }}>
 				Authenticate
 			</Button>
+			<Box className='mt-10'>{isLoading && <ClipLoader color='#2374CE' size={30} />}</Box>
 		</Box>
 	);
 };

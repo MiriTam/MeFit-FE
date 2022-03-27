@@ -93,10 +93,10 @@ const EditUserForm = ({
 							<Grid item xs={12}>
 								<TextField
 									{...register('email', {
-										minLength: 4
-										// pattern: {
-										// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-										// }
+										minLength: 4,
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+										}
 									})}
 									value={email}
 									error={errors.hasOwnProperty('email')}
