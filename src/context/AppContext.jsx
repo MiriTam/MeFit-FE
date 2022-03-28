@@ -3,8 +3,9 @@ import React from 'react';
 import Auth0Provider from '../auth0/Auth0Provider';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ContributorRequestsProvider } from './ContributorRequestsContext';
+import { CurrentUserProvider } from './CurrentUserContext';
 import { ExercisesProvider } from './ExercisesContext';
-import { ProfileProvider } from './ProfileContext';
+import { GoalProvider } from './GoalContext';
 import { ProgramsProvider } from './ProgramsContext';
 import { UsersProvider } from './UsersContext';
 import { WorkoutsProvider } from './WorkoutsContext';
@@ -17,9 +18,11 @@ function AppContext({ children }) {
 					<WorkoutsProvider>
 						<ProgramsProvider>
 							<UsersProvider>
-								<ProfileProvider>
-									<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
-								</ProfileProvider>
+								<CurrentUserProvider>
+									<GoalProvider>
+										<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+									</GoalProvider>
+								</CurrentUserProvider>
 							</UsersProvider>
 						</ProgramsProvider>
 					</WorkoutsProvider>

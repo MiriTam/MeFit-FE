@@ -1,17 +1,23 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, LinearProgress, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
+import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
+import CurrentGoal from '../components/goal-page-components/CurrentGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
 import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
+import { isAdministrator } from '../utils/isRole';
 
 const color = blue[500];
 
 const DashboardPage = () => {
+	const [madeInitialRequests, setMadeInitialRequests] = useState(false);
+	const mountedRef = useRef(true);
+
 	const { user, getAccessTokenSilently } = useAuth0();
 	const { getAndSetExercises } = useExercises();
 	const { getAndSetWorkouts } = useWorkouts();
@@ -23,11 +29,18 @@ const DashboardPage = () => {
 		(async () => {
 			const token = await getAccessTokenSilently();
 
-			getAndSetExercises(token);
-			getAndSetWorkouts(token);
-			getAndSetPrograms(token);
-			getAndSetUsers(token);
-			getAndSetContributorRequests(token);
+			if (!madeInitialRequests) {
+				getAndSetExercises(token);
+				getAndSetWorkouts(token);
+				getAndSetPrograms(token);
+
+				if (user && isAdministrator(user)) {
+					getAndSetUsers(token);
+					getAndSetContributorRequests(token);
+				}
+
+				if (mountedRef.current) setMadeInitialRequests(true);
+			}
 		})();
 	}, [
 		getAccessTokenSilently,
@@ -35,27 +48,26 @@ const DashboardPage = () => {
 		getAndSetExercises,
 		getAndSetPrograms,
 		getAndSetContributorRequests,
-		getAndSetUsers
+		getAndSetUsers,
+		madeInitialRequests,
+		user
 	]);
 
 	useEffect(() => {
-		(async () => {
-			// 1. GET /api/login to check if user exists
-			// 2. if false -> set hasProfile to false, redirect to new profile page
-			// 3. if true -> redirect to dashboard
-			// 4. is on new profile page, POST /api/user and POST /api/profile
-		})();
+		return () => {
+			mountedRef.current = false;
+		};
 	}, []);
 
 	return (
-		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
+		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
 			<Typography component='h1' variant='h2' color='text.secondary'>
 				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}
 				</Box>
 			</Typography>
-			<Typography component='h2' variant='h4' sx={{ mt: 4 }}></Typography>
+			<DashboardCurrentGoal />
 		</Container>
 	);
 };

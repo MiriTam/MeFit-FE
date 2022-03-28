@@ -1,34 +1,33 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { useState } from 'react';
 import { Container, TextField } from '@mui/material';
 import enLocale from 'date-fns/locale/en-US';
+import { useState } from 'react';
 
 const localeMap = {
-    en: enLocale
-}
+	en: enLocale
+};
 
 const maskMap = {
-    en: '__/__/____'
-}
+	en: '__/__/____'
+};
 
-export default function Calendar() {
+export default function GoalDatePicker() {
 	const [value, setValue] = useState(new Date());
-    const [locale] = useState('en')
-    
+	const [locale] = useState('en');
 
 	return (
-		<Container align='center' sx={{my: 3}}>
+		<Container align='center' sx={{ my: 3 }}>
 			<LocalizationProvider dateAdapter={AdapterDateFns} locale={localeMap[locale]}>
 				<DatePicker
-                    mask={maskMap[locale]}
+					mask={maskMap[locale]}
 					label='Choose starting day'
 					value={value}
 					onChange={newValue => {
 						setValue(newValue);
 					}}
 					renderInput={params => <TextField {...params} />}
-                    disablePast
+					disablePast
 				/>
 			</LocalizationProvider>
 		</Container>

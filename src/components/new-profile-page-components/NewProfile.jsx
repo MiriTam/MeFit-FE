@@ -16,13 +16,17 @@ import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-// import { postUser } from '../../api/profiles';
-import { postUser } from '../../api/users';
-import { useProfile } from '../../context/ProfileContext';
+// import { useCurrentUser } from '../../api/contributor-requests';
+// import { postProfile } from '../../api/profiles';
+// import { postUser } from '../../api/users';
+import { useCurrentUser } from '../../context/CurrentUserContext';
 
 const NewProfile = () => {
-	const { user, getAccessTokenSilently } = useAuth0();
-	const { setHasProfile } = useProfile();
+	const {
+		user
+		// getAccessTokenSilently
+	} = useAuth0();
+	const { setHasProfile } = useCurrentUser();
 
 	const navigate = useNavigate();
 
@@ -35,10 +39,14 @@ const NewProfile = () => {
 	async function onFormSubmitClick(data) {
 		console.log(data);
 
-		// const token = getAccessTokenSilently();
+		// const token = await getAccessTokenSilently();
 
-		// await postUser(user, token);
-		// await postProfile(token);
+		// await postUser(user.email, data, token);
+		// await postProfile(data, token);
+
+		// if (data.request) {
+		// 	await postContributorRequest(token);
+		// }
 
 		setHasProfile(true);
 		navigate('/dashboard');
@@ -68,6 +76,7 @@ const NewProfile = () => {
 								minLength: 4
 							})}
 							error={errors.hasOwnProperty('firstName')}
+							defaultValue='Konstantinos'
 							name='firstName'
 							fullWidth
 							id='firstName'
@@ -81,6 +90,7 @@ const NewProfile = () => {
 								required: true,
 								minLength: 4
 							})}
+							defaultValue='Pascal'
 							error={errors.hasOwnProperty('lastName')}
 							fullWidth
 							id='lastName'
@@ -104,6 +114,7 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
+							defaultValue='80'
 							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
@@ -122,6 +133,7 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
+							defaultValue='175'
 							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
@@ -138,6 +150,7 @@ const NewProfile = () => {
 							})}
 							error={errors.hasOwnProperty('medicalConditions')}
 							fullWidth
+							defaultValue='None'
 							id='medicalConditions'
 							label='Medical Conditions'
 							name='medicalConditions'
@@ -150,6 +163,7 @@ const NewProfile = () => {
 								minLength: 4,
 								maxLength: 50
 							})}
+							defaultValue='None'
 							error={errors.hasOwnProperty('disabilities')}
 							fullWidth
 							name='disabilities'

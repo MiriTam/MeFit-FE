@@ -1,31 +1,25 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ApplicationFrame from './components/shared-components/ApplicationFrame';
-import { useProfile } from './context/ProfileContext';
+import { useCurrentUser } from './context/CurrentUserContext';
 import AdministratorPage from './pages/AdministratorPage';
 import AuthenticationPage from './pages/AuthenticationPage';
 import ContributorPage from './pages/ContributorPage';
 import DashboardPage from './pages/DashboardPage';
 import EditProfilePage from './pages/EditProfilePage';
 import ExercisesPage from './pages/ExercisesPage';
-import GoalsPage from './pages/GoalsPage';
+import GoalPage from './pages/GoalPage';
 import NewProfilePage from './pages/NewProfilePage';
 import ProgramsPage from './pages/ProgramsPage';
 import WorkoutsPage from './pages/WorkoutsPage';
 import { isOnRootPage } from './utils/isOnPage';
 
 function App() {
+	const [hasCheckedStatus, setHasCheckedStatus] = useState(false);
 	const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-	const {
-		hasProfile,
-		hasCheckedStatus,
-		setHasCheckedStatus,
-		setHasProfile,
-		checkHasProfile,
-		hasProfileIsPending
-	} = useProfile();
+	const { hasProfile, setHasProfile, checkHasProfile, hasProfileIsPending } = useCurrentUser();
 
 	const navigate = useNavigate();
 	const pathname = useLocation().pathname;
@@ -80,7 +74,7 @@ function App() {
 				<Route exact path='new-profile' element={<NewProfilePage />} />
 
 				<Route exact path='dashboard' element={<DashboardPage />} />
-				<Route exact path='goals' element={<GoalsPage />} />
+				<Route exact path='goals' element={<GoalPage />} />
 				<Route exact path='exercises' element={<ExercisesPage />} />
 				<Route exact path='programs' element={<ProgramsPage />} />
 				<Route exact path='workouts' element={<WorkoutsPage />} />

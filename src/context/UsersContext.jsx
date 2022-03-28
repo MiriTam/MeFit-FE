@@ -1,5 +1,6 @@
-import { getAllUsers } from '../api/users';
 import React, { createContext, useContext, useState } from 'react';
+
+import { getAllUsers } from '../api/users';
 
 // Creating context
 const UsersContext = createContext();
@@ -16,10 +17,14 @@ export function UsersProvider({ children }) {
 	async function getAndSetUsers(token) {
 		if (firstRequestMade) return;
 
-		const apiUsers = await getAllUsers(token);
+		try {
+			const apiUsers = await getAllUsers(token);
 
-		setUsers(apiUsers);
-		setFirstRequestMade(true);
+			setUsers(apiUsers);
+			setFirstRequestMade(true);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	const state = {

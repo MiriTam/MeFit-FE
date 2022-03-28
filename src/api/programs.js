@@ -1,12 +1,11 @@
+import axios from 'axios';
+
 const BASE_URL = 'https://mefit22api.azurewebsites.net/api/workout-program';
 
 export async function getAllPrograms() {
-	const req = await fetch(BASE_URL);
-	if (!req.ok) throw new Error('Could not get programs!');
+	const req = await axios.get(BASE_URL);
 
-	const programsArr = await req.json();
-
-	return programsArr;
+	return req.data;
 }
 
 // export async function postProgram(program) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GET_ALL_USERS_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
-const POST_USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
+const USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
 
 export async function getAllUsers(token) {
 	const req = await axios.get(GET_ALL_USERS_URL, {
@@ -10,32 +10,33 @@ export async function getAllUsers(token) {
 
 	return req.data;
 }
-
-export async function postUser(user, token) {
-	console.log('posting');
-
-	const userToBePosted = {
-		email: user.email,
-		firstName: user.firstName,
-		lastName: user.lastName,
-		fitnessLevel: user.fitnessLevel
-	};
-	const req = await fetch(POST_USER_URL, {
-		method: 'POST',
-		headers: {
-			Authorization: 'Bearer ' + token,
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			...userToBePosted
-		})
+export async function getUserById(id, token) {
+	const req = await axios.get(`${USER_URL}/${id}`, {
+		headers: { Authorization: `Bearer ${token}` }
 	});
 
-	if (!req.ok) throw new Error('Could not post user!');
+	return req.data;
+}
 
-	const newUser = await req.json();
+export async function postUser(email, { firstName, lastName, fitnessLevel }, token) {
+	const userToBePosted = {
+		email,
+		firstName,
+		lastName,
+		fitnessLevel,
+		restrictedCategories: 'Arms,Core,Stamina'
+	};
 
-	return newUser;
+	const req = await axios.post(USER_URL, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(userToBePosted)
+	});
+
+	return req.data;
 }
 
 // export async function getUsersAuth0() {

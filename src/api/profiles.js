@@ -11,29 +11,22 @@ export async function checkUserExists(token) {
 	return req.data;
 }
 
-export async function postProfile(profile, token) {
-	console.log('posting profile');
-
+export async function postProfile({ weight, height, medicalConditions, disabilities }, token) {
 	const profileToBePosted = {
-		weight: profile.weight,
-		height: profile.height,
-		medicalConditions: profile.medicalConditions,
-		disabilities: profile.disabilities
+		weight,
+		height,
+		medicalConditions,
+		disabilities
 	};
-	const req = await fetch(POST_PROFILE_URL, {
+
+	const req = await axios.post(POST_PROFILE_URL, {
 		method: 'POST',
 		headers: {
-			Authorization: 'Bearer ' + token,
+			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({
-			...profileToBePosted
-		})
+		body: JSON.stringify(profileToBePosted)
 	});
 
-	if (!req.ok) throw new Error('Could not post profile!');
-
-	const newUser = await req.json();
-
-	return newUser;
+	return req.data;
 }

@@ -1,31 +1,24 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://mefit22api.azurewebsites.net/api/admin/contributer-request';
+const GET_REQUESTS_URL = 'https://mefit22api.azurewebsites.net/api/admin/contributer-request';
+const POST_REQUEST_URL = 'https://mefit22api.azurewebsites.net/api/user/contributer-request';
 
 export async function getAllContributorRequests(token) {
-	const req = await axios.get(BASE_URL, {
+	const req = await axios.get(GET_REQUESTS_URL, {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
 	return req.data;
 }
-// export async function postUser(user, role) {
-// 	const req = await fetch(BASE_URL, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({
-// 			...user
-// 			// ...getRoleBooleans(role)
-// 		})
-// 	});
-// 	if (!req.ok) throw new Error('Could not post user!');
-
-// 	const newUser = await req.json();
-
-// 	return newUser;
-// }
+export async function postContributorRequest(token) {
+	await axios.post(POST_REQUEST_URL, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	});
+}
 
 // export async function getUsersAuth0() {
 // 	const req = await axios.get(BASE_URL_AUTH0 + 'auth0|6238875390b4c900687f5445', {

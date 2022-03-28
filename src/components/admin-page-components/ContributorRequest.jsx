@@ -1,8 +1,14 @@
 import { Person } from '@mui/icons-material';
 import { Button, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
 
-const ContributorRequest = ({ user: { firstName, lastName, email } }) => {
+import { useUsers } from '../../context/UsersContext';
+
+const ContributorRequest = ({ userId }) => {
+	const [requestingUser, setRequestingUser] = useState(null);
+	const { users } = useUsers();
+
 	async function onApproveClick() {
 		console.log('approved request');
 	}
@@ -11,6 +17,11 @@ const ContributorRequest = ({ user: { firstName, lastName, email } }) => {
 		console.log('denied request');
 	}
 
+	useEffect(() => {
+		const requestingUser = users.find(user => user.id === userId);
+		setRequestingUser(requestingUser);
+	}, [users, userId]);
+
 	return (
 		<Paper
 			variant='outlined'
@@ -18,12 +29,12 @@ const ContributorRequest = ({ user: { firstName, lastName, email } }) => {
 			<Box className='flex items-center'>
 				<Person sx={{ mr: 1.25 }} />
 				<Typography sx={{ fontSize: 20 }}>
-					{`${firstName} ${lastName}`}
+					{`${requestingUser?.firstName} ${requestingUser?.lastName}`}
 					<Typography
 						variant='span'
 						color={'text.secondary'}
 						sx={{ fontSize: 18, ml: 1, display: { xs: 'none', lg: 'inline' } }}>
-						{email}
+						{requestingUser?.email}
 					</Typography>
 				</Typography>
 			</Box>
