@@ -19,13 +19,11 @@ export async function postProfile({ weight, height, medicalConditions, disabilit
 		disabilities
 	};
 
-	const req = await axios.post(POST_PROFILE_URL, {
-		method: 'POST',
+	const req = await axios.post(POST_PROFILE_URL, JSON.stringify(profileToBePosted), {
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(profileToBePosted)
+		}
 	});
 
 	return req.data;

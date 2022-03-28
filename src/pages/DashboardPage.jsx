@@ -1,28 +1,34 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Container, LinearProgress, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect, useRef, useState } from 'react';
 
 import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
-import CurrentGoal from '../components/goal-page-components/CurrentGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
+import { useCurrentUser } from '../context/CurrentUserContext';
 import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
-import { isAdministrator } from '../utils/isRole';
+import { isAdministrator, isContributor } from '../utils/isRole';
 
 const color = blue[500];
 
 const DashboardPage = () => {
 	const [madeInitialRequests, setMadeInitialRequests] = useState(false);
+	const [madeInitialRequests2, setMadeInitialRequests2] = useState(false);
+	const [madeInitialRequests3, setMadeInitialRequests3] = useState(false);
+
 	const mountedRef = useRef(true);
+	const mountedRef2 = useRef(true);
+	const mountedRef3 = useRef(true);
 
 	const { user, getAccessTokenSilently } = useAuth0();
-	const { getAndSetExercises } = useExercises();
+	const { getAndSetExercises, getAndSetContributorExercises } = useExercises();
 	const { getAndSetWorkouts } = useWorkouts();
 	const { getAndSetPrograms } = usePrograms();
 	const { getAndSetUsers } = useUsers();
+	const { currentUser, getAndSetCurrentUser } = useCurrentUser();
 	const { getAndSetContributorRequests } = useContributorRequests();
 
 	useEffect(() => {
@@ -33,29 +39,83 @@ const DashboardPage = () => {
 				getAndSetExercises(token);
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
-
-				if (user && isAdministrator(user)) {
-					getAndSetUsers(token);
-					getAndSetContributorRequests(token);
-				}
+				getAndSetCurrentUser(token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}
 		})();
 	}, [
 		getAccessTokenSilently,
-		getAndSetWorkouts,
 		getAndSetExercises,
+		getAndSetContributorExercises,
+		getAndSetWorkouts,
 		getAndSetPrograms,
 		getAndSetContributorRequests,
 		getAndSetUsers,
+		getAndSetCurrentUser,
 		madeInitialRequests,
+		user
+	]);
+
+	useEffect(() => {
+		(async () => {
+			const token = await getAccessTokenSilently();
+
+			if (!madeInitialRequests2) {
+				if (currentUser && isContributor(user)) {
+					getAndSetContributorExercises(currentUser.id, token);
+					// getAndSetContributorWorkouts(token);
+					// getAndSetContributorPrograms(token);
+				}
+
+				if (mountedRef2.current) setMadeInitialRequests2(true);
+			}
+		})();
+	}, [
+		currentUser,
+		user,
+		getAccessTokenSilently,
+		getAndSetContributorExercises,
+		madeInitialRequests2
+	]);
+
+	useEffect(() => {
+		(async () => {
+			const token = await getAccessTokenSilently();
+
+			if (!madeInitialRequests3) {
+				if (user && isAdministrator(user)) {
+					getAndSetContributorRequests(token);
+					getAndSetUsers(token);
+				}
+
+				if (mountedRef3.current) setMadeInitialRequests3(true);
+			}
+		})();
+	}, [
+		getAccessTokenSilently,
+		getAndSetContributorRequests,
+		getAndSetUsers,
+		getAndSetCurrentUser,
+		madeInitialRequests3,
 		user
 	]);
 
 	useEffect(() => {
 		return () => {
 			mountedRef.current = false;
+		};
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			mountedRef2.current = false;
+		};
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			mountedRef3.current = false;
 		};
 	}, []);
 

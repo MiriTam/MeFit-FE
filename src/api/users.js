@@ -10,6 +10,15 @@ export async function getAllUsers(token) {
 
 	return req.data;
 }
+
+export async function getMyUser(token) {
+	const req = await axios.get(USER_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
+
+	return req.data;
+}
+
 export async function getUserById(id, token) {
 	const req = await axios.get(`${USER_URL}/${id}`, {
 		headers: { Authorization: `Bearer ${token}` }
@@ -27,26 +36,12 @@ export async function postUser(email, { firstName, lastName, fitnessLevel }, tok
 		restrictedCategories: 'Arms,Core,Stamina'
 	};
 
-	const req = await axios.post(USER_URL, {
-		method: 'POST',
+	const req = await axios.post(USER_URL, JSON.stringify(userToBePosted), {
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(userToBePosted)
+		}
 	});
 
 	return req.data;
 }
-
-// export async function getUsersAuth0() {
-// 	const req = await axios.get(BASE_URL_AUTH0 + 'auth0|6238875390b4c900687f5445', {
-// 		headers: {
-// 			Authorization: `Bearer ${API_TOKEN_AUTH0}`
-// 		}
-// 	});
-
-// 	const users = await req.data;
-
-// 	return users;
-// }

@@ -13,6 +13,7 @@ export function useGoal() {
 export function GoalProvider({ children }) {
 	const [goal, setGoal] = useState(false);
 	const [newGoal, setNewGoal] = useState(null);
+
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
 
 	async function getAndSetGoal(goalId, token) {
@@ -20,8 +21,8 @@ export function GoalProvider({ children }) {
 
 		const apiGoal = await getGoalById(goalId, token);
 
-		setGoal(apiGoal);
 		setFirstRequestMade(true);
+		setGoal(apiGoal);
 	}
 
 	const state = {

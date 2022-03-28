@@ -16,16 +16,13 @@ import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-// import { useCurrentUser } from '../../api/contributor-requests';
-// import { postProfile } from '../../api/profiles';
-// import { postUser } from '../../api/users';
+import { postContributorRequest } from '../../api/contributor-requests';
+import { postProfile } from '../../api/profiles';
+import { postUser } from '../../api/users';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 
 const NewProfile = () => {
-	const {
-		user
-		// getAccessTokenSilently
-	} = useAuth0();
+	const { user, getAccessTokenSilently } = useAuth0();
 	const { setHasProfile } = useCurrentUser();
 
 	const navigate = useNavigate();
@@ -37,16 +34,14 @@ const NewProfile = () => {
 	} = useForm();
 
 	async function onFormSubmitClick(data) {
-		console.log(data);
+		const token = await getAccessTokenSilently();
 
-		// const token = await getAccessTokenSilently();
+		await postUser(user.email, data, token);
+		await postProfile(data, token);
 
-		// await postUser(user.email, data, token);
-		// await postProfile(data, token);
-
-		// if (data.request) {
-		// 	await postContributorRequest(token);
-		// }
+		if (data.request) {
+			await postContributorRequest(token);
+		}
 
 		setHasProfile(true);
 		navigate('/dashboard');

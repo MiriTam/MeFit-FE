@@ -25,6 +25,7 @@ const ProgramCardList = () => {
 								program.category === programType && (
 									<ProgramCard
 										key={program.id}
+										id={program.id}
 										name={program.name}
 										difficulty={program.difficulty}
 										category={program.category}
