@@ -1,8 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Container, Typography } from '@mui/material';
-import { blue } from '@mui/material/colors';
-import React, { useEffect, useRef, useState } from 'react';
-
 import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
 import { useCurrentUser } from '../context/CurrentUserContext';
@@ -11,6 +6,10 @@ import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
 import { isAdministrator, isContributor } from '../utils/isRole';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Container, Typography } from '@mui/material';
+import { blue } from '@mui/material/colors';
+import React, { useEffect, useRef, useState } from 'react';
 
 const color = blue[500];
 
@@ -40,6 +39,7 @@ const DashboardPage = () => {
 				getAndSetExercises(token);
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
+
 				getAndSetCurrentUser(token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
@@ -62,6 +62,8 @@ const DashboardPage = () => {
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
+
+			console.log(token);
 
 			if (!madeInitialRequests2) {
 				if (currentUser && isContributor(user)) {

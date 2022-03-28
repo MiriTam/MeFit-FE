@@ -19,7 +19,7 @@ const ProgramCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display programs for that program type */}
-					<Box className='mt-4 flex flex-wrap items-start gap-4 '>
+					<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6 items-center  justify-center'>
 						{programs.map(
 							program =>
 								program.category === programType && (

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const GET_ALL_USERS_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
 const USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
+const POST_ROLE_URL = 'https://mefit22api.azurewebsites.net/api/admin/users';
 
 export async function getAllUsers(token) {
 	const req = await axios.get(GET_ALL_USERS_URL, {
@@ -37,6 +38,17 @@ export async function postUser(email, { firstName, lastName, fitnessLevel }, tok
 	};
 
 	const req = await axios.post(USER_URL, JSON.stringify(userToBePosted), {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return req.data;
+}
+
+export async function postRoleToUser(userId, role, token) {
+	const req = await axios.post(`${POST_ROLE_URL}/${userId}/roles?role=${role}`, null, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'

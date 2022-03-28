@@ -1,9 +1,8 @@
+import { usePrograms } from '../../context/ProgramsContext';
+import ProgramCard from '../programs-page-components/ProgramCard';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-
-import { usePrograms } from '../../context/ProgramsContext';
-import ProgramCard from '../programs-page-components/ProgramCard';
 
 const GoalProgramPicker = () => {
 	const { programs } = usePrograms();
@@ -12,7 +11,7 @@ const GoalProgramPicker = () => {
 			<Typography variant='h5' gutterBottom>
 				Pick a program
 			</Typography>
-			<Box className='flex flex-wrap justify-center gap-4 ' sx={{ mt: 4 }}>
+			<Box className='flex flex-wrap justify-center items-center gap-4 ' sx={{ mt: 4 }}>
 				{programs.map(program => (
 					<ProgramCard
 						key={program.id}

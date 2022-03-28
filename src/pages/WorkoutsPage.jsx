@@ -1,10 +1,11 @@
-import WorkoutCardList from '../components/workout-page-components/WorkoutCardList';
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
+import WorkoutCardList from '../components/workout-page-components/WorkoutCardList';
+
 const WorkoutsPage = () => {
 	return (
-		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
+		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
 			<Typography component='h1' variant='h4'>
 				Workouts Overview
 			</Typography>

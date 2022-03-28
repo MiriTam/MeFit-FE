@@ -66,7 +66,6 @@ const ProgramCard = ({ id, name, category, workouts: _workouts, difficulty }) =>
 										<Box className='text-center mx-auto'>
 											<Typography sx={{ fontSize: 18 }}>Workout {idx + 1}</Typography>
 											<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-												Workout:{' '}
 												<Link
 													className='text-blue-400 font-semibold '
 													to={`/workouts?workoutId=${workoutId}`}>
