@@ -24,7 +24,7 @@ const ContributorRequest = ({ userId }) => {
 
 	return (
 		<Paper
-			variant='outlined'
+			variant='elevation'
 			className='flex flex-col mt-1 sm:flex-row shadow-md justify-between md:w-2/3 items-center flex-wrap py-3 px-6 '>
 			<Box className='flex items-center'>
 				<Person sx={{ mr: 1.25 }} />

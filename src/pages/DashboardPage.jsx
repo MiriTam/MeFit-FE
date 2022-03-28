@@ -1,10 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Container, LinearProgress, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect, useRef, useState } from 'react';
 
 import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
-import CurrentGoal from '../components/goal-page-components/CurrentGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
 import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';

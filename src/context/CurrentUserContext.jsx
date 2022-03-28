@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-import { checkUserExists } from '../api/profiles';
+// import { checkUserExists } from '../api/profiles';
 
 // Creating context
 const CurrentUserContext = createContext();
@@ -15,9 +15,10 @@ export function CurrentUserProvider({ children }) {
 	const [hasProfile, setHasProfile] = useState(null);
 
 	async function checkHasProfile(token) {
-		const res = await checkUserExists(token);
+		// const res = await checkUserExists(token);
 
-		return res.includes('true');
+		// return res.includes('true');
+		return false;
 	}
 
 	function hasProfileIsPending() {
