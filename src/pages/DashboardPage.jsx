@@ -25,12 +25,13 @@ const DashboardPage = () => {
 
 	const { user, getAccessTokenSilently } = useAuth0();
 	const { getAndSetExercises, getAndSetContributorExercises } = useExercises();
-	const { getAndSetWorkouts } = useWorkouts();
-	const { getAndSetPrograms } = usePrograms();
+	const { getAndSetWorkouts, getAndSetContributorWorkouts } = useWorkouts();
+	const { getAndSetPrograms, getAndSetContributorPrograms } = usePrograms();
 	const { getAndSetUsers } = useUsers();
 	const { currentUser, getAndSetCurrentUser } = useCurrentUser();
 	const { getAndSetContributorRequests } = useContributorRequests();
 
+	// Common requests across all roles
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
@@ -57,18 +58,19 @@ const DashboardPage = () => {
 		user
 	]);
 
+	// Contributor specific requests
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
 
 			if (!madeInitialRequests2) {
 				if (currentUser && isContributor(user)) {
-					getAndSetContributorExercises(currentUser.id, token);
-					// getAndSetContributorWorkouts(token);
-					// getAndSetContributorPrograms(token);
-				}
+					// getAndSetContributorExercises(currentUser.id, token);
+					// getAndSetContributorWorkouts(currentUser.id, token);
+					// getAndSetContributorPrograms(currentUser.id, token);
 
-				if (mountedRef2.current) setMadeInitialRequests2(true);
+					if (mountedRef2.current) setMadeInitialRequests2(true);
+				}
 			}
 		})();
 	}, [
@@ -76,9 +78,12 @@ const DashboardPage = () => {
 		user,
 		getAccessTokenSilently,
 		getAndSetContributorExercises,
-		madeInitialRequests2
+		madeInitialRequests2,
+		getAndSetContributorWorkouts,
+		getAndSetContributorPrograms
 	]);
 
+	// Admin specific requests
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
@@ -87,9 +92,9 @@ const DashboardPage = () => {
 				if (user && isAdministrator(user)) {
 					getAndSetContributorRequests(token);
 					getAndSetUsers(token);
-				}
 
-				if (mountedRef3.current) setMadeInitialRequests3(true);
+					if (mountedRef3.current) setMadeInitialRequests3(true);
+				}
 			}
 		})();
 	}, [
@@ -101,6 +106,7 @@ const DashboardPage = () => {
 		user
 	]);
 
+	// Preventing async requests running on unmounted component
 	useEffect(() => {
 		return () => {
 			mountedRef.current = false;
