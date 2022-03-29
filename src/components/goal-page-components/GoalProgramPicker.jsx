@@ -1,28 +1,69 @@
-import { Typography } from '@mui/material';
+import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { useGoal } from '../../context/GoalContext';
 import { usePrograms } from '../../context/ProgramsContext';
-import GoalProgramCard from './GoalProgramCard';
 
 const GoalProgramPicker = () => {
 	const { programs } = usePrograms();
+	const { setNewGoal } = useGoal();
+	const [pickedProgram, setPickedProgram] = useState('Hot and Heavy');
+
+	useEffect(() => {
+		const matchedProgram = programs.find(program => program.name === pickedProgram);
+
+		setNewGoal(prev => ({
+			...prev,
+			workoutProgramId: matchedProgram.id
+		}));
+	}, [pickedProgram, setNewGoal, programs]);
+
+	const handleChange = event => {
+		setPickedProgram(event.target.value);
+	};
 
 	return (
 		<Box sx={{ my: 3 }} className='text-center'>
 			<Typography variant='h5' gutterBottom>
 				Pick a program
 			</Typography>
-			<Box className='flex flex-wrap justify-center items-center gap-4 ' sx={{ mt: 4 }}>
-				{programs.map(program => (
-					<GoalProgramCard
-						key={program.id}
-						name={program.name}
-						difficulty={program.difficulty}
-						category={program.category}
-						workouts={program.workouts}
-					/>
-				))}
+			<Box className='flex flex-wrap justify-center items-center gap-4 ' sx={{ mt: 2 }}>
+				<FormControl>
+					<RadioGroup
+						aria-labelledby='demo-controlled-radio-buttons-group'
+						name='controlled-radio-buttons-group'
+						onChange={handleChange}
+						value={pickedProgram}>
+						{programs.map(program => (
+							<Box key={program.name}>
+								<FormControlLabel
+									value={program.name}
+									control={<Radio />}
+									label={program.name}
+								/>
+								<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+									Category:{' '}
+									<Typography
+										variant='span'
+										className='font-semibold'
+										color='text.primary'>
+										{program.category}
+									</Typography>
+								</Typography>
+								<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+									Difficulty:{' '}
+									<Typography
+										variant='span'
+										className='font-semibold'
+										color='text.primary'>
+										{program.difficulty}
+									</Typography>
+								</Typography>
+							</Box>
+						))}
+					</RadioGroup>
+				</FormControl>
 			</Box>
 		</Box>
 	);

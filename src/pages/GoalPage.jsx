@@ -9,7 +9,7 @@ const GoalPage = () => {
 
 	return (
 		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
-			{currentUser?.goals.length !== 0 ? <CurrentGoal /> : <SetGoal />}
+			{currentUser?.goals.length === 0 ? <CurrentGoal /> : <SetGoal />}
 		</Container>
 	);
 };

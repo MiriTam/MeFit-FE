@@ -7,7 +7,7 @@ export default function DashboardCurrentGoal() {
 	const { programs } = usePrograms();
 
 	return (
-		<Box className='shadow-md  rounded-md p-6 ' sx={{ mt: 4 }}>
+		<Box className='shadow-md  rounded-md p-6 '>
 			<CardContent>
 				<Typography sx={{ mb: 3, fontSize: 30 }} variant='h4'>
 					My current goal

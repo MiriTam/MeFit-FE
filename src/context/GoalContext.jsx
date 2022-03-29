@@ -12,7 +12,7 @@ export function useGoal() {
 // Providing the context
 export function GoalProvider({ children }) {
 	const [goal, setGoal] = useState(false);
-	const [newGoal, setNewGoal] = useState(null);
+	const [newGoal, setNewGoal] = useState({ workoutProgramId: null, endData: null });
 
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
 

@@ -5,7 +5,7 @@ import { ThemeProvider } from '../context/ThemeContext';
 import { ContributorRequestsProvider } from './ContributorRequestsContext';
 import { CurrentUserProvider } from './CurrentUserContext';
 import { ExercisesProvider } from './ExercisesContext';
-// import { ProgramsProvider } from './GoalContext';
+import { GoalProvider } from './GoalContext';
 import { ProgramsProvider } from './ProgramsContext';
 import { UsersProvider } from './UsersContext';
 import { WorkoutsProvider } from './WorkoutsContext';
@@ -19,9 +19,9 @@ function AppContext({ children }) {
 						<ProgramsProvider>
 							<UsersProvider>
 								<CurrentUserProvider>
-									{/* <GoalProvider> */}
-									<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
-									{/* </GoalProvider> */}
+									<GoalProvider>
+										<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+									</GoalProvider>
 								</CurrentUserProvider>
 							</UsersProvider>
 						</ProgramsProvider>

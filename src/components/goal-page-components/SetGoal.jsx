@@ -37,10 +37,6 @@ export default function SetGoal() {
 		setActiveStep(activeStep + 1);
 	};
 
-	const handlePrev = () => {
-		setActiveStep(activeStep - 1);
-	};
-
 	function handleSubmit() {
 		console.log('handle goal submit');
 	}
@@ -61,11 +57,6 @@ export default function SetGoal() {
 				<>
 					{getStepContent(activeStep)}
 					<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-						{activeStep !== 0 && (
-							<Button onClick={handlePrev} sx={{ mt: 3, ml: 1 }}>
-								Back
-							</Button>
-						)}
 						<Button
 							sx={{ mt: 3, ml: 1 }}
 							variant='contained'

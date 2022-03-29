@@ -42,7 +42,7 @@ const DashboardPage = () => {
 				getAndSetPrograms(token);
 
 				const apiCurrentUser = await getAndSetCurrentUser(token);
-				if (apiCurrentUser) getAndSetProfile(apiCurrentUser.id, token);
+				if (apiCurrentUser) getAndSetProfile(apiCurrentUser?.id, token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}
@@ -65,14 +65,13 @@ const DashboardPage = () => {
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
-
 			console.log(token);
 
 			if (!madeInitialRequests2) {
 				if (currentUser && isContributor(user)) {
-					getAndSetContributorExercises(currentUser.id, token);
-					getAndSetContributorWorkouts(currentUser.id, token);
-					getAndSetContributorPrograms(currentUser.id, token);
+					getAndSetContributorExercises(currentUser?.id, token);
+					getAndSetContributorWorkouts(currentUser?.id, token);
+					getAndSetContributorPrograms(currentUser?.id, token);
 
 					if (mountedRef2.current) setMadeInitialRequests2(true);
 				}
