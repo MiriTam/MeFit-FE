@@ -1,12 +1,6 @@
-import { Box, Button, CardContent, Typography } from '@mui/material';
+import { Box, Button, CardContent, Paper, Typography } from '@mui/material';
 
-import { usePrograms } from '../../context/ProgramsContext';
-import getProgramById from '../../utils/getProgramById';
-import ProgramCard from '../programs-page-components/ProgramCard';
-
-export default function CurrentGoal({ endDate, workoutProgramId, subGoals }) {
-	const { programs } = usePrograms();
-
+export default function CurrentGoal({ currentGoal, goalProgram }) {
 	return (
 		<Box className='shadow-md  rounded-md  text-center '>
 			<CardContent>
@@ -15,13 +9,38 @@ export default function CurrentGoal({ endDate, workoutProgramId, subGoals }) {
 				</Typography>
 				<Box sx={{ mt: 3 }}>
 					<Typography variant='h5'>Program:</Typography>
-					<Box className='flex justify-center' sx={{ mt: 1 }}>
-						<ProgramCard
-							category={getProgramById(programs, workoutProgramId)?.category}
-							name={getProgramById(programs, workoutProgramId)?.name}
-							difficulty={getProgramById(programs, workoutProgramId)?.difficulty}
-							workouts={getProgramById(programs, workoutProgramId)?.workouts}
-						/>
+					<Box className='flex justify-center' sx={{ mt: 2 }}>
+						<Paper elevation={4} className='w-64 px-6 py-4 text-center'>
+							<CardContent>
+								<Box>
+									<Typography component='h3' variant='h5'>
+										{goalProgram.name}
+									</Typography>
+								</Box>
+								<Box className='mt-2'>
+									<Box>
+										<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+											Category:{' '}
+											<Typography
+												variant='span'
+												className='font-semibold'
+												color='text.primary'>
+												{goalProgram.category}
+											</Typography>
+										</Typography>
+										<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+											Difficulty:{' '}
+											<Typography
+												variant='span'
+												className='font-semibold'
+												color='text.primary'>
+												{goalProgram.difficulty}
+											</Typography>
+										</Typography>
+									</Box>
+								</Box>
+							</CardContent>
+						</Paper>
 					</Box>
 				</Box>
 				<Box sx={{ mt: 3 }}>

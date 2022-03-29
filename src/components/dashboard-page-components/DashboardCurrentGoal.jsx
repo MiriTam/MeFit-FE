@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, LinearProgress, Typography } from '@mui/material';
+import { Box, CardContent, LinearProgress, Typography } from '@mui/material';
 
 import { usePrograms } from '../../context/ProgramsContext';
 import ProgramCard from '../programs-page-components/ProgramCard';
