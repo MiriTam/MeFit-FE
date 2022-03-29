@@ -46,38 +46,40 @@ const ProgramCard = ({ id, name, category, workouts: _workouts, difficulty }) =>
 						</Typography>
 					</Box>
 
-					<Box className='mt-2'>
-						{/* Program has no workouts to show*/}
-						{_workouts.length === 0 && (
-							<Typography
-								variant='span'
-								sx={{ fontSize: 16 }}
-								color='text.secondary'
-								className='font-semibold'>
-								No workouts
-							</Typography>
-						)}
-
-						{/* Program has workouts to show */}
+					{workouts !== undefined && (
 						<Box className='mt-2'>
-							<List className='divide-y max-h-56 overflow-y-scroll scrollbar '>
-								{_workouts.map((workoutId, idx) => (
-									<ListItem key={idx}>
-										<Box className='text-center mx-auto'>
-											<Typography sx={{ fontSize: 18 }}>Workout {idx + 1}</Typography>
-											<Typography sx={{ fontSize: 16 }} color='text.secondary'>
-												<Link
-													className='text-blue-400 font-semibold '
-													to={`/workouts?workoutId=${workoutId}`}>
-													{getWorkoutNameById(workouts, workoutId)}
-												</Link>
-											</Typography>
-										</Box>
-									</ListItem>
-								))}
-							</List>
+							{/* Program has no workouts to show*/}
+							{_workouts.length === 0 && (
+								<Typography
+									variant='span'
+									sx={{ fontSize: 16 }}
+									color='text.secondary'
+									className='font-semibold'>
+									No workouts
+								</Typography>
+							)}
+
+							{/* Program has workouts to show */}
+							<Box className='mt-2'>
+								<List className='divide-y max-h-56 overflow-y-scroll scrollbar '>
+									{_workouts.map((workoutId, idx) => (
+										<ListItem key={idx}>
+											<Box className='text-center mx-auto'>
+												<Typography sx={{ fontSize: 18 }}>Workout {idx + 1}</Typography>
+												<Typography sx={{ fontSize: 16 }} color='text.secondary'>
+													<Link
+														className='text-blue-400 font-semibold '
+														to={`/workouts?workoutId=${workoutId}`}>
+														{getWorkoutNameById(workouts, workoutId)}
+													</Link>
+												</Typography>
+											</Box>
+										</ListItem>
+									))}
+								</List>
+							</Box>
 						</Box>
-					</Box>
+					)}
 				</Box>
 			</CardContent>
 		</Paper>

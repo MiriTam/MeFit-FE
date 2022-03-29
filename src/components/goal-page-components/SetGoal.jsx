@@ -1,7 +1,11 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Button, Container, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
+import { postGoal } from '../../api/goals';
+import { useCurrentUser } from '../../context/CurrentUserContext';
+import { useGoal } from '../../context/GoalContext';
 import GoalDatePicker from './GoalDatePicker';
 import GoalProgramPicker from './GoalProgramPicker';
 
@@ -32,13 +36,21 @@ function getStepContent(step) {
 
 export default function SetGoal() {
 	const [activeStep, setActiveStep] = useState(0);
+	const { newGoal } = useGoal();
+	const { setCurrentUser } = useCurrentUser();
+	const { getAccessTokenSilently } = useAuth0();
 
 	const handleNext = () => {
 		setActiveStep(activeStep + 1);
 	};
 
-	function handleSubmit() {
-		console.log('handle goal submit');
+	async function handleSubmit() {
+		const token = await getAccessTokenSilently();
+		const apiGoal = await postGoal(newGoal, token);
+
+		console.log(apiGoal);
+
+		setCurrentUser(prev => ({ ...prev, goals: [apiGoal.id] }));
 	}
 
 	return (

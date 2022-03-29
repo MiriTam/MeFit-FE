@@ -49,8 +49,8 @@ const DashboardPage = () => {
 				getAndSetAllGoals(token);
 				getAndSetAllSubGoals(token);
 
-				const apiCurrentUser = await getAndSetCurrentUser(token);
-				if (apiCurrentUser) getAndSetProfile(apiCurrentUser?.id, token);
+				getAndSetCurrentUser(token);
+				getAndSetProfile(token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}

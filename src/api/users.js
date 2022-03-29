@@ -35,8 +35,8 @@ export async function getCurrentUser(token) {
 	return req.data;
 }
 
-export async function getProfileByUserId(id, token) {
-	const req = await axios.get(`${USER_URL}/${id}/profile`, {
+export async function getProfile(token) {
+	const req = await axios.get(`${USER_URL}/profile`, {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
@@ -63,7 +63,7 @@ export async function postUser(email, { firstName, lastName, fitnessLevel }, tok
 }
 
 export async function postRoleToUser(userId, role, token) {
-	const req = await axios.post(`${POST_ROLE_URL}/${userId}/roles?role=${role}`, null, {
+	const req = await axios.post(`${POST_ROLE_URL}/${userId}/${role}`, null, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
