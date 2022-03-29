@@ -28,6 +28,14 @@ export async function getUserById(id, token) {
 	return req.data;
 }
 
+export async function getProfileByUserId(id, token) {
+	const req = await axios.get(`${USER_URL}/${id}/profile`, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
+
+	return req.data;
+}
+
 export async function postUser(email, { firstName, lastName, fitnessLevel }, token) {
 	const userToBePosted = {
 		email,

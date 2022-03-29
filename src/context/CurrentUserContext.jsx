@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import { checkUserExists } from '../api/profiles';
-import { getMyUser } from '../api/users';
+import { getMyUser, getProfileByUserId } from '../api/users';
 
 // Creating context
 const CurrentUserContext = createContext();
@@ -13,9 +13,11 @@ export function useCurrentUser() {
 // Providing the context
 export function CurrentUserProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState(null);
+	const [profile, setProfile] = useState(null);
 	const [hasProfile, setHasProfile] = useState(null);
 
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
+	const [firstRequestMade2, setFirstRequestMade2] = useState(false);
 
 	async function checkHasProfile(token) {
 		const res = await checkUserExists(token);
@@ -38,7 +40,21 @@ export function CurrentUserProvider({ children }) {
 		return apiCurrentUser;
 	}
 
+	async function getAndSetProfile(id, token) {
+		if (firstRequestMade2) return;
+
+		const apiProfile = await getProfileByUserId(id, token);
+
+		setFirstRequestMade2(true);
+		setProfile(apiProfile);
+
+		return apiProfile;
+	}
+
 	const state = {
+		getAndSetProfile,
+		profile,
+		setProfile,
 		hasProfile,
 		setHasProfile,
 		checkHasProfile,

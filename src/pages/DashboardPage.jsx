@@ -1,3 +1,8 @@
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Container, Typography } from '@mui/material';
+import { blue } from '@mui/material/colors';
+import React, { useEffect, useRef, useState } from 'react';
+
 import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
 import { useCurrentUser } from '../context/CurrentUserContext';
@@ -6,10 +11,6 @@ import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
 import { isAdministrator, isContributor } from '../utils/isRole';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Container, Typography } from '@mui/material';
-import { blue } from '@mui/material/colors';
-import React, { useEffect, useRef, useState } from 'react';
 
 const color = blue[500];
 
@@ -27,7 +28,7 @@ const DashboardPage = () => {
 	const { getAndSetWorkouts, getAndSetContributorWorkouts } = useWorkouts();
 	const { getAndSetPrograms, getAndSetContributorPrograms } = usePrograms();
 	const { getAndSetUsers } = useUsers();
-	const { currentUser, getAndSetCurrentUser } = useCurrentUser();
+	const { currentUser, getAndSetCurrentUser, getAndSetProfile } = useCurrentUser();
 	const { getAndSetContributorRequests } = useContributorRequests();
 
 	// Common requests across all roles
@@ -40,13 +41,15 @@ const DashboardPage = () => {
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
 
-				getAndSetCurrentUser(token);
+				const apiCurrentUser = await getAndSetCurrentUser(token);
+				getAndSetProfile(apiCurrentUser.id, token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}
 		})();
 	}, [
 		getAccessTokenSilently,
+		getAndSetProfile,
 		getAndSetExercises,
 		getAndSetContributorExercises,
 		getAndSetWorkouts,
@@ -67,9 +70,9 @@ const DashboardPage = () => {
 
 			if (!madeInitialRequests2) {
 				if (currentUser && isContributor(user)) {
-					// getAndSetContributorExercises(currentUser.id, token);
-					// getAndSetContributorWorkouts(currentUser.id, token);
-					// getAndSetContributorPrograms(currentUser.id, token);
+					getAndSetContributorExercises(currentUser.id, token);
+					getAndSetContributorWorkouts(currentUser.id, token);
+					getAndSetContributorPrograms(currentUser.id, token);
 
 					if (mountedRef2.current) setMadeInitialRequests2(true);
 				}
