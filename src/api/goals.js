@@ -10,12 +10,14 @@ export async function getGoalById(id, token) {
 	return req.data;
 }
 
-export async function postGoal({ endData, workoutProgramId, userId }, token) {
-	const goalToBePosted = { endData, achieved: false, workoutProgramId, userId };
+export async function postGoal({ endDate, workoutProgramId }, token) {
+	const goalToBePosted = { endDate, workoutProgramId };
 
-	const req = await axios.post(BASE_URL, {
-		headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-		body: JSON.stringify(goalToBePosted)
+	const req = await axios.post(BASE_URL, JSON.stringify(goalToBePosted), {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
 	});
 
 	return req.data;
