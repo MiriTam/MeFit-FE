@@ -28,7 +28,7 @@ export function GoalProvider({ children }) {
 	async function getAndSetManyGoals(goalIdArray, token) {
 
 		const apiGoals = await getManyGoalsById(goalIdArray, token);
-
+		console.log("API goals", apiGoals);
 		setGoals(apiGoals);
 	}
 

@@ -1,5 +1,5 @@
 import { Box, CardContent, LinearProgress, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { usePrograms } from '../../context/ProgramsContext';
@@ -7,7 +7,6 @@ import { useGoal } from '../../context/GoalContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useWorkouts } from '../../context/WorkoutsContext';
 import { useSubGoal } from '../../context/SubGoalContext';
-import ProgramCard from '../programs-page-components/ProgramCard'; 
 
 export default function DashboardCurrentGoal() {
 
@@ -18,44 +17,88 @@ export default function DashboardCurrentGoal() {
 	const { getAccessTokenSilently } = useAuth0();
 	const { workouts } = useWorkouts();
 
-	console.log("USER: ", currentUser);
+	const [progressValue, setProgressValue] = useState(0);
+	const [activeGoal, setActiveGoal] = useState(null);
+	const [activeProgram, setActiveProgram] = useState(null);
 
-	// lol
-	let currentUserGoals = null;
-	if (currentUser) currentUserGoals = [... currentUser.goals];
-
-	// regn ut utifra antall completed workouts
-	let progressValue = 25;
+	console.log("ProgressValue: ", progressValue);
 	// regn ut utifra end-date - today-date ? elns, finnes sikkert en funksjon for det
 	let daysLeftInGoal = 1;
 
-	//currentUser.goals; // int array
-	console.log("goals: ", currentUserGoals);
+
 	console.log("Goals: ", goals);
-
-	// Find active goal
-	let activeGoal = goals.filter(checkAchieved);
-	function checkAchieved(goal) {
-		return !goal.achieved;
-	}
-	console.log("ACTIVE: ", activeGoal);
-
-	let subGoalIdArray = null;
-	if (activeGoal.length >= 1) subGoalIdArray = activeGoal[0].subGoals;
-
+	console.log("USER: ", currentUser);
+	console.log("active program: ", activeProgram);
 	console.log("SubGoals: ", subGoals);
 
-	//let activeGoalProgram = activeGoal[0].workoutProgramId; // :/
-	// TODO, legge inn programId i goalReadDTO
+	// TODO
 	// Lage Subgoal component, med knapp
 
+	// Get goals from the api
 	useEffect(() => {
 		(async () => {
 			const token = await getAccessTokenSilently();
-			getAndSetManyGoals(currentUserGoals, token);
-			getAndSetManySubGoals(subGoalIdArray, token);
+
+			// Get goals
+			getAndSetManyGoals(currentUser.goals, token);
+
+			console.log("**************\n Goals useEffect done");
 		})();
-	}, []);
+	}, [currentUser]);
+
+	// Set activegoal
+	useEffect(() => {
+
+		// Find active goal
+		setActiveGoal(goals[0]);
+		/*
+		setActiveGoal(goals.filter(checkAchieved));
+		function checkAchieved(goal) {
+			return !goal.achieved;
+		}
+		*/
+
+		// Find active program
+		let activeGoalProgramId = activeGoal.workoutProgramId;
+		let _activeProgram = (programs.filter(checkForId));
+		function checkForId(prog) {
+			return prog.id === activeGoalProgramId;
+		}
+		setActiveProgram(_activeProgram);
+
+
+	}, [goals]);
+
+	// Get subgoals from the api
+	useEffect(() => {
+		(async () => {
+
+			const token = await getAccessTokenSilently();
+			// Get subgoals
+			let subGoalIdArray = [];
+			if (activeGoal.length >= 1) subGoalIdArray = activeGoal.subGoals;
+			
+			if (subGoalIdArray) getAndSetManySubGoals(subGoalIdArray, token);
+		})();
+	}, [goals, activeGoal]);
+
+
+	// Wait for and subgoals from api
+	useEffect(() => {
+
+		// regn ut utifra antall completed workouts
+		let achievedSubGoals = [];
+		if (subGoals) achievedSubGoals = subGoals.filter(checkAchievedSubGoal);
+		function checkAchievedSubGoal(sg) {
+			return sg.achieved;
+		}
+		console.log("achieved len", achievedSubGoals.length);
+		console.log("len", subGoals.length);
+
+		if (achievedSubGoals.length > 0) setProgressValue((achievedSubGoals.length/subGoals.length)*100);
+		console.log("**************\n Other useEffect done");
+
+	}, [subGoals]);
 	
 
 	return (
@@ -76,14 +119,16 @@ export default function DashboardCurrentGoal() {
 				<Box sx={{ mt: 2 }}>
 					<Typography variant='h5'>Program:</Typography>
 					<Box className='flex justify-center' sx={{ mt: 1 }}>
-						{programs.length > 0 && (
+						{/*
+						{activeProgram && (
 							<ProgramCard
-								category={programs[0]?.category}
-								name={programs[0]?.name}
-								difficulty={programs[0]?.difficulty}
-								workouts={programs[0]?.workouts}
+								category={activeProgram?.category}
+								name={activeProgram?.name}
+								difficulty={activeProgram?.difficulty}
+								workouts={activeProgram?.workouts}
 							/>
 						)}
+						*/}
 					</Box>
 				</Box>
 				<Box sx={{ mt: 3 }}>

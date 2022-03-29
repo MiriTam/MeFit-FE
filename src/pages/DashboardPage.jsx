@@ -11,7 +11,6 @@ import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
 import { useCurrentUser } from '../context/CurrentUserContext';
 import { isAdministrator } from '../utils/isRole';
-import ProgressBar from '../components/dashboard-page-components/progress-bar';
 import GoalsDisplay from '../components/dashboard-page-components/goals-display';
 
 const color = blue[500];
