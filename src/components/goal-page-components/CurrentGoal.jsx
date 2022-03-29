@@ -1,9 +1,10 @@
 import { Box, Button, CardContent, Typography } from '@mui/material';
 
 import { usePrograms } from '../../context/ProgramsContext';
+import getProgramById from '../../utils/getProgramById';
 import ProgramCard from '../programs-page-components/ProgramCard';
 
-export default function CurrentGoal() {
+export default function CurrentGoal({ endDate, workoutProgramId, subGoals }) {
 	const { programs } = usePrograms();
 
 	return (
@@ -15,14 +16,12 @@ export default function CurrentGoal() {
 				<Box sx={{ mt: 3 }}>
 					<Typography variant='h5'>Program:</Typography>
 					<Box className='flex justify-center' sx={{ mt: 1 }}>
-						{programs.length > 0 && (
-							<ProgramCard
-								category={programs[0]?.category}
-								name={programs[0]?.name}
-								difficulty={programs[0]?.difficulty}
-								workouts={programs[0]?.workouts}
-							/>
-						)}
+						<ProgramCard
+							category={getProgramById(programs, workoutProgramId)?.category}
+							name={getProgramById(programs, workoutProgramId)?.name}
+							difficulty={getProgramById(programs, workoutProgramId)?.difficulty}
+							workouts={getProgramById(programs, workoutProgramId)?.workouts}
+						/>
 					</Box>
 				</Box>
 				<Box sx={{ mt: 3 }}>

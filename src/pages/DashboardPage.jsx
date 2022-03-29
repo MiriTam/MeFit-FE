@@ -41,8 +41,8 @@ const DashboardPage = () => {
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
 
-				const apiCurrentUser = await getAndSetCurrentUser(token);
-				if (apiCurrentUser) getAndSetProfile(apiCurrentUser?.id, token);
+				getAndSetCurrentUser(token);
+				getAndSetProfile(token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}
