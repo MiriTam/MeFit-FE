@@ -42,7 +42,7 @@ const DashboardPage = () => {
 				getAndSetPrograms(token);
 
 				const apiCurrentUser = await getAndSetCurrentUser(token);
-				getAndSetProfile(apiCurrentUser.id, token);
+				if (apiCurrentUser) getAndSetProfile(apiCurrentUser.id, token);
 
 				if (mountedRef.current) setMadeInitialRequests(true);
 			}

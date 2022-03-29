@@ -1,31 +1,32 @@
 import { Box, CardContent, List, ListItem, Paper, Typography } from '@mui/material';
-import { lightBlue } from '@mui/material/colors';
+// import { useState } from '@mui/material/colors';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useWorkouts } from '../../context/WorkoutsContext';
 import getWorkoutNameById from '../../utils/getWorkoutNameById';
 
-const color = lightBlue[500];
+// const color = lightBlue[500];
 
 const GoalProgramCard = ({ id, name, category, workouts: _workouts, difficulty }) => {
 	const { workouts } = useWorkouts();
-	const [pickedProgram, setPickedProgram] = useState(null);
+	// const [pickedProgram, setPickedProgram] = useState(null);
 
-	function handleProgramPick(id) {
-		if (pickedProgram === id) return setPickedProgram(null);
-		setPickedProgram(id);
-	}
+	// function handleProgramPick(id) {
+	// 	if (pickedProgram === id) return setPickedProgram(null);
+	// 	setPickedProgram(id);
+	// }
 
 	return (
 		<Paper
-			onClick={handleProgramPick(id)}
+			// onClick={handleProzgramPick(id)}
 			elevation={4}
 			className='w-64 px-6 py-4 text-center'
-			sx={{
-				border: pickedProgram === name ? '2px solid' : 'none',
-				borderColor: pickedProgram === name && color
-			}}>
+			// sx={{
+			// 	border: pickedProgram === name ? '2px solid' : 'none',
+			// 	borderColor: pickedProgram === name && color
+			// }}
+		>
 			<CardContent>
 				<Box>
 					<Typography component='h3' variant='h5'>
