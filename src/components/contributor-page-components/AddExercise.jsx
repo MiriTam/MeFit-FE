@@ -4,6 +4,7 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
+	Autocomplete,
 	Button,
 	Grid,
 	TextField,
@@ -25,10 +26,14 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 		console.log(`New values:`);
 		console.log(data);
 
-		// const { name, description } = data;
+		// POST new exercise
+		// name x
+		// description x
+		// picture (opt.) x 
+		// video (opt.) x
+		// category (must be [Arms, Legs, Core, Stamina, Full body, Flexibility])
 
-		// const exerciseToBePatched = { name, description };
-		// await patchExercise(userToBePatched, role);
+		//await patchExercise(userToBePatched, role);
 	}
 
 	return (
@@ -70,6 +75,47 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 									fullWidth
 									label='Description'
 									name='exerciseDescription'
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Autocomplete
+									{...register('exerciseCategory', {
+										required: true
+									})}
+									disablePortal
+									id="exerciseCategory"
+									options={["Arms", "Core", "Full body", "Flexibility", "Legs", "Stamina"]}
+									//sx={{ width: 300 }}
+									fullWidth
+									renderInput={(params) => <TextField {...params} label="Category" />}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									{...register('exercisePictureUrl', {
+										required: false,
+										minLength: 4
+									})}
+									error={errors.hasOwnProperty('exercisePictureUrl')}
+									autoComplete='Picture URL'
+									name='exercisePictureUrl'
+									fullWidth
+									label='Picture'
+									autoFocus
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									{...register('exerciseVideoUrl', {
+										required: false,
+										minLength: 4
+									})}
+									error={errors.hasOwnProperty('exerciseVideoUrl')}
+									autoComplete='Video URL'
+									name='exerciseVideoUrl'
+									fullWidth
+									label='Video'
+									autoFocus
 								/>
 							</Grid>
 						</Grid>

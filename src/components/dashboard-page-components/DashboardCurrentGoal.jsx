@@ -17,25 +17,32 @@ export default function DashboardCurrentGoal() {
 	const { getAccessTokenSilently } = useAuth0();
 	const { workouts } = useWorkouts();
 
-	const [progressValue, setProgressValue] = useState(0);
-	const [activeGoal, setActiveGoal] = useState(null);
-	const [activeProgram, setActiveProgram] = useState(null);
+	//const [progressValue, setProgressValue] = useState(0);
+	//const [activeGoal, setActiveGoal] = useState(null);
+	//const [activeProgram, setActiveProgram] = useState(null);
 
-	console.log("ProgressValue: ", progressValue);
+	//console.log("ProgressValue: ", progressValue);
 	// regn ut utifra end-date - today-date ? elns, finnes sikkert en funksjon for det
 	let daysLeftInGoal = 1;
+	let progressValue = 50;
 
+	/*
 
-	console.log("Goals: ", goals);
 	console.log("USER: ", currentUser);
-	console.log("active program: ", activeProgram);
-	console.log("active goal: ", activeGoal);
+	console.log("Goals: ", goals);
 	console.log("SubGoals: ", subGoals);
+
+	console.log("active goal: ", activeGoal);
+	console.log("active program: ", activeProgram);
+
+	*/
 
 	// TODO
 	// Make shit work >:(
 	// Get user goals, get user subgoals, render
 	// Lage Subgoal component, med knapp
+
+	/* Ikke lov med set utenfor useeffect :P
 
 	// Find active goal for USER
 	setActiveGoal(goals.filter(checkAchieved));
@@ -43,7 +50,7 @@ export default function DashboardCurrentGoal() {
 		return !goal.achieved && currentUser.goals.includes(goal.Id);
 	}
 
-	// Find active program
+	// Find active program for user
 	let activeGoalProgramId = null;
 	if (activeGoal) {
 		activeGoalProgramId = activeGoal.workoutProgramId;
@@ -59,11 +66,12 @@ export default function DashboardCurrentGoal() {
 		function checkAchievedSubGoal(sg) {
 			return sg.achieved;
 		}
-		console.log("achieved len", achievedSubGoals.length);
-		console.log("len", subGoals.length);
+	console.log("achieved len", achievedSubGoals.length);
+	console.log("len", subGoals.length);
 
-		if (achievedSubGoals.length > 0) setProgressValue((achievedSubGoals.length/subGoals.length)*100);
+	if (achievedSubGoals.length > 0) setProgressValue((achievedSubGoals.length/subGoals.length)*100);
 	
+	*/
 
 	return (
 		<Box className='shadow-md  rounded-md p-6 '>
