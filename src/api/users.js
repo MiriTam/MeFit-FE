@@ -3,6 +3,7 @@ import axios from 'axios';
 const GET_ALL_USERS_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
 const USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
 
+
 export async function getAllUsers(token) {
 	const req = await axios.get(GET_ALL_USERS_URL, {
 		headers: { Authorization: `Bearer ${token}` }
@@ -15,6 +16,12 @@ export async function getUserById(id, token) {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
+	return req.data;
+}
+export async function getCurrentUser(token) {
+	const req = await axios.get(USER_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
 	return req.data;
 }
 

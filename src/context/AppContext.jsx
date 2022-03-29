@@ -9,6 +9,7 @@ import { GoalProvider } from './GoalContext';
 import { ProgramsProvider } from './ProgramsContext';
 import { UsersProvider } from './UsersContext';
 import { WorkoutsProvider } from './WorkoutsContext';
+import { SubGoalProvider } from './SubGoalContext';
 
 function AppContext({ children }) {
 	return (
@@ -20,7 +21,9 @@ function AppContext({ children }) {
 							<UsersProvider>
 								<CurrentUserProvider>
 									<GoalProvider>
-										<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+										<SubGoalProvider>
+											<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+										</SubGoalProvider>
 									</GoalProvider>
 								</CurrentUserProvider>
 							</UsersProvider>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const GET_REQUESTS_URL = 'https://mefit22api.azurewebsites.net/api/admin/contributer-request';
-const POST_REQUEST_URL = 'https://mefit22api.azurewebsites.net/api/user/contributer-request';
+const GET_REQUESTS_URL = 'https://mefit22api.azurewebsites.net/api/admin/contributor-request';
+const POST_REQUEST_URL = 'https://mefit22api.azurewebsites.net/api/user/contributor-request';
 
 export async function getAllContributorRequests(token) {
 	const req = await axios.get(GET_REQUESTS_URL, {

@@ -9,7 +9,10 @@ import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
+import { useCurrentUser } from '../context/CurrentUserContext';
 import { isAdministrator } from '../utils/isRole';
+import ProgressBar from '../components/dashboard-page-components/progress-bar';
+import GoalsDisplay from '../components/dashboard-page-components/goals-display';
 
 const color = blue[500];
 
@@ -23,6 +26,7 @@ const DashboardPage = () => {
 	const { getAndSetPrograms } = usePrograms();
 	const { getAndSetUsers } = useUsers();
 	const { getAndSetContributorRequests } = useContributorRequests();
+	const { getCurrentUserFromApi } = useCurrentUser();
 
 	useEffect(() => {
 		(async () => {
@@ -32,6 +36,7 @@ const DashboardPage = () => {
 				getAndSetExercises(token);
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
+				getCurrentUserFromApi(token);
 
 				if (user && isAdministrator(user)) {
 					getAndSetUsers(token);
@@ -48,6 +53,7 @@ const DashboardPage = () => {
 		getAndSetPrograms,
 		getAndSetContributorRequests,
 		getAndSetUsers,
+		getCurrentUserFromApi,
 		madeInitialRequests,
 		user
 	]);
@@ -60,13 +66,15 @@ const DashboardPage = () => {
 
 	return (
 		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
-			<Typography component='h1' variant='h2' color='text.secondary'>
+			<Typography component='h1' variant='h3' color='text.secondary' align='left'>
 				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}
 				</Box>
 			</Typography>
 			<DashboardCurrentGoal />
+			<Typography component='h2' variant='h4' sx={{ mt: 4 }}>Your Current Goal:</Typography>
+			<GoalsDisplay></GoalsDisplay>
 		</Container>
 	);
 };
