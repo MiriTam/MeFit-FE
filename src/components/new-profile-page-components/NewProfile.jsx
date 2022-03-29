@@ -16,16 +16,14 @@ import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-// import { useCurrentUser } from '../../api/contributor-requests';
-// import { postProfile } from '../../api/profiles';
-// import { postUser } from '../../api/users';
+import { postContributorRequest } from '../../api/contributor-requests';
+import { postProfile } from '../../api/profiles';
+import { postUser } from '../../api/users';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import { isContributor } from '../../utils/isRole';
 
 const NewProfile = () => {
-	const {
-		user
-		// getAccessTokenSilently
-	} = useAuth0();
+	const { user, getAccessTokenSilently } = useAuth0();
 	const { setHasProfile } = useCurrentUser();
 
 	const navigate = useNavigate();
@@ -37,16 +35,14 @@ const NewProfile = () => {
 	} = useForm();
 
 	async function onFormSubmitClick(data) {
-		console.log(data);
+		const token = await getAccessTokenSilently();
 
-		// const token = await getAccessTokenSilently();
+		await postUser(user.email, data, token);
+		await postProfile(data, token);
 
-		// await postUser(user.email, data, token);
-		// await postProfile(data, token);
-
-		// if (data.request) {
-		// 	await postContributorRequest(token);
-		// }
+		if (data.request) {
+			await postContributorRequest(token);
+		}
 
 		setHasProfile(true);
 		navigate('/dashboard');
@@ -198,15 +194,17 @@ const NewProfile = () => {
 					</Grid>
 				</Grid>
 
-				<Grid item xs={12} sx={{ mt: 1 }}>
-					<FormGroup>
-						<FormControlLabel
-							{...register('request')}
-							control={<Checkbox />}
-							label='I want to submit a contributor request'
-						/>
-					</FormGroup>
-				</Grid>
+				{!isContributor(user) && (
+					<Grid item xs={12} sx={{ mt: 1 }}>
+						<FormGroup>
+							<FormControlLabel
+								{...register('request')}
+								control={<Checkbox />}
+								label='I want to submit a contributor request'
+							/>
+						</FormGroup>
+					</Grid>
+				)}
 
 				<Box className='w-1/2 mx-auto'>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>

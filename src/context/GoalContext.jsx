@@ -13,7 +13,7 @@ export function useGoal() {
 export function GoalProvider({ children }) {
 	const [goal, setGoal] = useState(false);
 	const [goals, setGoals] = useState([]);
-	const [newGoal, setNewGoal] = useState(null);
+	const [newGoal, setNewGoal] = useState({ workoutProgramId: null, endData: null });
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
 
 	async function getAndSetGoal(goalId, token) {

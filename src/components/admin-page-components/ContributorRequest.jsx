@@ -1,20 +1,38 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Person } from '@mui/icons-material';
 import { Button, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
+import { deleteContributorRequest } from '../../api/contributor-requests';
+import { postRoleToUser } from '../../api/users';
+import { useContributorRequests } from '../../context/ContributorRequestsContext';
 import { useUsers } from '../../context/UsersContext';
 
-const ContributorRequest = ({ userId }) => {
+const ContributorRequest = ({ id, userId }) => {
 	const [requestingUser, setRequestingUser] = useState(null);
+	const { contributorRequests, setContributorRequests } = useContributorRequests();
+	const { getAccessTokenSilently } = useAuth0();
 	const { users } = useUsers();
 
-	async function onApproveClick() {
-		console.log('approved request');
+	async function onApproveClick(_requestId, _userId) {
+		const token = await getAccessTokenSilently();
+
+		await postRoleToUser(_userId, 'Contributor', token);
+		await deleteContributorRequest(_requestId, token);
+
+		// Settings new state
+		const newContributorRequests = contributorRequests.filter(req => req.id !== _requestId);
+		setContributorRequests(newContributorRequests);
 	}
 
-	async function onDenyClick() {
-		console.log('denied request');
+	async function onDenyClick(_requestId) {
+		const token = await getAccessTokenSilently();
+		await deleteContributorRequest(_requestId, token);
+
+		// Settings new state
+		const newContributorRequests = contributorRequests.filter(req => req.id !== _requestId);
+		setContributorRequests(newContributorRequests);
 	}
 
 	useEffect(() => {
@@ -39,10 +57,10 @@ const ContributorRequest = ({ userId }) => {
 				</Typography>
 			</Box>
 			<Box className='flex gap-2 mt-1 sm:mt-0'>
-				<Button onClick={onApproveClick} variant='contained' color='primary'>
+				<Button onClick={() => onApproveClick(id, userId)} variant='contained' color='primary'>
 					Approve
 				</Button>
-				<Button onClick={onDenyClick} variant='contained' color='error'>
+				<Button onClick={() => onDenyClick(id)} variant='contained' color='error'>
 					Deny
 				</Button>
 			</Box>

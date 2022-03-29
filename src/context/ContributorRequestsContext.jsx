@@ -1,5 +1,6 @@
-import { getAllContributorRequests } from '../api/contributor-requests';
 import React, { createContext, useContext, useState } from 'react';
+
+import { getAllContributorRequests } from '../api/contributor-requests';
 
 // Creating context
 const ContributorRequestsContext = createContext();
@@ -18,8 +19,8 @@ export function ContributorRequestsProvider({ children }) {
 
 		const apiContributorRequests = await getAllContributorRequests(token);
 
-		setContributorRequests(apiContributorRequests);
 		setFirstRequestMade(true);
+		setContributorRequests(apiContributorRequests);
 	}
 
 	const state = {

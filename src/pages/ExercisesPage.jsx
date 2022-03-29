@@ -5,7 +5,7 @@ import ExerciseCardList from '../components/exercise-page-components/ExerciseCar
 
 const ExercisesPage = () => {
 	return (
-		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
+		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
 			<Typography component='h1' variant='h4'>
 				Exercises Overview
 			</Typography>

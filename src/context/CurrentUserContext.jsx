@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
-import { getCurrentUser } from '../api/users';
+import { checkUserExists } from '../api/profiles';
+import { getMyUser, getProfileByUserId } from '../api/users';
 
 // Creating context
 const CurrentUserContext = createContext();
@@ -11,10 +12,11 @@ export function useCurrentUser() {
 
 // Providing the context
 export function CurrentUserProvider({ children }) {
-	const [userId, setUserId] = useState(null);
+	const [currentUser, setCurrentUser] = useState(null);
+	const [profile, setProfile] = useState(null);
 	const [hasProfile, setHasProfile] = useState(null);
-	const [currentUser, setCurrentUser] = useState();
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
+	const [firstRequestMade2, setFirstRequestMade2] = useState(false);
 
 	async function getCurrentUserFromApi(token) {
 		if (firstRequestMade) return;
@@ -23,7 +25,7 @@ export function CurrentUserProvider({ children }) {
 		setCurrentUser(apiUser);
 		setFirstRequestMade(true);
 	}
-	
+
 	async function checkHasProfile(token) {
 		// const res = await checkUserExists(token);
 
@@ -35,16 +37,39 @@ export function CurrentUserProvider({ children }) {
 		return hasProfile === null;
 	}
 
+	async function getAndSetCurrentUser(token) {
+		if (firstRequestMade) return;
+
+		const apiCurrentUser = await getMyUser(token);
+
+		setFirstRequestMade(true);
+		setCurrentUser(apiCurrentUser);
+
+		return apiCurrentUser;
+	}
+
+	async function getAndSetProfile(id, token) {
+		if (firstRequestMade2) return;
+
+		const apiProfile = await getProfileByUserId(id, token);
+
+		setFirstRequestMade2(true);
+		setProfile(apiProfile);
+
+		return apiProfile;
+	}
+
 	const state = {
+		getAndSetProfile,
+		profile,
+		setProfile,
 		hasProfile,
 		setHasProfile,
 		checkHasProfile,
 		hasProfileIsPending,
-		userId,
-		setUserId,
 		currentUser,
 		setCurrentUser,
-		getCurrentUserFromApi
+		getAndSetCurrentUser
 	};
 
 	return <CurrentUserContext.Provider value={state}>{children}</CurrentUserContext.Provider>;

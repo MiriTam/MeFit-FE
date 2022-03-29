@@ -17,7 +17,7 @@ const ContributorRequestList = () => {
 			{/* Contributor requests to show */}
 			{contributorRequests.length !== 0 &&
 				contributorRequests.map((req, idx) => (
-					<ContributorRequest key={req.id} userId={req.requestingUser} />
+					<ContributorRequest key={req.id} id={req.id} userId={req.requestingUser} />
 				))}
 		</Box>
 	);
