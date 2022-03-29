@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { usePrograms } from '../../context/ProgramsContext';
-import { useGoal } from '../../context/GoalContext';
+import { useGoals } from '../../context/GoalContext';
+import { useSubGoals } from '../../context/SubGoalContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useWorkouts } from '../../context/WorkoutsContext';
-import { useSubGoal } from '../../context/SubGoalContext';
 
 export default function DashboardCurrentGoal() {
 
 	const { programs } = usePrograms();
 	const { currentUser } = useCurrentUser();
-	const { getAndSetManyGoals, goals } = useGoal();
-	const { getAndSetManySubGoals, subGoals } = useSubGoal();
+	const { goals } = useGoals();
+	const { subGoals } = useSubGoals();
 	const { getAccessTokenSilently } = useAuth0();
 	const { workouts } = useWorkouts();
 
@@ -29,65 +29,32 @@ export default function DashboardCurrentGoal() {
 	console.log("Goals: ", goals);
 	console.log("USER: ", currentUser);
 	console.log("active program: ", activeProgram);
+	console.log("active goal: ", activeGoal);
 	console.log("SubGoals: ", subGoals);
 
 	// TODO
+	// Make shit work >:(
+	// Get user goals, get user subgoals, render
 	// Lage Subgoal component, med knapp
 
-	// Get goals from the api
-	useEffect(() => {
-		(async () => {
-			const token = await getAccessTokenSilently();
+	// Find active goal for USER
+	setActiveGoal(goals.filter(checkAchieved));
+	function checkAchieved(goal) {
+		return !goal.achieved && currentUser.goals.includes(goal.Id);
+	}
 
-			// Get goals
-			getAndSetManyGoals(currentUser.goals, token);
-
-			console.log("**************\n Goals useEffect done");
-		})();
-	}, [currentUser]);
-
-	// Set activegoal
-	useEffect(() => {
-
-		// Find active goal
-		setActiveGoal(goals[0]);
-		/*
-		setActiveGoal(goals.filter(checkAchieved));
-		function checkAchieved(goal) {
-			return !goal.achieved;
-		}
-		*/
-
-		// Find active program
-		let activeGoalProgramId = activeGoal.workoutProgramId;
+	// Find active program
+	let activeGoalProgramId = null;
+	if (activeGoal) {
+		activeGoalProgramId = activeGoal.workoutProgramId;
 		let _activeProgram = (programs.filter(checkForId));
 		function checkForId(prog) {
 			return prog.id === activeGoalProgramId;
 		}
 		setActiveProgram(_activeProgram);
+	}
 
-
-	}, [goals]);
-
-	// Get subgoals from the api
-	useEffect(() => {
-		(async () => {
-
-			const token = await getAccessTokenSilently();
-			// Get subgoals
-			let subGoalIdArray = [];
-			if (activeGoal.length >= 1) subGoalIdArray = activeGoal.subGoals;
-			
-			if (subGoalIdArray) getAndSetManySubGoals(subGoalIdArray, token);
-		})();
-	}, [goals, activeGoal]);
-
-
-	// Wait for and subgoals from api
-	useEffect(() => {
-
-		// regn ut utifra antall completed workouts
-		let achievedSubGoals = [];
+	let achievedSubGoals = [];
 		if (subGoals) achievedSubGoals = subGoals.filter(checkAchievedSubGoal);
 		function checkAchievedSubGoal(sg) {
 			return sg.achieved;
@@ -96,9 +63,6 @@ export default function DashboardCurrentGoal() {
 		console.log("len", subGoals.length);
 
 		if (achievedSubGoals.length > 0) setProgressValue((achievedSubGoals.length/subGoals.length)*100);
-		console.log("**************\n Other useEffect done");
-
-	}, [subGoals]);
 	
 
 	return (

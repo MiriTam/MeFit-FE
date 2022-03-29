@@ -2,12 +2,12 @@ import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@m
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 
-import { useGoal } from '../../context/GoalContext';
+import { useGoals } from '../../context/GoalContext';
 import { usePrograms } from '../../context/ProgramsContext';
 
 const GoalProgramPicker = () => {
 	const { programs } = usePrograms();
-	const { setNewGoal } = useGoal();
+	const { setNewGoal } = useGoals();
 	const [pickedProgram, setPickedProgram] = useState('Hot and Heavy');
 
 	useEffect(() => {

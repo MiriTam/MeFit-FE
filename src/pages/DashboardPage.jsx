@@ -10,7 +10,8 @@ import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
-import { useCurrentUser } from '../context/CurrentUserContext';
+import { useGoals } from '../context/GoalContext';
+import { useSubGoals } from '../context/SubGoalContext';
 import { isAdministrator, isContributor } from '../utils/isRole';
 import GoalsDisplay from '../components/dashboard-page-components/goals-display';
 
@@ -29,10 +30,11 @@ const DashboardPage = () => {
 	const { getAndSetExercises, getAndSetContributorExercises } = useExercises();
 	const { getAndSetWorkouts, getAndSetContributorWorkouts } = useWorkouts();
 	const { getAndSetPrograms, getAndSetContributorPrograms } = usePrograms();
+	const { getAndSetAllGoals } = useGoals();
+	const { getAndSetAllSubGoals } = useSubGoals();
 	const { getAndSetUsers } = useUsers();
 	const { currentUser, getAndSetCurrentUser, getAndSetProfile } = useCurrentUser();
 	const { getAndSetContributorRequests } = useContributorRequests();
-	const { getCurrentUserFromApi } = useCurrentUser();
 
 	// Common requests across all roles
 	useEffect(() => {
@@ -43,7 +45,9 @@ const DashboardPage = () => {
 				getAndSetExercises(token);
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
-				getCurrentUserFromApi(token);
+				getAndSetCurrentUser(token);
+				getAndSetAllGoals(token);
+				getAndSetAllSubGoals(token);
 
 				const apiCurrentUser = await getAndSetCurrentUser(token);
 				if (apiCurrentUser) getAndSetProfile(apiCurrentUser?.id, token);
@@ -60,8 +64,9 @@ const DashboardPage = () => {
 		getAndSetPrograms,
 		getAndSetContributorRequests,
 		getAndSetUsers,
-		getCurrentUserFromApi,
 		getAndSetCurrentUser,
+		getAndSetAllGoals,
+		getAndSetAllSubGoals,
 		madeInitialRequests,
 		user
 	]);

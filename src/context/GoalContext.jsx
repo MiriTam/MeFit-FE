@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState } from 'react';
 
-import { getGoalById, getManyGoalsById } from '../api/goals';
+import { getAllGoals, getGoalById, getManyGoalsById } from '../api/goals';
 
 // Creating context
 const GoalContext = createContext();
 
-export function useGoal() {
+export function useGoals() {
 	return useContext(GoalContext);
 }
 
@@ -16,6 +16,16 @@ export function GoalProvider({ children }) {
 	const [newGoal, setNewGoal] = useState({ workoutProgramId: null, endData: null });
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
 
+	async function getAndSetAllGoals(token) {
+		if (firstRequestMade) return;
+
+		const apiGoals = await getAllGoals(token);
+		console.log("GET ALL GOALS", apiGoals);
+		setGoals(apiGoals);
+		setFirstRequestMade(true);
+	}
+
+	/*
 	async function getAndSetGoal(goalId, token) {
 		if (firstRequestMade) return;
 
@@ -23,6 +33,7 @@ export function GoalProvider({ children }) {
 		setGoal(apiGoal);
 		setFirstRequestMade(true);
 	}
+	
 
 	// Call with an array of goal-ids (user goals)
 	async function getAndSetManyGoals(goalIdArray, token) {
@@ -31,6 +42,7 @@ export function GoalProvider({ children }) {
 		console.log("API goals", apiGoals);
 		setGoals(apiGoals);
 	}
+	*/
 
 	const state = {
 		goal,
@@ -39,8 +51,9 @@ export function GoalProvider({ children }) {
 		setNewGoal,
 		goals,
 		setGoals,
-		getAndSetGoal,
-		getAndSetManyGoals
+		getAndSetAllGoals,
+		//getAndSetGoal,
+		//getAndSetManyGoals
 	};
 
 	return <GoalContext.Provider value={state}>{children}</GoalContext.Provider>;

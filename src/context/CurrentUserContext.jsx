@@ -18,19 +18,11 @@ export function CurrentUserProvider({ children }) {
 	const [firstRequestMade, setFirstRequestMade] = useState(false);
 	const [firstRequestMade2, setFirstRequestMade2] = useState(false);
 
-	async function getCurrentUserFromApi(token) {
-		if (firstRequestMade) return;
-
-		const apiUser = await getCurrentUser(token);
-		setCurrentUser(apiUser);
-		setFirstRequestMade(true);
-	}
-
 	async function checkHasProfile(token) {
-		// const res = await checkUserExists(token);
+		const res = await checkUserExists(token);
 
-		// return res.includes('true');
-		return false;
+		return res.includes('true');
+		//return false;
 	}
 
 	function hasProfileIsPending() {
