@@ -3,15 +3,16 @@ import { Box, Container, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect, useRef, useState } from 'react';
 
+import { getGoalById } from '../api/goals';
 import DashboardCurrentGoal from '../components/dashboard-page-components/DashboardCurrentGoal';
+import DashboardSetGoal from '../components/dashboard-page-components/DashboardSetGoal';
 import { useContributorRequests } from '../context/ContributorRequestsContext';
 import { useCurrentUser } from '../context/CurrentUserContext';
 import { useExercises } from '../context/ExercisesContext';
 import { usePrograms } from '../context/ProgramsContext';
 import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
-import { useGoals } from '../context/GoalContext';
-import { useSubGoals } from '../context/SubGoalContext';
+import getProgramById from '../utils/getProgramById';
 import { isAdministrator, isContributor } from '../utils/isRole';
 import GoalsDisplay from '../components/dashboard-page-components/goals-display';
 
@@ -29,9 +30,7 @@ const DashboardPage = () => {
 	const { user, getAccessTokenSilently } = useAuth0();
 	const { getAndSetExercises, getAndSetContributorExercises } = useExercises();
 	const { getAndSetWorkouts, getAndSetContributorWorkouts } = useWorkouts();
-	const { getAndSetPrograms, getAndSetContributorPrograms } = usePrograms();
-	const { getAndSetAllGoals } = useGoals();
-	const { getAndSetAllSubGoals } = useSubGoals();
+	const { getAndSetPrograms, getAndSetContributorPrograms, programs } = usePrograms();
 	const { getAndSetUsers } = useUsers();
 	const { currentUser, getAndSetCurrentUser, getAndSetProfile } = useCurrentUser();
 	const { getAndSetContributorRequests } = useContributorRequests();
@@ -139,6 +138,23 @@ const DashboardPage = () => {
 		};
 	}, []);
 
+	const [currentGoal, setCurrentGoal] = useState();
+	const [currentGoalProgram, setCurrentGoalProgram] = useState();
+
+	useEffect(() => {
+		(async () => {
+			const token = await getAccessTokenSilently();
+
+			const goalId = currentUser?.goals[0];
+			const apiGoal = await getGoalById(goalId, token);
+
+			const goalProgram = getProgramById(programs, apiGoal.workoutProgramId);
+
+			setCurrentGoal(apiGoal);
+			setCurrentGoalProgram(goalProgram);
+		})();
+	}, [getAccessTokenSilently, currentUser?.goals, programs]);
+
 	return (
 		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
 			<Typography component='h1' variant='h3' color='text.secondary' align='left'>
@@ -147,9 +163,11 @@ const DashboardPage = () => {
 					{user?.nickname}
 				</Box>
 			</Typography>
-			<DashboardCurrentGoal />
-			<Typography component='h2' variant='h4' sx={{ mt: 4 }}>Your Current Goal:</Typography>
-			<GoalsDisplay></GoalsDisplay>
+			{currentUser?.goals.length !== 0 ? (
+				<DashboardCurrentGoal currentGoal={currentGoal} goalProgram={currentGoalProgram} />
+			) : (
+				<DashboardSetGoal />
+			)}
 		</Container>
 	);
 };
