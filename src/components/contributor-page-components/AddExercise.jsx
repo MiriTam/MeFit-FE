@@ -4,8 +4,11 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
+	Alert,
 	Autocomplete,
 	Button,
+	Collapse,
+	IconButton,
 	Grid,
 	TextField,
 	Typography,
@@ -15,6 +18,7 @@ import {
 	FormControlLabel,
 	FormLabel,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useState } from 'react';
@@ -34,17 +38,11 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 
 	const { getAccessTokenSilently } = useAuth0();
 	const { setExercises } = useExercises();
+	const [open, setOpen] = useState(false); // Alert-box
 
 	async function onSubmitClick(data) {
 		console.log(`Adding exercise...`);
 		console.log(`New values:`);
-
-		// POST new exercise
-		// name x
-		// description x
-		// picture (opt.) x 
-		// video (opt.) x
-		// category (must be [Arms, Legs, Core, Stamina, Full body, Flexibility]) /
 
 		let imageUrl = null; 
 		if (data.exercisePictureUrl) imageUrl = data.exercisePictureUrl;
@@ -57,14 +55,19 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 			category: data.category
 		}
 
-		//console.log("NEW: ", newExercise);
+		setOpen(true); // opens the alert
+
+		console.log("NEW: ", newExercise);
 		const token = await getAccessTokenSilently();
+		
 		const apiExercise = await postExercise(newExercise, token);
 
 		const jsonized = JSON.parse(apiExercise);
 		console.log("New Exercise ", apiExercise);
 		
+
 		setExercises(prev => ({ ...prev, jsonized}));
+		
 	}
 	
 	/*
@@ -120,7 +123,7 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 									<RadioGroup
 										row
 										aria-labelledby='category'>
-																				<Box>
+										<Box>
 											<FormControlLabel
 												{...register('category')}
 												value='Arms'
@@ -217,6 +220,25 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 								/>
 							</Grid>
 						</Grid>
+						<Box sx={{width: '100%'}} marginTop={2}>
+							<Collapse in={open}>
+									<Alert
+										action={
+											<IconButton
+												aria-label="close"
+												color="inherit"
+												size="small"
+												onClick={() => {
+													setOpen(false);
+												}}
+												>
+												<CloseIcon fontSize="inherit" />
+											</IconButton>
+										}
+										sx={{ mb: 2 }}
+									>Your new Exercise has been submitted!</Alert>
+							</Collapse>
+						</Box>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>
 							<Button type='submit' fullWidth variant='contained'>
 								Add Exercise
