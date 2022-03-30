@@ -43,25 +43,16 @@ const EditUserForm = ({
 	// const { users } = useUsers();
 
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${email} ...`);
-		console.log(id);
 		console.log(`New values:`);
 		console.log(data);
 
-		
 		const token = await getAccessTokenSilently();
 
-		// console.log(isContributer);
-		// console.log(data.role);
-		
 		await postRoleToUser(id, data.role, token);
-
-
-		//await postRoleToUser()
-		// await getManagementApiAccessToken();
 
 		// const { firstName, lastName, _email } = data;
 		// const userToBePatched = { firstName, lastName, _email };
+
 	}
 
 	return (
@@ -87,7 +78,7 @@ const EditUserForm = ({
 									{...register('firstName', {
 										minLength: 4
 									})}
-									value={firstName}
+									defaultValue={firstName}
 									error={errors.hasOwnProperty('firstName')}
 									autoComplete='given-name'
 									name='firstName'
@@ -101,7 +92,7 @@ const EditUserForm = ({
 									{...register('lastName', {
 										minLength: 4
 									})}
-									value={lastName}
+									defaultValue={lastName}
 									error={errors.hasOwnProperty('lastName')}
 									fullWidth
 									label='Last Name'
@@ -117,7 +108,7 @@ const EditUserForm = ({
 											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 										}
 									})}
-									value={email}
+									defaultValue={email}
 									error={errors.hasOwnProperty('email')}
 									fullWidth
 									label='Email Address'

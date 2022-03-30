@@ -72,7 +72,6 @@ const NewProfile = () => {
 								minLength: 4
 							})}
 							error={errors.hasOwnProperty('firstName')}
-							defaultValue='Konstantinos'
 							name='firstName'
 							fullWidth
 							id='firstName'
@@ -86,7 +85,6 @@ const NewProfile = () => {
 								required: true,
 								minLength: 4
 							})}
-							defaultValue='Pascal'
 							error={errors.hasOwnProperty('lastName')}
 							fullWidth
 							id='lastName'
@@ -110,7 +108,6 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							defaultValue='80'
 							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
@@ -129,7 +126,6 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							defaultValue='175'
 							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
@@ -146,7 +142,6 @@ const NewProfile = () => {
 							})}
 							error={errors.hasOwnProperty('medicalConditions')}
 							fullWidth
-							defaultValue='None'
 							id='medicalConditions'
 							label='Medical Conditions'
 							name='medicalConditions'
@@ -159,7 +154,6 @@ const NewProfile = () => {
 								minLength: 4,
 								maxLength: 50
 							})}
-							defaultValue='None'
 							error={errors.hasOwnProperty('disabilities')}
 							fullWidth
 							name='disabilities'

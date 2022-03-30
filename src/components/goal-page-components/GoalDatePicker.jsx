@@ -4,7 +4,7 @@ import { Container, TextField } from '@mui/material';
 import enLocale from 'date-fns/locale/en-US';
 import { useEffect, useState } from 'react';
 
-import { useGoal } from '../../context/GoalContext';
+import { useGoals } from '../../context/GoalContext';
 
 const localeMap = {
 	en: enLocale
@@ -17,7 +17,7 @@ const maskMap = {
 export default function GoalDatePicker() {
 	const [value, setValue] = useState(new Date());
 	const [locale] = useState('en');
-	const { setNewGoal } = useGoal();
+	const { setNewGoal } = useGoals();
 
 	useEffect(() => {
 		console.log(value.toISOString());

@@ -28,7 +28,9 @@ export async function getExerciseById(id, token) {
 }
 
 export async function postExercise(exercise, token) {
-	const req = await axios.post(BASE_URL, {
+	console.log(JSON.stringify(exercise));
+	const req = await axios.post(BASE_URL, JSON.stringify(exercise), 
+	{
 		headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
 	});
 

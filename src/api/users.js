@@ -4,6 +4,7 @@ const GET_ALL_USERS_URL = 'https://mefit22api.azurewebsites.net/api/user/all-use
 const USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
 const POST_ROLE_URL = 'https://mefit22api.azurewebsites.net/api/admin/users';
 
+
 export async function getAllUsers(token) {
 	const req = await axios.get(GET_ALL_USERS_URL, {
 		headers: { Authorization: `Bearer ${token}` }
@@ -27,9 +28,15 @@ export async function getUserById(id, token) {
 
 	return req.data;
 }
+export async function getCurrentUser(token) {
+	const req = await axios.get(USER_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
+	return req.data;
+}
 
-export async function getProfileByUserId(id, token) {
-	const req = await axios.get(`${USER_URL}/${id}/profile`, {
+export async function getProfile(token) {
+	const req = await axios.get(`${USER_URL}/profile`, {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
