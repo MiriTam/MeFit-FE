@@ -2,7 +2,10 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 
+import { useCurrentUser } from '../../context/CurrentUserContext';
+
 const EditProfile = () => {
+	const { profile } = useCurrentUser();
 	const {
 		register,
 		handleSubmit,
@@ -28,6 +31,7 @@ const EditProfile = () => {
 							})}
 							// defaultValue={120}
 							error={errors.hasOwnProperty('weight')}
+							defaultValue={profile?.weight}
 							name='weight'
 							fullWidth
 							id='weight'
@@ -42,6 +46,7 @@ const EditProfile = () => {
 								minLength: 4
 							})}
 							error={errors.hasOwnProperty('height')}
+							defaultValue={profile?.height}
 							fullWidth
 							id='height'
 							label='Height (cm)'
@@ -54,6 +59,7 @@ const EditProfile = () => {
 								required: true,
 								minLength: 4
 							})}
+							defaultValue={profile?.medicalConditions}
 							error={errors.hasOwnProperty('medicalConditions')}
 							fullWidth
 							id='medicalConditions'
@@ -67,6 +73,7 @@ const EditProfile = () => {
 								required: true,
 								minLength: 4
 							})}
+							defaultValue={profile?.disabilities}
 							error={errors.hasOwnProperty('disabilities')}
 							fullWidth
 							name='disabilities'

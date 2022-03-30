@@ -2,7 +2,7 @@ import { Box, Button, CardContent, Paper, Typography } from '@mui/material';
 
 export default function CurrentGoal({ currentGoal, goalProgram }) {
 	return (
-		<Box className='shadow-md  rounded-md  text-center '>
+		<Box className='shadow-md rounded-md text-center'>
 			<CardContent>
 				<Typography sx={{ mb: 3, fontSize: 30 }} variant='h4'>
 					My current goal
@@ -14,7 +14,7 @@ export default function CurrentGoal({ currentGoal, goalProgram }) {
 							<CardContent>
 								<Box>
 									<Typography component='h3' variant='h5'>
-										{goalProgram.name}
+										{goalProgram?.name}
 									</Typography>
 								</Box>
 								<Box className='mt-2'>
@@ -25,7 +25,7 @@ export default function CurrentGoal({ currentGoal, goalProgram }) {
 												variant='span'
 												className='font-semibold'
 												color='text.primary'>
-												{goalProgram.category}
+												{goalProgram?.category}
 											</Typography>
 										</Typography>
 										<Typography sx={{ fontSize: 16 }} color='text.secondary'>
@@ -34,7 +34,7 @@ export default function CurrentGoal({ currentGoal, goalProgram }) {
 												variant='span'
 												className='font-semibold'
 												color='text.primary'>
-												{goalProgram.difficulty}
+												{goalProgram?.difficulty}
 											</Typography>
 										</Typography>
 									</Box>
@@ -55,9 +55,14 @@ export default function CurrentGoal({ currentGoal, goalProgram }) {
 						No exercises to show
 					</Typography>
 				</Box>
-				<Button color='error' variant='contained' sx={{ mt: 2 }}>
-					Delete Goal
-				</Button>
+				<Box sx={{ mt: 2 }}>
+					<Button color='error' variant='contained'>
+						Delete Goal
+					</Button>
+					<Button color='primary' variant='contained' sx={{ ml: 1 }}>
+						Edit Goal
+					</Button>
+				</Box>
 			</CardContent>
 		</Box>
 	);
