@@ -8,11 +8,22 @@ import {
 	Button,
 	Grid,
 	TextField,
-	Typography
+	Typography,
+	Radio,
+	RadioGroup,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { useAuth0 } from '@auth0/auth0-react';
+import { postExercise } from '../../api/exercices';
+import { useExercises } from '../../context/ExercisesContext';
+
 
 const AddExercise = ({ expanded, handleChange, panel }) => {
 	const {
@@ -21,20 +32,46 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 		formState: { errors }
 	} = useForm();
 
+	const { getAccessTokenSilently } = useAuth0();
+	const { setExercises } = useExercises();
+
 	async function onSubmitClick(data) {
 		console.log(`Adding exercise...`);
 		console.log(`New values:`);
-		console.log(data);
 
 		// POST new exercise
 		// name x
 		// description x
 		// picture (opt.) x 
 		// video (opt.) x
-		// category (must be [Arms, Legs, Core, Stamina, Full body, Flexibility])
+		// category (must be [Arms, Legs, Core, Stamina, Full body, Flexibility]) /
 
-		//await patchExercise(userToBePatched, role);
+		let imageUrl = null; 
+		if (data.exercisePictureUrl) imageUrl = data.exercisePictureUrl;
+
+		const newExercise = {
+			name: data.exerciseName,
+			description: data.exerciseDescription,
+			image: imageUrl,
+			video: data.exerciseVideoUrl,
+			category: data.category
+		}
+
+		//console.log("NEW: ", newExercise);
+		const token = await getAccessTokenSilently();
+		const apiExercise = await postExercise(newExercise, token);
+
+		const jsonized = JSON.parse(apiExercise);
+		console.log("New Exercise ", apiExercise);
+		
+		setExercises(prev => ({ ...prev, jsonized}));
 	}
+	
+	/*
+	const handleChange = event => {
+		setSelectedCategory(event.value);
+	};
+	*/
 
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
@@ -78,18 +115,79 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 								/>
 							</Grid>
 							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='category'>Exercise Category</FormLabel>
+									<RadioGroup
+										row
+										aria-labelledby='category'>
+																				<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Arms'
+												control={<Radio />}
+												label='Arms'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Legs'
+												control={<Radio />}
+												label='Legs'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Core'
+												control={<Radio />}
+												label='Core'
+											/>
+										</Box>
+										<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Full body'
+												control={<Radio />}
+												label='Full body'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Flexibility'
+												control={<Radio />}
+												label='Flexibility'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Stamina'
+												control={<Radio />}
+												label='Stamina'
+											/>
+										</Box>
+									</RadioGroup>
+								</FormControl>
+							</Grid>
+							{/* SER grei ut, men categories blir ikke med :(
+							<Grid item xs={12}>
 								<Autocomplete
 									{...register('exerciseCategory', {
-										required: true
+										//required: true,
 									})}
+									onChange={handleChange}
+									error={errors.hasOwnProperty('exerciseCategory')}
+									autoComplete='Exercise Category'
+									name='exerciseCategory'
+									label='Category'
+									autoFocus
 									disablePortal
 									id="exerciseCategory"
-									options={["Arms", "Core", "Full body", "Flexibility", "Legs", "Stamina"]}
-									//sx={{ width: 300 }}
+									options={[
+										{label: "Arms", Id: 1},
+										{label: "Core", Id: 2},
+										{label: "Full body", Id: 3},
+										{label: "Flexibility", Id: 4},
+										{label: "Legs", Id: 5},
+										{label: "Stamina", Id: 6}]}
 									fullWidth
 									renderInput={(params) => <TextField {...params} label="Category" />}
 								/>
-							</Grid>
+								</Grid> */}
 							<Grid item xs={12}>
 								<TextField
 									{...register('exercisePictureUrl', {

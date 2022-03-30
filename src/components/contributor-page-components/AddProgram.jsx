@@ -4,14 +4,23 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
+	Autocomplete,
 	Button,
 	Grid,
 	TextField,
-	Typography
+	Typography,
+	Radio,
+	RadioGroup,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
+import { useAuth0 } from '@auth0/auth0-react';
+import { postProgram } from '../../api/programs';
 
 const AddProgram = ({ expanded, panel, handleChange }) => {
 	const {
@@ -20,15 +29,23 @@ const AddProgram = ({ expanded, panel, handleChange }) => {
 		formState: { errors }
 	} = useForm();
 
+	const { getAccessTokenSilently } = useAuth0();
+
 	async function onSubmitClick(data) {
 		console.log(`Adding program...`);
 		console.log(`New values:`);
 		console.log(data);
 
-		// const { name, description } = data;
+		const newProgram = {
+			name: data.programName,
+			category: data.category,
+			difficulty: data.difficulty
+		}
 
-		// const exerciseToBePatched = { name, description };
-		// await patchExercise(userToBePatched, role);
+			const token = await getAccessTokenSilently();
+			const apiProgram = await postProgram(newProgram, token);
+
+			console.log("New Program ", apiProgram)
 	}
 
 	return (
@@ -45,33 +62,95 @@ const AddProgram = ({ expanded, panel, handleChange }) => {
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
 								<TextField
-									{...register('exerciseName', {
+									{...register('programName', {
 										required: true,
 										minLength: 4
 									})}
-									error={errors.hasOwnProperty('exerciseName')}
+									error={errors.hasOwnProperty('programName')}
 									autoComplete='given-name'
-									name='exerciseName'
+									name='programName'
 									fullWidth
 									label='Name'
 									autoFocus
 								/>
 							</Grid>
 							<Grid item xs={12}>
-								<TextField
-									{...register('exerciseDescription', {
-										required: true,
-										minLength: 4
-										// pattern: {
-										// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-										// }
-									})}
-									error={errors.hasOwnProperty('exerciseDescription')}
-									fullWidth
-									label='Description'
-									name='exerciseDescription'
-								/>
+								<FormControl>
+									<FormLabel id='category'>Program Category</FormLabel>
+									<RadioGroup
+										row
+										aria-labelledby='category'>
+										<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Arms'
+												control={<Radio />}
+												label='Arms'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Legs'
+												control={<Radio />}
+												label='Legs'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Core'
+												control={<Radio />}
+												label='Core'
+											/>
+										</Box>
+										<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Full body'
+												control={<Radio />}
+												label='Full body'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Flexibility'
+												control={<Radio />}
+												label='Flexibility'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Stamina'
+												control={<Radio />}
+												label='Stamina'
+											/>
+										</Box>
+									</RadioGroup>
+								</FormControl>
 							</Grid>
+							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='difficulty'>Program Difficulty</FormLabel>
+									<RadioGroup
+										row
+										aria-labelledby='difficulty'>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Beginner'
+											control={<Radio />}
+											label='Beginner'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Intermediate'
+											control={<Radio />}
+											label='Intermediate'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Expert'
+											control={<Radio />}
+											label='Expert'
+										/>
+									</RadioGroup>
+								</FormControl>
+							</Grid>
+
 						</Grid>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>
 							<Button type='submit' fullWidth variant='contained'>

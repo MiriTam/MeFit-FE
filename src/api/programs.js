@@ -18,3 +18,13 @@ export async function getAllProgramsByContributor(id, token) {
 
 	return req.data;
 }
+
+export async function postProgram(program, token) {
+	console.log("JSON program: ", JSON.stringify(program));
+	const req = await axios.post(BASE_URL, JSON.stringify(program), 
+	{
+		headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+	});
+
+	return req.data;
+}

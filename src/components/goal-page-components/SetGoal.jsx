@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import { postGoal } from '../../api/goals';
 import { useCurrentUser } from '../../context/CurrentUserContext';
-import { useGoal } from '../../context/GoalContext';
+import { useGoals } from '../../context/GoalContext';
 import GoalDatePicker from './GoalDatePicker';
 import GoalProgramPicker from './GoalProgramPicker';
 
@@ -36,7 +36,7 @@ function getStepContent(step) {
 
 export default function SetGoal() {
 	const [activeStep, setActiveStep] = useState(0);
-	const { newGoal } = useGoal();
+	const { newGoal } = useGoals();
 	const { setCurrentUser } = useCurrentUser();
 	const { getAccessTokenSilently } = useAuth0();
 
