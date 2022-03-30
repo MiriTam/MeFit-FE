@@ -5,7 +5,7 @@ import ProgramCardList from '../components/programs-page-components/ProgramCardL
 
 const ProgramsPage = () => {
 	return (
-		<Container maxWidth='xl' className='pt-12 pb-24 overflow-hidden'>
+		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
 			<Typography component='h1' variant='h4'>
 				Programs Overview
 			</Typography>

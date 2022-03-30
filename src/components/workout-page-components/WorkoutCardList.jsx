@@ -19,7 +19,7 @@ const WorkoutCardList = () => {
 						</Box>
 					</Typography>
 					{/* Display workouts for that workout category */}
-					<Box className='mt-4 flex flex-wrap items-start gap-6 '>
+					<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6 items-center justify-center'>
 						{workouts.map(
 							workout =>
 								workout.category === workoutType && (

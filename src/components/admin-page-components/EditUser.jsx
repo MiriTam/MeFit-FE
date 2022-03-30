@@ -17,13 +17,17 @@ import {
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useUsers } from '../../context/UsersContext';
+import { postRoleToUser } from '../../api/users';
+
 
 import getDefaultRoleValue from '../../utils/getDefaultRoleString';
 
 // import getManagementApiAccessToken from '../../api/tokens';
 
 const EditUserForm = ({
-	user: { firstName, lastName, email, password, isContributor, isAdmin },
+	user: { firstName, lastName, email, password, isContributor, isAdmin, id },
 	expanded,
 	panel,
 	handleChange
@@ -34,15 +38,21 @@ const EditUserForm = ({
 		formState: { errors }
 	} = useForm();
 
+
+	const { getAccessTokenSilently } = useAuth0(); 
+	// const { users } = useUsers();
+
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${email}...`);
 		console.log(`New values:`);
 		console.log(data);
 
-		// await getManagementApiAccessToken();
+		const token = await getAccessTokenSilently();
+
+		await postRoleToUser(id, data.role, token);
 
 		// const { firstName, lastName, _email } = data;
 		// const userToBePatched = { firstName, lastName, _email };
+
 	}
 
 	return (
@@ -68,7 +78,7 @@ const EditUserForm = ({
 									{...register('firstName', {
 										minLength: 4
 									})}
-									value={firstName}
+									defaultValue={firstName}
 									error={errors.hasOwnProperty('firstName')}
 									autoComplete='given-name'
 									name='firstName'
@@ -82,7 +92,7 @@ const EditUserForm = ({
 									{...register('lastName', {
 										minLength: 4
 									})}
-									value={lastName}
+									defaultValue={lastName}
 									error={errors.hasOwnProperty('lastName')}
 									fullWidth
 									label='Last Name'
@@ -93,12 +103,12 @@ const EditUserForm = ({
 							<Grid item xs={12}>
 								<TextField
 									{...register('email', {
-										minLength: 4
-										// pattern: {
-										// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-										// }
+										minLength: 4,
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+										}
 									})}
-									value={email}
+									defaultValue={email}
 									error={errors.hasOwnProperty('email')}
 									fullWidth
 									label='Email Address'
@@ -128,19 +138,19 @@ const EditUserForm = ({
 										defaultValue={getDefaultRoleValue(isContributor, isAdmin)}>
 										<FormControlLabel
 											{...register('role')}
-											value='regular'
+											value='User'
 											control={<Radio />}
 											label='Regular'
 										/>
 										<FormControlLabel
 											{...register('role')}
-											value='contributor'
+											value='Contributor'
 											control={<Radio />}
 											label='Contributor'
 										/>
 										<FormControlLabel
 											{...register('role')}
-											value='admin'
+											value='Admin'
 											control={<Radio />}
 											label='Admin'
 										/>

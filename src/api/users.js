@@ -1,41 +1,74 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
+const GET_ALL_USERS_URL = 'https://mefit22api.azurewebsites.net/api/user/all-users';
+const USER_URL = 'https://mefit22api.azurewebsites.net/api/user';
+const POST_ROLE_URL = 'https://mefit22api.azurewebsites.net/api/admin/users';
+
 
 export async function getAllUsers(token) {
-	const req = await axios.get(BASE_URL, {
+	const req = await axios.get(GET_ALL_USERS_URL, {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
 	return req.data;
 }
 
-export async function postUser(user, role) {
-	const req = await fetch(BASE_URL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			...user
-			// ...getRoleBooleans(role)
-		})
+export async function getMyUser(token) {
+	const req = await axios.get(USER_URL, {
+		headers: { Authorization: `Bearer ${token}` }
 	});
-	if (!req.ok) throw new Error('Could not post user!');
 
-	const newUser = await req.json();
-
-	return newUser;
+	return req.data;
 }
 
-// export async function getUsersAuth0() {
-// 	const req = await axios.get(BASE_URL_AUTH0 + 'auth0|6238875390b4c900687f5445', {
-// 		headers: {
-// 			Authorization: `Bearer ${API_TOKEN_AUTH0}`
-// 		}
-// 	});
+export async function getUserById(id, token) {
+	const req = await axios.get(`${USER_URL}/${id}`, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
 
-// 	const users = await req.data;
+	return req.data;
+}
+export async function getCurrentUser(token) {
+	const req = await axios.get(USER_URL, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
+	return req.data;
+}
 
-// 	return users;
-// }
+export async function getProfile(token) {
+	const req = await axios.get(`${USER_URL}/profile`, {
+		headers: { Authorization: `Bearer ${token}` }
+	});
+
+	return req.data;
+}
+
+export async function postUser(email, { firstName, lastName, fitnessLevel }, token) {
+	const userToBePosted = {
+		email,
+		firstName,
+		lastName,
+		fitnessLevel,
+		restrictedCategories: 'Arms,Core,Stamina'
+	};
+
+	const req = await axios.post(USER_URL, JSON.stringify(userToBePosted), {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return req.data;
+}
+
+export async function postRoleToUser(userId, role, token) {
+	const req = await axios.post(`${POST_ROLE_URL}/${userId}/${role}`, null, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return req.data;
+}

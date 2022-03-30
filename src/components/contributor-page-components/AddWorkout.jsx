@@ -7,7 +7,12 @@ import {
 	Button,
 	Grid,
 	TextField,
-	Typography
+	Typography,
+	Radio,
+	RadioGroup,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
@@ -40,7 +45,7 @@ const AddWorkout = ({ expanded, panel, handleChange }) => {
 				</Box>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Box className='mt-6 md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
+				<Box className='md:w-2/3 lg:w-1/2 mx-auto text-left pb-10'>
 					<Box component='form' onSubmit={handleSubmit(onSubmitClick)} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
@@ -71,6 +76,82 @@ const AddWorkout = ({ expanded, panel, handleChange }) => {
 									label='Description'
 									name='exerciseDescription'
 								/>
+							</Grid>
+							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='category'>Workout Category</FormLabel>
+									<RadioGroup
+										row
+										aria-labelledby='category'>
+																				<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Arms'
+												control={<Radio />}
+												label='Arms'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Legs'
+												control={<Radio />}
+												label='Legs'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Core'
+												control={<Radio />}
+												label='Core'
+											/>
+										</Box>
+										<Box>
+											<FormControlLabel
+												{...register('category')}
+												value='Full body'
+												control={<Radio />}
+												label='Full body'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Flexibility'
+												control={<Radio />}
+												label='Flexibility'
+											/>
+											<FormControlLabel
+												{...register('category')}
+												value='Stamina'
+												control={<Radio />}
+												label='Stamina'
+											/>
+										</Box>
+									</RadioGroup>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12}>
+								<FormControl>
+									<FormLabel id='difficulty'>Workout Difficulty</FormLabel>
+									<RadioGroup
+										row
+										aria-labelledby='difficulty'>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Beginner'
+											control={<Radio />}
+											label='Beginner'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Intermediate'
+											control={<Radio />}
+											label='Intermediate'
+										/>
+										<FormControlLabel
+											{...register('difficulty')}
+											value='Expert'
+											control={<Radio />}
+											label='Expert'
+										/>
+									</RadioGroup>
+								</FormControl>
 							</Grid>
 						</Grid>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>

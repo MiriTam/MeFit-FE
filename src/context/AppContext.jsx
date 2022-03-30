@@ -3,11 +3,13 @@ import React from 'react';
 import Auth0Provider from '../auth0/Auth0Provider';
 import { ThemeProvider } from '../context/ThemeContext';
 import { ContributorRequestsProvider } from './ContributorRequestsContext';
+import { CurrentUserProvider } from './CurrentUserContext';
 import { ExercisesProvider } from './ExercisesContext';
+import { GoalProvider } from './GoalContext';
 import { ProgramsProvider } from './ProgramsContext';
-import { WorkoutsProvider } from './WorkoutsContext';
-import { HasProfileProvider } from './HasProfileContext';
 import { UsersProvider } from './UsersContext';
+import { WorkoutsProvider } from './WorkoutsContext';
+import { SubGoalProvider } from './SubGoalContext';
 
 function AppContext({ children }) {
 	return (
@@ -17,9 +19,13 @@ function AppContext({ children }) {
 					<WorkoutsProvider>
 						<ProgramsProvider>
 							<UsersProvider>
-								<HasProfileProvider>
-									<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
-								</HasProfileProvider>
+								<CurrentUserProvider>
+									<GoalProvider>
+										<SubGoalProvider>
+											<ContributorRequestsProvider>{children}</ContributorRequestsProvider>
+										</SubGoalProvider>
+									</GoalProvider>
+								</CurrentUserProvider>
 							</UsersProvider>
 						</ProgramsProvider>
 					</WorkoutsProvider>
