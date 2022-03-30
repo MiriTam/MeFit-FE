@@ -1,11 +1,6 @@
 import { Box, CardContent, LinearProgress, Paper, Typography } from '@mui/material';
 
-import { usePrograms } from '../../context/ProgramsContext';
-import ProgramCard from '../programs-page-components/ProgramCard';
-
 export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
-	const { programs } = usePrograms();
-
 	return (
 		<Box className='shadow-md  rounded-md p-6 '>
 			<CardContent>
