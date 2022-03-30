@@ -17,13 +17,17 @@ import {
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useUsers } from '../../context/UsersContext';
+import { postRoleToUser } from '../../api/users';
+
 
 import getDefaultRoleValue from '../../utils/getDefaultRoleString';
 
 // import getManagementApiAccessToken from '../../api/tokens';
 
 const EditUserForm = ({
-	user: { firstName, lastName, email, password, isContributor, isAdmin },
+	user: { firstName, lastName, email, password, isContributor, isAdmin, id },
 	expanded,
 	panel,
 	handleChange
@@ -34,11 +38,26 @@ const EditUserForm = ({
 		formState: { errors }
 	} = useForm();
 
+
+	const { getAccessTokenSilently } = useAuth0(); 
+	// const { users } = useUsers();
+
 	async function onSubmitClick(data) {
-		console.log(`Modifying ${email}...`);
+		console.log(`Modifying ${email} ...`);
+		console.log(id);
 		console.log(`New values:`);
 		console.log(data);
 
+		
+		const token = await getAccessTokenSilently();
+
+		// console.log(isContributer);
+		// console.log(data.role);
+		
+		await postRoleToUser(id, data.role, token);
+
+
+		//await postRoleToUser()
 		// await getManagementApiAccessToken();
 
 		// const { firstName, lastName, _email } = data;
@@ -128,19 +147,19 @@ const EditUserForm = ({
 										defaultValue={getDefaultRoleValue(isContributor, isAdmin)}>
 										<FormControlLabel
 											{...register('role')}
-											value='regular'
+											value='User'
 											control={<Radio />}
 											label='Regular'
 										/>
 										<FormControlLabel
 											{...register('role')}
-											value='contributor'
+											value='Contributor'
 											control={<Radio />}
 											label='Contributor'
 										/>
 										<FormControlLabel
 											{...register('role')}
-											value='admin'
+											value='Admin'
 											control={<Radio />}
 											label='Admin'
 										/>
