@@ -108,7 +108,6 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							defaultValue='80'
 							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
@@ -127,7 +126,6 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							defaultValue='175'
 							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
