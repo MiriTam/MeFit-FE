@@ -45,8 +45,8 @@ const DashboardPage = () => {
 				getAndSetWorkouts(token);
 				getAndSetPrograms(token);
 				getAndSetCurrentUser(token);
-				getAndSetAllGoals(token);
-				getAndSetAllSubGoals(token);
+				//getAndSetAllGoals(token);
+				//getAndSetAllSubGoals(token);
 
 				getAndSetCurrentUser(token);
 				getAndSetProfile(token);
@@ -64,8 +64,8 @@ const DashboardPage = () => {
 		getAndSetContributorRequests,
 		getAndSetUsers,
 		getAndSetCurrentUser,
-		getAndSetAllGoals,
-		getAndSetAllSubGoals,
+		//getAndSetAllGoals,
+		//getAndSetAllSubGoals,
 		madeInitialRequests,
 		user
 	]);
@@ -157,7 +157,7 @@ const DashboardPage = () => {
 
 	return (
 		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
-			<Typography component='h1' variant='h3' color='text.secondary' align='left'>
+			<Typography component='h1' variant='h3' color='text.secondary' >
 				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}

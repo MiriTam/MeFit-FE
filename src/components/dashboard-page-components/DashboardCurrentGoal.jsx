@@ -8,7 +8,7 @@ export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 					My current goal
 				</Typography>
 				<Box className='lg:w-5/6 mx-auto'>
-					<LinearProgress variant='determinate' value={progressValue} />
+					<LinearProgress variant='determinate' value={60} />
 				</Box>
 				<Box sx={{ mt: 3 }}>
 					<Typography variant='h5'>Days left:</Typography>
@@ -55,6 +55,9 @@ export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 				<Box sx={{ mt: 3 }}>
 					<Typography variant='h5'>Workouts:</Typography>
 					<Typography color={'text.secondary'} sx={{ fontSize: 18, mt: 0.5 }}>
+					<Typography color={'text.secondary'} sx={{ fontSize: 18, mt: 0.5 }}>
+						No workouts to show
+					</Typography>
 					{/*
 					{workouts.map(
 							workout =>
