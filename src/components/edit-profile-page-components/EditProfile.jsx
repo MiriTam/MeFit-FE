@@ -1,11 +1,15 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Button, Grid, TextField, Typography, InputAdornment } from '@mui/material';
 import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form';
 
+import { useAuth0 } from '@auth0/auth0-react';
+import { patchProfile } from '../../api/profiles';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+
 
 const EditProfile = () => {
 	const { profile } = useCurrentUser();
+	const { getAccessTokenSilently } = useAuth0();
 	const {
 		register,
 		handleSubmit,
@@ -14,6 +18,11 @@ const EditProfile = () => {
 
 	async function onAttributesFormSubmitClick(data) {
 		console.log(data);
+
+		const token = await getAccessTokenSilently();
+		// PATCH profile
+		const updatedProfile = patchProfile(data, profile.id, token);
+		console.log("updated profile: ", updatedProfile);
 	}
 
 	return (
@@ -26,37 +35,43 @@ const EditProfile = () => {
 					<Grid item xs={12} sm={6}>
 						<TextField
 							{...register('weight', {
-								required: true,
-								minLength: 4
+								minLength: 2,
+								maxLength: 3,
+								pattern: {
+									value: /^\d+$/
+								}
 							})}
-							// defaultValue={120}
+							InputProps={{ endAdornment: <InputAdornment position="end">kg</InputAdornment>,}}
 							error={errors.hasOwnProperty('weight')}
 							defaultValue={profile?.weight}
 							name='weight'
 							fullWidth
 							id='weight'
-							label='Weight (kg)'
+							label='Weight'
 							autoFocus
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
 							{...register('height', {
-								required: true,
-								minLength: 4
+								minLength: 2,
+								maxLength: 3,
+								pattern: {
+									value: /^\d+$/
+								}
 							})}
+							InputProps={{ endAdornment: <InputAdornment position="end">cm</InputAdornment>,}}
 							error={errors.hasOwnProperty('height')}
 							defaultValue={profile?.height}
 							fullWidth
 							id='height'
-							label='Height (cm)'
+							label='Height'
 							name='height'
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
 							{...register('medicalConditions', {
-								required: true,
 								minLength: 4
 							})}
 							defaultValue={profile?.medicalConditions}
@@ -70,7 +85,6 @@ const EditProfile = () => {
 					<Grid item xs={12}>
 						<TextField
 							{...register('disabilities', {
-								required: true,
 								minLength: 4
 							})}
 							defaultValue={profile?.disabilities}
