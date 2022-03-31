@@ -1,14 +1,14 @@
-import { Box, CardContent, LinearProgress, List, Paper, Typography } from '@mui/material';
-import { ClipLoader } from 'react-spinners';
 import { useWorkouts } from '../../context/WorkoutsContext';
 import getWorkoutById from '../../utils/getWorkoutById';
 import WorkoutCard from '../workout-page-components/WorkoutCard';
+import { Box, CardContent, LinearProgress, List, Paper, Typography } from '@mui/material';
+import { ClipLoader } from 'react-spinners';
 
 export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 	const { workouts } = useWorkouts();
 
 	return (
-		<Box className='shadow-md  rounded-md p-6 '>
+		<Box className='shadow-md pt-2  rounded-md  '>
 			<CardContent>
 				<Typography sx={{ fontSize: 28 }} variant='h4'>
 					My current goal
@@ -27,7 +27,7 @@ export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 				<Typography sx={{ mt: 3 }} variant='h5'>
 					Days left:
 				</Typography>
-				<Box sx={{ mt: 1 }}>
+				<Box sx={{ mt: 2 }}>
 					{!goalProgram ? (
 						<Box>
 							<ClipLoader color='#2374CE' size={30} />
@@ -38,7 +38,7 @@ export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 						</Typography>
 					)}
 				</Box>
-				<Typography sx={{ mt: 2 }} variant='h5'>
+				<Typography sx={{ mt: 3 }} variant='h5'>
 					Program:
 				</Typography>
 				<Box className='flex justify-center' sx={{ mt: 2 }}>

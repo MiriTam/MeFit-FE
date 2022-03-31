@@ -26,7 +26,7 @@ export default function GoalDatePicker() {
 	}, [value, setNewGoal]);
 
 	return (
-		<Container align='center' sx={{ my: 3 }}>
+		<Container align='center'>
 			<LocalizationProvider dateAdapter={AdapterDateFns} locale={localeMap[locale]}>
 				<DatePicker
 					mask={maskMap[locale]}

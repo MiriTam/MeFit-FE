@@ -9,7 +9,7 @@ import { useGoals } from '../../context/GoalContext';
 import GoalDatePicker from './GoalDatePicker';
 import GoalProgramPicker from './GoalProgramPicker';
 
-const steps = ['Select program', 'Pick starting date', 'Submit goal'];
+const steps = ['Select program', 'Pick ending date', 'Submit goal'];
 
 function getStepContent(step) {
 	switch (step) {
@@ -19,13 +19,13 @@ function getStepContent(step) {
 			return <GoalDatePicker />;
 		case 2:
 			return (
-				<Box sx={{ my: 3 }} className='text-center '>
+				<Box className='text-center md:w-1/2 mx-auto'>
 					<Typography variant='h5' gutterBottom>
 						Your goal has been made!
 					</Typography>
 					<Typography variant='subtitle1'>
-						Your goal has been made and is ready for submission. If you are not sure about
-						your choices, you may go back and change them, otherwise, press the submit button.
+						Your goal has been made and is ready for submission. Click the submit button if
+						you are sure with your choices!
 					</Typography>
 				</Box>
 			);
@@ -48,14 +48,12 @@ export default function SetGoal() {
 		const token = await getAccessTokenSilently();
 		const apiGoal = await postGoal(newGoal, token);
 
-		console.log(apiGoal);
-
 		setCurrentUser(prev => ({ ...prev, goals: [apiGoal.id] }));
 	}
 
 	return (
 		<Container component='main' maxWidth='md'>
-			<Paper variant='outlined' sx={{ p: { xs: 2, md: 3 } }}>
+			<Paper sx={{ p: { xs: 2, md: 3 } }}>
 				<Typography component='h1' variant='h4' align='center' sx={{ mb: 3 }}>
 					Select your weekly goal
 				</Typography>

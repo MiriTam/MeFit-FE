@@ -24,7 +24,7 @@ const GoalProgramPicker = () => {
 	};
 
 	return (
-		<Box sx={{ my: 3 }} className='text-center'>
+		<Box className='text-center'>
 			<Typography variant='h5' gutterBottom>
 				Pick a program
 			</Typography>

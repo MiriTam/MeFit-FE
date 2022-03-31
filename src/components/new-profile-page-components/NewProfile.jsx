@@ -109,7 +109,9 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							InputProps={{ endAdornment: <InputAdornment position="end">kg</InputAdornment>,}}
+							InputProps={{
+								endAdornment: <InputAdornment position='end'>kg</InputAdornment>
+							}}
 							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
@@ -128,7 +130,9 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
-							InputProps={{ endAdornment: <InputAdornment position="end">cm</InputAdornment>,}}
+							InputProps={{
+								endAdornment: <InputAdornment position='end'>cm</InputAdornment>
+							}}
 							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
@@ -205,7 +209,7 @@ const NewProfile = () => {
 
 				<Box className='w-1/2 mx-auto'>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
-						Update Profile
+						Create Profile
 					</Button>
 				</Box>
 			</Box>

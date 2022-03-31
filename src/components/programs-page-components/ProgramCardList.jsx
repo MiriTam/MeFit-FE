@@ -1,34 +1,37 @@
+import armAnimation from './../../animations/arms';
+import coreAnimation from './../../animations/core';
+import flexAnimation from './../../animations/flexibility';
+import fullAnimation from './../../animations/full-body';
+import legAnimation from './../../animations/legs';
+import staminaAnimation from './../../animations/stamina';
 import { Alert, Box, Typography } from '@mui/material';
+import Lottie from 'lottie-react';
 import { useState } from 'react';
+
 import { usePrograms } from '../../context/ProgramsContext';
 import filterData from '../../utils/filterData';
 import getUniqueProgramCategories from '../../utils/getUniqueProgramCategories';
 import SearchBar from '../shared-components/SearchBar';
 import ProgramCard from './ProgramCard';
-import Lottie from 'lottie-react';
-import armAnimation from './../../animations/arms';
-import legAnimation from './../../animations/legs'
-import coreAnimation from './../../animations/core';
-import staminaAnimation from './../../animations/stamina';
-import flexAnimation from './../../animations/flexibility';
-import fullAnimation from './../../animations/full-body';
 
-const GetAnimation = (category) => {
+const GetAnimation = category => {
 	switch (category) {
-		case "Arms":
-			return armAnimation
-		case "Legs":
-			return legAnimation
-		case "Core":
-			return coreAnimation
-		case "Stamina":
-			return staminaAnimation
-		case "Flexibility":
-			return flexAnimation
-		case "Full body":
-			return fullAnimation
+		case 'Arms':
+			return armAnimation;
+		case 'Legs':
+			return legAnimation;
+		case 'Core':
+			return coreAnimation;
+		case 'Stamina':
+			return staminaAnimation;
+		case 'Flexibility':
+			return flexAnimation;
+		case 'Full body':
+			return fullAnimation;
+		default:
+			return null;
 	}
-}
+};
 
 const ProgramCardList = () => {
 	const { programs } = usePrograms();
@@ -45,16 +48,13 @@ const ProgramCardList = () => {
 				</Box>
 			) : (
 				getUniqueProgramCategories(dataFiltered).map((programType, idx) => (
-					<Box className='mt-6' key={idx}>
+					<Box key={idx}>
 						<Box sx={{ width: '100%' }}>
-							<Box sx={{ width: '250px', margin: 'auto' }}>
-								<Lottie
-									animationData={GetAnimation(programType)}
-									loop={true}
-								/>
+							<Box sx={{ width: '200px', margin: 'auto' }}>
+								<Lottie animationData={GetAnimation(programType)} loop={true} />
 							</Box>
 						</Box>
-						<Box sx={{ width: '100%' }}>
+						<Box className='mt-6' sx={{ width: '100%' }}>
 							<Typography component='h2' variant='h6' color='text.secondary'>
 								Program Type:{' '}
 								<Box component={'span'} className='font-semibold' color='text.primary'>
