@@ -1,33 +1,31 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { FitnessCenterOutlined } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	Alert,
-	Autocomplete,
 	Button,
 	Collapse,
-	IconButton,
-	Grid,
-	TextField,
-	Typography,
-	Radio,
-	RadioGroup,
 	FormControl,
 	FormControlLabel,
 	FormLabel,
+	Grid,
+	IconButton,
+	Radio,
+	RadioGroup,
+	TextField,
+	Typography
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useAuth0 } from '@auth0/auth0-react';
 import { postExercise } from '../../api/exercices';
 import { useExercises } from '../../context/ExercisesContext';
-
 
 const AddExercise = ({ expanded, handleChange, panel }) => {
 	const {
@@ -44,7 +42,7 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 		console.log(`Adding exercise...`);
 		console.log(`New values:`);
 
-		let imageUrl = null; 
+		let imageUrl = null;
 		if (data.exercisePictureUrl) imageUrl = data.exercisePictureUrl;
 
 		const newExercise = {
@@ -53,28 +51,16 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 			image: imageUrl,
 			video: data.exerciseVideoUrl,
 			category: data.category
-		}
+		};
 
+		console.log('NEW: ', newExercise);
+		const token = await getAccessTokenSilently();
+
+		const apiExercise = await postExercise(newExercise, token);
 		setOpen(true); // opens the alert
 
-		console.log("NEW: ", newExercise);
-		const token = await getAccessTokenSilently();
-		
-		const apiExercise = await postExercise(newExercise, token);
-
-		const jsonized = JSON.parse(apiExercise);
-		console.log("New Exercise ", apiExercise);
-		
-
-		setExercises(prev => ({ ...prev, jsonized}));
-		
+		setExercises(prev => [...prev, apiExercise]);
 	}
-	
-	/*
-	const handleChange = event => {
-		setSelectedCategory(event.value);
-	};
-	*/
 
 	return (
 		<Accordion expanded={expanded === panel} onChange={handleChange(panel)}>
@@ -120,9 +106,7 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 							<Grid item xs={12}>
 								<FormControl>
 									<FormLabel id='category'>Exercise Category</FormLabel>
-									<RadioGroup
-										row
-										aria-labelledby='category'>
+									<RadioGroup row aria-labelledby='category'>
 										<Box>
 											<FormControlLabel
 												{...register('category')}
@@ -220,23 +204,23 @@ const AddExercise = ({ expanded, handleChange, panel }) => {
 								/>
 							</Grid>
 						</Grid>
-						<Box sx={{width: '100%'}} marginTop={2}>
+						<Box sx={{ width: '100%' }} marginTop={2}>
 							<Collapse in={open}>
-									<Alert
-										action={
-											<IconButton
-												aria-label="close"
-												color="inherit"
-												size="small"
-												onClick={() => {
-													setOpen(false);
-												}}
-												>
-												<CloseIcon fontSize="inherit" />
-											</IconButton>
-										}
-										sx={{ mb: 2 }}
-									>Your new Exercise has been submitted!</Alert>
+								<Alert
+									action={
+										<IconButton
+											aria-label='close'
+											color='inherit'
+											size='small'
+											onClick={() => {
+												setOpen(false);
+											}}>
+											<CloseIcon fontSize='inherit' />
+										</IconButton>
+									}
+									sx={{ mb: 2 }}>
+									Your new Exercise has been submitted!
+								</Alert>
 							</Collapse>
 						</Box>
 						<Box className='flex mt-4 w-1/2 mx-auto gap-4'>

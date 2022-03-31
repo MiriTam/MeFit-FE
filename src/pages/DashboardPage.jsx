@@ -14,7 +14,6 @@ import { useUsers } from '../context/UsersContext';
 import { useWorkouts } from '../context/WorkoutsContext';
 import getProgramById from '../utils/getProgramById';
 import { isAdministrator, isContributor } from '../utils/isRole';
-import GoalsDisplay from '../components/dashboard-page-components/goals-display';
 
 const color = blue[500];
 
@@ -157,7 +156,7 @@ const DashboardPage = () => {
 
 	return (
 		<Container maxWidth='xl' className='pt-12 pb-24 text-center overflow-hidden'>
-			<Typography component='h1' variant='h3' color='text.secondary' >
+			<Typography component='h1' variant='h3' color='text.secondary'>
 				Welcome back,{' '}
 				<Box component='span' color={color} className='font-semibold '>
 					{user?.nickname}
