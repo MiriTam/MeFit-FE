@@ -1,8 +1,9 @@
+import { Box, CardContent, LinearProgress, List, Paper, Typography } from '@mui/material';
+import { ClipLoader } from 'react-spinners';
+
 import { useWorkouts } from '../../context/WorkoutsContext';
 import getWorkoutById from '../../utils/getWorkoutById';
 import WorkoutCard from '../workout-page-components/WorkoutCard';
-import { Box, CardContent, LinearProgress, List, Paper, Typography } from '@mui/material';
-import { ClipLoader } from 'react-spinners';
 
 export default function DashboardCurrentGoal({ currentGoal, goalProgram }) {
 	const { workouts } = useWorkouts();
