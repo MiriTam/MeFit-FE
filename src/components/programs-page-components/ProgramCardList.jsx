@@ -30,9 +30,7 @@ const ProgramCardList = () => {
 							</Box>
 						</Typography>
 						{/* Display programs for that program type */}
-						<Box
-							sx={{ mt: 2 }}
-							className=' flex flex-wrap gap-6 items-center  justify-center'>
+						<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6  justify-center'>
 							{dataFiltered.map(
 								program =>
 									program.category === programType && (

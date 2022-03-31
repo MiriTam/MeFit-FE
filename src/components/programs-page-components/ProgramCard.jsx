@@ -60,8 +60,8 @@ const ProgramCard = ({ id, name, category, workouts: _workouts, difficulty }) =>
 							)}
 
 							{/* Program has workouts to show */}
-							<Box className='mt-2'>
-								<List className='divide-y max-h-56 overflow-y-scroll scrollbar '>
+							<Box className='mt-4'>
+								<List className='divide-y max-h-24 overflow-y-scroll scrollbar '>
 									{_workouts.map((workoutId, idx) => (
 										<ListItem key={idx}>
 											<Box className='text-center mx-auto'>

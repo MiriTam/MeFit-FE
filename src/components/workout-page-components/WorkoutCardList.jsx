@@ -30,7 +30,7 @@ const WorkoutCardList = () => {
 							</Box>
 						</Typography>
 						{/* Display workouts for that workout category */}
-						<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6 items-center justify-center'>
+						<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6  justify-center'>
 							{dataFiltered.map(
 								workout =>
 									workout.category === workoutType && (

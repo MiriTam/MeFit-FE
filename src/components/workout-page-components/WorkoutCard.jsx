@@ -47,8 +47,8 @@ const WorkoutCard = ({ id, name, type, difficulty, sets, contributorId }) => {
 					</Typography>
 				</Box>
 
-				<Box className='mt-2'>
-					<List className='divide-y max-h-56 overflow-y-scroll scrollbar '>
+				<Box className='mt-4'>
+					<List className='divide-y max-h-44 overflow-y-scroll scrollbar '>
 						{sets.map(({ exerciseId, exerciseRepetitions }, idx) => (
 							<ListItem key={idx}>
 								<Box className='text-center mx-auto'>

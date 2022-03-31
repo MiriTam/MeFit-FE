@@ -31,9 +31,7 @@ const ExerciseCardList = () => {
 							</Box>
 						</Typography>
 						{/* Display exercises for that target muscle group */}
-						<List
-							sx={{ mt: 2 }}
-							className=' flex flex-wrap gap-6 items-center  justify-center'>
+						<List sx={{ mt: 2 }} className=' flex flex-wrap gap-6   justify-center'>
 							{dataFiltered.map(
 								exercise =>
 									exercise.category === muscleGroup && (
