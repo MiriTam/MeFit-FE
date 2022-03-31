@@ -1,11 +1,34 @@
 import { Alert, Box, Typography } from '@mui/material';
 import { useState } from 'react';
-
 import { usePrograms } from '../../context/ProgramsContext';
 import filterData from '../../utils/filterData';
 import getUniqueProgramCategories from '../../utils/getUniqueProgramCategories';
 import SearchBar from '../shared-components/SearchBar';
 import ProgramCard from './ProgramCard';
+import Lottie from 'lottie-react';
+import armAnimation from './../../animations/arms';
+import legAnimation from './../../animations/legs'
+import coreAnimation from './../../animations/core';
+import staminaAnimation from './../../animations/stamina';
+import flexAnimation from './../../animations/flexibility';
+import fullAnimation from './../../animations/full-body';
+
+const GetAnimation = (category) => {
+	switch (category) {
+		case "Arms":
+			return armAnimation
+		case "Legs":
+			return legAnimation
+		case "Core":
+			return coreAnimation
+		case "Stamina":
+			return staminaAnimation
+		case "Flexibility":
+			return flexAnimation
+		case "Full body":
+			return fullAnimation
+	}
+}
 
 const ProgramCardList = () => {
 	const { programs } = usePrograms();
@@ -23,12 +46,22 @@ const ProgramCardList = () => {
 			) : (
 				getUniqueProgramCategories(dataFiltered).map((programType, idx) => (
 					<Box className='mt-6' key={idx}>
-						<Typography component='h2' variant='h6' color='text.secondary'>
-							Program type:{' '}
-							<Box component={'span'} className='font-semibold' color='text.primary'>
-								{programType}
+						<Box sx={{ width: '100%' }}>
+							<Box sx={{ width: '250px', margin: 'auto' }}>
+								<Lottie
+									animationData={GetAnimation(programType)}
+									loop={true}
+								/>
 							</Box>
-						</Typography>
+						</Box>
+						<Box sx={{ width: '100%' }}>
+							<Typography component='h2' variant='h6' color='text.secondary'>
+								Program Type:{' '}
+								<Box component={'span'} className='font-semibold' color='text.primary'>
+									{programType}
+								</Box>
+							</Typography>
+						</Box>
 						{/* Display programs for that program type */}
 						<Box sx={{ mt: 2 }} className=' flex flex-wrap gap-6  justify-center'>
 							{dataFiltered.map(

@@ -57,7 +57,7 @@ const WorkoutCardList = () => {
 						</Box>
 						<Box sx={{ width: '100%' }}>
 							<Typography component='h2' variant='h6' color='text.secondary'>
-								Workout type:{' '}
+								Workout Type:{' '}
 								<Box component={'span'} className='font-semibold' color='text.primary'>
 									{workoutType}
 								</Box>
