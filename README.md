@@ -1,70 +1,88 @@
-# MeFit FE
+# Mefit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mefit is a web application designed to help users plan and manage their weekly workout goals. Mefit provides
+workout programs that target different areas of fitness. Users make goals for themselves to complete a workout
+program by a given date. The application then provides them with an overview of the workouts they must complete to 
+achieve their goal and their progress towards it. The application recommends suitable workout programs to the user 
+based on their fitness level and exercise category restrictions. The purpose of the category restrictions is to
+prevent injury by warning users with pre-existing conditions if they attempt to engage in a type of exercise
+that may trigger their health difficulties, such as someone who struggles with a knee injury choosing to do a 
+heavy leg workout. However, users make the final decision on which workouts to participate in.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+The workout programs are produced by contributors and consumed by any user. The contributors create new exercises 
+and combine them into workouts, which are then combined into workout programs. While users may participate in the
+contributor's workout programs, the contributor is the owner of everything they have contributed and may change or 
+remove their contributions as they see fit. All contributed workout programs are available to all users.
+Contributors may also use the regular user aspects of the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Administrators are the users with the most access privileges. The purpose of the administrator role is to manage
+the users of the application. An administrator can alter a user's profile, delete a user, and make another user a 
+contributor or administrator. All administrators also have contributor access. However, they can only alter other
+users, not the contributions of other contributors.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Source Code
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The code for this project is available on GitHub. The application is divided into a front-end and back-end part.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The front-end code is available at: https://github.com/MiriTam/MeFit-FE.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The back-end code is available at: https://github.com/Vannmellelon/MeFit-BE.git
 
-### `npm run eject`
+## Contributors
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This application was developed by Anne Elisabeth Larsen, Jasotharan Cyril, Konstantinos Pascal, Ammar Ahmed, and 
+Miriam Tamara Grødeland Aarag.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[@Vannmellelon](https://github.com/Vannmellelon)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[@s325909](https://github.com/s325909)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[@konstpascal](https://github.com/konstapascal)
 
-## Learn More
+[@AmmarAhmed007](https://github.com/AmmarAhmed007)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[@MiriTam](https://github.com/MiriTam)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project was developed with the support of mentor Magnus Jerre.
 
-### Code Splitting
+[@magnusjerre](https://github.com/magnusjerre)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Technologies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+MeFit was developed with a separate front and back-end that communicate through an API. The front-end is a
+React application and the back-end is based on dotnet. Authentication and authorization are handled using the 
+third-party technology Auth0. The React application is hosted in production on Heroku, while the dotnet 
+application is containerized using Docker and hosted on Microsoft Azure. The database is SQL and is also hosted
+on Microsoft Azure.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## View in Production
 
-### Advanced Configuration
+MeFit is available in a production environment. The front-end part of the application is running on address 
+https://mefit-fe.herokuapp.com/, while the back-end can be found running on https://mefit22api.azurewebsites.net/api/.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Install and Run in Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Front-end
 
-### `npm run build` fails to minify
+- Install the necessary dependencies by running 'npm install'.
+- Run the application by running 'npm start'.
+- Unless otherwise configured, the application will be running on localhost://3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Back-end
+
+- Run the application by running 'dotnet run'.
+- Unless otherwise configured, the application will be running on localhost://5000.
+
+
+## License
+
+MIT © 2022 Miriam Tamara Grødeland Aarag, Anne Elisabeth Larsen, Konstantinos Pascal, Ammar Ahmed, Jasotharan Cyril
