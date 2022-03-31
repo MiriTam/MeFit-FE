@@ -7,6 +7,7 @@ import {
 	FormGroup,
 	FormLabel,
 	Grid,
+	InputAdornment,
 	Radio,
 	RadioGroup,
 	TextField,
@@ -62,7 +63,7 @@ const NewProfile = () => {
 							name='email'
 							fullWidth
 							id='email'
-							label='First name'
+							label='email'
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -108,11 +109,12 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
+							InputProps={{ endAdornment: <InputAdornment position="end">kg</InputAdornment>,}}
 							error={errors.hasOwnProperty('weight')}
 							name='weight'
 							fullWidth
 							id='weight'
-							label='Weight (kg)'
+							label='Weight'
 							autoFocus
 						/>
 					</Grid>
@@ -126,10 +128,11 @@ const NewProfile = () => {
 									value: /^\d+$/
 								}
 							})}
+							InputProps={{ endAdornment: <InputAdornment position="end">cm</InputAdornment>,}}
 							error={errors.hasOwnProperty('height')}
 							fullWidth
 							id='height'
-							label='Height (cm)'
+							label='Height'
 							name='height'
 						/>
 					</Grid>

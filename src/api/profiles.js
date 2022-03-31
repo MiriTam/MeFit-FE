@@ -28,3 +28,21 @@ export async function postProfile({ weight, height, medicalConditions, disabilit
 
 	return req.data;
 }
+
+export async function patchProfile({ weight, height, medicalConditions, disabilities }, id, token) {
+	const profileToBePosted = {
+		weight,
+		height,
+		medicalConditions,
+		disabilities
+	};
+
+	const req = await axios.patch(`${POST_PROFILE_URL}/${id}`, JSON.stringify(profileToBePosted), {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return req.data;
+}

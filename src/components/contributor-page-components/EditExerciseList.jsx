@@ -12,6 +12,9 @@ const EditExerciseList = ({ expanded, handleChange }) => {
 					key={exercise.id}
 					name={exercise.name}
 					description={exercise.description}
+					image={exercise.image}
+					video={exercise.video}
+					category={exercise.category}
 					panel={exercise.name}
 					expanded={expanded}
 					handleChange={handleChange}
