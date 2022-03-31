@@ -19,7 +19,7 @@ const AuthenticationForm = () => {
 			</Typography>
 			<Lottie animationData={animation} loop={true} height={300} width={300} />
 			<Box sx={{ mt: 2 }}>
-				<Typography color='text.primary' sx={{ mt: 1, fontSize: 22 }}>
+				<Typography color='text.primary' sx={{ mt: 1, fontSize: 24, fontWeight: 500 }}>
 					Let's get fit together!
 				</Typography>
 				<Typography color='text.secondary' sx={{ mt: 1, fontSize: 20 }}>
