@@ -33,6 +33,7 @@ The front-end code is available at: https://github.com/MiriTam/MeFit-FE.git
 
 The back-end code is available at: https://github.com/Vannmellelon/MeFit-BE.git
 
+
 ## Contributors
 
 This application was developed by Anne Elisabeth Larsen, Jasotharan Cyril, Konstantinos Pascal, Ammar Ahmed, and 
@@ -64,8 +65,11 @@ on Microsoft Azure.
 
 ## View in Production
 
-MeFit is available in a production environment. The front-end part of the application is running on address 
-https://mefit-fe.herokuapp.com/, while the back-end can be found running on https://mefit22api.azurewebsites.net/api/.
+MeFit is available in a production environment. 
+
+The front-end part of the application is running on: https://mefit-fe.herokuapp.com/
+
+View the documentation for the API on: https://mefit22api.azurewebsites.net/api/
 
 
 ## Install and Run in Development
